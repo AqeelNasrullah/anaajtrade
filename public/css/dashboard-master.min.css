@@ -1,0 +1,18 @@
+.header-inner {background-color: rgba(0,128,0,1.00);}
+.logo {max-width: 275px;float: left;}
+.logo-txt {float: right;}
+.navbar {background-color: rgba(100,190,90,1.00) !important;}
+.nav-link {color: white !important;transition: color .5s; font-size: medium;}
+.nav-link:hover {color: lightgray !important;}
+.dropdown-menu {border-top: 2px solid goldenrod !important;}
+.dropdown-toggle::after {content: none !important;}
+
+.nav-item > .btn-success {background-color: rgba(0,128,0,1.00);border: none !important;}
+.navbar-toggler {border: 1px solid white !important;}
+
+.footer {background-color: black; padding: 7px 15px;border-top: 2px solid goldenrod;} .footer > p {font-size: smaller;}
+
+
+@media screen and (max-width: 991px) {
+    .nav-item > .btn-success {margin-right: 0px !important;margin-top: 5px !important;}
+}

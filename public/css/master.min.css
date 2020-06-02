@@ -1,0 +1,13 @@
+.navbar-toggler {border: 1px solid white !important;}
+.navbar-toggler-icon {background: none !important;}
+.navbar {background-color: rgba(0,155,0,0.75)  !important;}
+.nav-link {font-size: medium;}
+
+.header {border-bottom: 3px solid goldenrod;}
+.main {min-height: 100vh;background-image: url('/images/bg.jpg');background-attachment: fixed;background-size: cover;background-position: center bottom;}
+.content {background-color: rgba(0,0,0,0.85);}
+.footer {background-color: black; padding: 7px 15px;border-top: 2px solid goldenrod;} .footer > p {font-size: smaller;}
+
+@media screen and (max-width:991px) {
+    .seperator {display: none !important;}
+}
