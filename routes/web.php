@@ -39,4 +39,14 @@ Route::put('dashboard/customer/{id}/edit', 'ProfileController@update')->name('pr
 Route::delete('dashboard/customer/{id}', 'ProfileController@destroy')->name('profile.destroy');
 Route::get('dashboard/customers/search', 'ProfileController@searchCustomers')->name('profile.searchCustomers');
 
+// Customer Search Routes
+Route::get('/search/customer', 'CustomerSearchController@searchCustomer')->name('customerSearch.searchCustomer');
+
+// Filling Stations Routes
+Route::get('dashboard/filling-stations', 'FillingStationController@index')->name('fillingStation.index');
+Route::get('dashboard/filling-stations/create', 'FillingStationController@create')->name('fillingStation.create');
+Route::post('dashboard/filling-stations/create', 'FillingStationController@store')->name('fillingStation.store');
+
+
+
 ?>

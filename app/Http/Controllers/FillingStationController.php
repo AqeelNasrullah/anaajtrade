@@ -3,10 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\FillingStation;
+use App\OilCompany;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class FillingStationController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +21,8 @@ class FillingStationController extends Controller
      */
     public function index()
     {
-        //
+        $fillingStations = Auth::User()->manyFillingStations()->latest()->paginate(10);
+        return view('dashboard.filling-stations.index', ['stations' => $fillingStations]);
     }
 
     /**
@@ -24,7 +32,8 @@ class FillingStationController extends Controller
      */
     public function create()
     {
-        //
+        $companies = OilCompany::all();
+        return view('dashboard.filling-stations.create', ['companies' => $companies]);
     }
 
     /**
@@ -35,7 +44,20 @@ class FillingStationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'name'              =>  'required|min:3',
+            'phone_number'      =>  'required|min:5',
+            'company'           =>  'required'
+        ];
+        if($request->get('address')) {
+            $rules['address'] = 'min:3';
+        }
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        } else {
+            dd($request->all());
+        }
     }
 
     /**

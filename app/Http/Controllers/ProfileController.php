@@ -22,9 +22,8 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $name = 'Aqeel Nasrullah';
         $customers = Auth::User()->manyProfiles()->latest()->paginate(10);
-        return view('dashboard.customer.index', ['customers'=>$customers]);
+        return view('dashboard.customers.index', ['customers'=>$customers]);
     }
 
     /**
@@ -34,7 +33,7 @@ class ProfileController extends Controller
      */
     public function create()
     {
-        return view('dashboard.customer.create');
+        return view('dashboard.customers.create');
     }
 
     /**
@@ -116,7 +115,7 @@ class ProfileController extends Controller
         if($id) {
             $d_id = (base64_decode($id) * 12098) / 123456789;
             $profile = Profile::find($d_id);
-            return view('dashboard.customer.show', ['profile'=>$profile]);
+            return view('dashboard.customers.show', ['profile'=>$profile]);
         }
     }
 
@@ -132,7 +131,7 @@ class ProfileController extends Controller
             $d_id = (base64_decode($id) * 12098) / 123456789;
             $profile = Profile::where('id', $d_id)->first();
             $roles = Role::all();
-            return view('dashboard.customer.edit', ['profile'=>$profile, 'roles'=>$roles]);
+            return view('dashboard.customers.edit', ['profile'=>$profile, 'roles'=>$roles]);
         } else {
             return redirect()->route('profile.index');
         }
@@ -238,14 +237,14 @@ class ProfileController extends Controller
                         <td class="align-middle">'.$profile->address.'</td>
                         <td class="align-middle">'.$profile->role->name.'</td>
                         <td class="align-middle">
-                            <a class="d-inline" href="'. route('profile.show', base64_encode(($profile->id * 123456789) / 12098)) .'">View</a>
+                            <a class="d-inline view-customer" data-id="'. base64_encode(($profile->id * 123456789) / 12098) .'" href="">View</a>
                             <p class="mb-0 d-inline">|</p>
                             <a class="d-inline" href="'. route('profile.edit', base64_encode(($profile->id * 123456789) / 12098)) .'">Edit</a>
                             <p class="mb-0 d-inline">|</p>
                             <form class="d-inline" action="'. route('profile.destroy', base64_encode(($profile->id * 123456789) / 12098)) .'" method="post">
                                 '. csrf_field() .'
                                 '. method_field('DELETE') .'
-                                <button type="submit" onclick="return confirm("Are you sure to delete customer?")" class="btn btn-link" style="margin: 0px !important;padding: 0px !important;">Delete</button>
+                                <button type="submit" class="btn btn-link delete-customer" style="margin: 0px !important;padding: 0px !important;">Delete</button>
                             </form>
                         </td>
                     </tr>';
@@ -256,7 +255,9 @@ class ProfileController extends Controller
                 </tr>';
             }
 
-            $data = ['data_output'=>$output];
+            $data = [
+                'data_output'           =>  $output
+            ];
             return json_encode($data);
         }
     }

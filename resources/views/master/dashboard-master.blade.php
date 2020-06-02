@@ -82,7 +82,7 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <a href="{{ route('profile.index') }}" class="dropdown-item"><i class="fas fa-users"></i> Customers / <span class="text-urdu-kasheeda">خریدار</span></a>
-                                        <a href="" class="dropdown-item"><i class="fas fa-gas-pump"></i> Filling Stations / <span class="text-urdu-kasheeda">پیٹرول پمپ</span></a>
+                                        <a href="{{ route('fillingStation.index') }}" class="dropdown-item"><i class="fas fa-gas-pump"></i> Filling Stations / <span class="text-urdu-kasheeda">پیٹرول پمپ</span></a>
                                         <a href="" class="dropdown-item"><i class="fas fa-layer-group"></i> Fertilizer Traders / <span class="text-urdu-kasheeda">کھاد کے تاجر</span></a>
                                         <a href="" class="dropdown-item"><i class="fas fa-file-prescription"></i> Medicine Traders / <span class="text-urdu-kasheeda">ادویات کے تاجر</span></a>
                                     </ul>
