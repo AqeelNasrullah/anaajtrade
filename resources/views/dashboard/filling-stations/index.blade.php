@@ -6,8 +6,13 @@
 
 @section('content')
     <section>
+        <div class="station-search-result m-0 p-0"></div>
         <div class="container-fluid py-3">
             <h1 class="text-center fw-900 text-success mb-3">Filling Stations / <span class="text-urdu-kasheeda">پیٹرول پمپ</span></h1>
+
+            @include('components.error')
+            @include('components.success')
+
             <div>
                 <div class="float-left mb-3">
                     <input type="text" name="search" id="station-search" class="form-control" placeholder="Search" width="175px">
@@ -29,7 +34,7 @@
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="stations-table-body">
                         @if ($stations->count() > 0)
                             @foreach ($stations as $station)
                             <tr>
@@ -39,14 +44,14 @@
                                 <td class="align-middle">{{ $station->address }}</td>
                                 <td class="align-middle">{{ $station->oilCompany->name }}</td>
                                 <td class="align-middle">
-                                    <a class="d-inline" href="">View</a>
+                                    <a class="d-inline station-popup" data-id="{{ base64_encode(($station->id * 123456789) / 12098) }}" href="">View</a>
                                     <p class="mb-0 d-inline"> | </p>
-                                    <a class="d-inline" href="">Edit</a>
+                                    <a class="d-inline" href="{{ route('fillingStation.edit', base64_encode(($station->id * 123456789) / 12098)) }}">Edit</a>
                                     <p class="mb-0 d-inline"> | </p>
-                                    <form action="" method="post">
+                                    <form action="{{ route('fillingStation.destroy', base64_encode(($station->id * 123456789) / 12098)) }}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-link p-0 m-0 d-inline">Delete</button>
+                                        <button class="btn btn-link p-0 m-0 d-inline stations-delete">Delete</button>
                                     </form>
                                 </td>
                             </tr>
@@ -60,14 +65,45 @@
                 </table>
             </div>
             <div>
-                <div class="float-left">
+                <div class="float-left pagination">
                     {{ $stations->links() }}
                 </div>
-                <div class="float-right">
+                <div class="float-right no-of-results">
                     <p class="mb-0">Showing {{ $stations->firstItem() .' - '. $stations->lastItem() }} of {{ $stations->total() }} results</p>
                 </div>
                 <br class="clear">
             </div>
         </div>
     </section>
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $('#station-search').keyup(function() {
+                var station = $(this).val();
+                $.get('{{ route("fillingStation.filterFillingStation") }}', {station:station}, function(data) {
+                    $('#stations-table-body').html(data.data_output);
+                    $('.pagination, .no-of-results').addClass('d-none');
+                }, 'json');
+            });
+
+            $('#stations-table').on('click', '.station-popup', function(e) {
+                var id = $(this).data('id');
+                $.get('{{ route("fillingStation.searchFillingStation") }}', {id:id}, function(data){
+                    $('.station-search-result').html(data.data_output);
+                    $('#station-search-popup').modal('show');
+                }, 'json');
+                e.preventDefault();
+            });
+
+            $('#stations-table').on('click', '.stations-delete', function() {
+                if (confirm('Are you sure you want to delete filling station?')) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+        });
+    </script>
 @endsection

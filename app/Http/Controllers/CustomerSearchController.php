@@ -41,7 +41,7 @@ class CustomerSearchController extends Controller
                                 </div>
                                 <div>
                                     <a href="'. route('profile.edit', base64_encode(($profile->id * 123456789) / 12098)) .'" class="btn btn-success float-right"><i class="fas fa-edit"></i> Edit Customer</a>
-                                    <a href="'. route('profile.show', base64_encode(($profile->id * 123456789) / 12098)) .'" class="btn btn-outline-danger float-right mr-2"><i class="fas fa-user"></i> View Customer</a>
+                                    <a href="'. route('profile.show', base64_encode(($profile->id * 123456789) / 12098)) .'" class="btn btn-outline-danger float-right mr-2"><i class="fas fa-user"></i> View Detail</a>
                                     <button class="btn btn-danger float-right mr-2" data-dismiss="modal"><i class="fas fa-times"></i> Close</button>
                                     <br class="clear">
                                 </div>

@@ -40,13 +40,18 @@ Route::delete('dashboard/customer/{id}', 'ProfileController@destroy')->name('pro
 Route::get('dashboard/customers/search', 'ProfileController@searchCustomers')->name('profile.searchCustomers');
 
 // Customer Search Routes
-Route::get('/search/customer', 'CustomerSearchController@searchCustomer')->name('customerSearch.searchCustomer');
+Route::get('search/customer', 'CustomerSearchController@searchCustomer')->name('customerSearch.searchCustomer');
 
 // Filling Stations Routes
 Route::get('dashboard/filling-stations', 'FillingStationController@index')->name('fillingStation.index');
-Route::get('dashboard/filling-stations/create', 'FillingStationController@create')->name('fillingStation.create');
-Route::post('dashboard/filling-stations/create', 'FillingStationController@store')->name('fillingStation.store');
+Route::get('dashboard/filling-station/create', 'FillingStationController@create')->name('fillingStation.create');
+Route::post('dashboard/filling-station/create', 'FillingStationController@store')->name('fillingStation.store');
+Route::get('dashboard/filling-station/{id}', 'FillingStationController@show')->name('fillingStation.show');
+Route::get('dashboard/filling-station/{id}/edit', 'FillingStationController@edit')->name('fillingStation.edit');
+Route::put('dashboard/filling-station/{id}/edit', 'FillingStationController@update')->name('fillingStation.update');
+Route::delete('dashboard/filling-station/{id}', 'FillingStationController@destroy')->name('fillingStation.destroy');
 
-
+Route::get('dashboard/filling-stations/search', 'FillingStationController@filterFillingStation')->name('fillingStation.filterFillingStation');
+Route::get('search/filling-station', 'FillingStationController@searchFillingStation')->name('fillingStation.searchFillingStation');
 
 ?>

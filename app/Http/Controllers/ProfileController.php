@@ -68,7 +68,7 @@ class ProfileController extends Controller
             if($profile) {
                 $attached = ProfileUser::where('profile_id', $profile->id)->where('user_id', Auth::User()->id)->first();
                 if ($attached) {
-                    return redirect()->route('profile.index')->with('success', 'Customer already exists.');
+                    return redirect()->route('profile.create')->with('success', 'Customer already exists.')->withInput();
                 } else {
                     Auth::User()->manyProfiles()->attach($profile);
                     return redirect()->route('profile.index')->with('success', 'Customer created successfully.');
@@ -115,7 +115,11 @@ class ProfileController extends Controller
         if($id) {
             $d_id = (base64_decode($id) * 12098) / 123456789;
             $profile = Profile::find($d_id);
-            return view('dashboard.customers.show', ['profile'=>$profile]);
+            if ($profile) {
+                return view('dashboard.customers.show', ['profile'=>$profile]);
+            } else {
+                return redirect()->route('profile.index');
+            }
         }
     }
 
@@ -218,6 +222,7 @@ class ProfileController extends Controller
         if ($request->ajax()) {
             $name = $request->get('name');
             $output = '';
+            $profiles='';
 
             if ($name !== "") {
                 $profiles = Auth::User()->manyProfiles()->where(function($query) use ($name) {
