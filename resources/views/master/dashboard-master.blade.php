@@ -54,7 +54,7 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <a href="" class="dropdown-item">Account Book / <span class="text-urdu-kasheeda">کھاتہ</span></a>
-                                        <a href="" class="dropdown-item">Oil / <span class="text-urdu-kasheeda">تیل</span></a>
+                                        <a href="{{ route('oilRecord.index') }}" class="dropdown-item">Oil / <span class="text-urdu-kasheeda">تیل</span></a>
                                         <a href="" class="dropdown-item">Fertilizer / <span class="text-urdu-kasheeda">کھاد</span></a>
                                         <a href="" class="dropdown-item">Agricultural Medicine / <span class="text-urdu-kasheeda">زرعی ادویات</span></a>
                                         <a href="" class="dropdown-item">Wheat / <span class="text-urdu-kasheeda">گندم</span></a>

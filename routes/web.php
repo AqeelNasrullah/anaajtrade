@@ -54,4 +54,5 @@ Route::delete('dashboard/filling-station/{id}', 'FillingStationController@destro
 Route::get('dashboard/filling-stations/search', 'FillingStationController@filterFillingStation')->name('fillingStation.filterFillingStation');
 Route::get('search/filling-station', 'FillingStationController@searchFillingStation')->name('fillingStation.searchFillingStation');
 
-?>
+// Oil Record Routes
+Route::get('dashboard/oil', 'OilRecordController@index')->name('oilRecord.index');
