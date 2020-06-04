@@ -14,6 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Customers API Routes
+Route::get('customers', 'ReadServiceController@getCustomers');
+Route::get('customer/{id}', 'ReadServiceController@customer');
+// Oil Companies API Routes
+Route::get('oil-companies', 'ReadServiceController@getOilCompanies');
+Route::get('oil-company/{id}', 'ReadServiceController@oilCompany');
+// Filling Stations API Routes
+Route::get('filling-stations', 'ReadServiceController@getFillingStations');
+Route::get('filling-station/{id}', 'ReadServiceController@fillingStation');
+// Oil Records API Routes
+Route::get('oil-records', 'ReadServiceController@getOilRecords');
+Route::get('oil-record/{id}', 'ReadServiceController@oilRecord');
