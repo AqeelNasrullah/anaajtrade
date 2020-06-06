@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Profile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class CustomerSearchController extends Controller
 {
@@ -52,6 +54,87 @@ class CustomerSearchController extends Controller
             </div>';
 
             $data = ['profile'=>$customer];
+            return json_encode($data);
+        }
+    }
+
+    public function customer(Request $request)
+    {
+        if ($request->get('name')) {
+            $validator = Validator::make($request->all(), ['name'=>'min:1']);
+            if ($validator->fails()) {
+                return back()->withErrors($validator)->withInput();
+            } else {
+                $name = addslashes(htmlentities(trim($request->get('name'))));
+                $profiles = Auth::user()->manyProfiles()->where('name', 'like', '%' . $name . '%')->get();
+                if ($profiles->count() > 0) {
+                    return back()->with('profiles', $profiles);
+                } else {
+                    return back()->with('error', 'Customer not found. <a href="' . route('profile.create') . '" class="alert-link">Add customer</a>')->withInput();
+                }
+
+            }
+        } else if ($request->get('phone_number')) {
+            $validator = Validator::make($request->all(), ['phone_number'=>'min:12']);
+            if ($validator->fails()) {
+                return back()->withErrors($validator)->withInput();
+            } else {
+                $phone_number = '+92 ' . substr(addslashes(htmlentities(trim($request->get('phone_number')))), 1);
+                $profile = Auth::user()->manyProfiles()->where('phone_number', $phone_number)->first();
+                if ($profile) {
+                    return back()->with('profile', $profile);
+                } else {
+                    return back()->with('error', 'Customer not found. <a href="' . route('profile.create') . '" class="alert-link">Add customer</a>')->withInput();
+                }
+            }
+        } else if ($request->get('cnic')) {
+            $validator = Validator::make($request->all(), ['cnic'=>'min:15']);
+            if ($validator->fails()) {
+                return back()->withErrors($validator)->withInput();
+            } else {
+                $cnic = addslashes(htmlentities(trim($request->get('cnic'))));
+                $profile = Auth::user()->manyProfiles()->where('cnic', $cnic)->first();
+                if ($profile) {
+                    return back()->with('profile', $profile);
+                } else {
+                    return back()->with('error', 'Customer not found. <a href="' . route('profile.create') . '" class="alert-link">Add customer</a>')->withInput();
+                }
+            }
+        } else {
+            if ($request->get('name') == "" && $request->get('phone_number') == "" && $request->get('cnic') == "") {
+                return back()->with('error', 'Atleast one field is required.');
+            }
+        }
+    }
+
+    public function namesList(Request $request)
+    {
+        if ($request->ajax()) {
+            $name = $request->get('name');
+            $output = '';
+
+            if ($name) {
+                $profiles = Auth::user()->manyProfiles()->where('name', 'like', '%' . $name . '%')->get();
+                if ($profiles->count() > 0) {
+                    foreach ($profiles as $profile) {
+                        $output .= '<a href="' . route('profile.show', base64_encode(($profile->id * 123456789) / 12098)) . '" class="dropdown-item px-2">
+                        <span style="width:50px;float:left;margin-right:10px;"><img src="' . asset('images/dps/'. $profile->avatar) . '" width="100%" alt="Image not found"></span>
+                        <span style="width:calc(100% - 60px);float:left;">
+                            <h5 class="fw-700">' . $profile->name . '</h5>
+                            <p class="mb-0" style="font-size:13px;white-space:normal;">' . $profile->address . '</p>
+                        </span>
+                        <br class="clear">
+                    </a>';
+                    }
+                } else {
+                    $output .= '<li class="dropdown-item">No customer found.</li>';
+                }
+
+            } else {
+                $output .= '<li class="dropdown-item">Searching Customer ...</li>';
+            }
+
+            $data = ['list' =>  $output];
             return json_encode($data);
         }
     }

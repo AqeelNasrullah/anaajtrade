@@ -115,8 +115,9 @@ class ProfileController extends Controller
         if($id) {
             $d_id = (base64_decode($id) * 12098) / 123456789;
             $profile = Profile::find($d_id);
+            $oil_records = Auth::user()->oilRecords()->where('profile_id', $d_id)->latest()->get();
             if ($profile) {
-                return view('dashboard.customers.show', ['profile'=>$profile]);
+                return view('dashboard.customers.show', ['profile' => $profile, 'oil_records' => $oil_records]);
             } else {
                 return redirect()->route('profile.index');
             }

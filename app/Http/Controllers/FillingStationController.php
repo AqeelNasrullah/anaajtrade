@@ -95,8 +95,10 @@ class FillingStationController extends Controller
         if ($id) {
             $s_id = (base64_decode($id) * 12098) / 123456789;
             $station = FillingStation::find($s_id);
+            $dates = Auth::user()->oilRecords()->selectRaw('date(created_at) as date')->where('filling_station_id', $s_id)->distinct()->latest()->get();
+            $records = Auth::user()->oilRecords()->where('filling_station_id', $s_id)->latest()->get();
             if ($station) {
-                return view('dashboard.filling-stations.show', ['station'=>$station]);
+                return view('dashboard.filling-stations.show', ['station' => $station, 'dates' => $dates, 'records' => $records]);
             } else {
                 return redirect()->route('fillingStation.index');
             }

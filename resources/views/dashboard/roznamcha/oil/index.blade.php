@@ -13,10 +13,18 @@
         <div class="oil-record">
             <h1 class="text-center text-success fw-900 mb-3">Oil Records / <span class="text-urdu-kasheeda">تیل کے ریکارڈ</span></h1>
 
+            @include('components.error')
+            @include('components.success')
+
+            <div class="mb-3">
+                <input type="text" name="search-name" id="search-name" class="form-control" style="width: 175px;" placeholder="Search ...">
+            </div>
+
             <div id="oil-record">
                 @if ($dates->count() > 0)
                     @foreach ($dates as $date)
                         <h3 class="mb-3 text-success fw-700">{{ date('d F, Y (l)', strtotime($date->date)) }}</h3>
+
                         <div class="table-responsive">
                             <table class="table table-striped" id="oil-record-table">
                                 <thead class="table-success">
@@ -44,14 +52,14 @@
                                                     <td class="align-middle"><a href="" data-id="{{ base64_encode(($record->fillingStation->id * 123456789) / 12098) }}" class="view-stations">{{ $record->fillingStation->name }}</a></td>
                                                     <td class="align-middle">{{ date('h:i A', strtotime($record->created_at)) }}</td>
                                                     <td class="align-middle">
-                                                        <a href="" class="d-inline">View Bill</a>
+                                                        <a href="{{ route('oilRecord.show', base64_encode(($record->id * 123456789) / 12098)) }}" class="d-inline">View Bill</a>
                                                         <p class="mb-0 d-inline"> | </p>
-                                                        <a href="" class="d-inline">Edit Bill</a>
+                                                        <a href="{{ route('oilRecord.edit', base64_encode(($record->id * 123456789) / 12098)) }}" class="d-inline">Edit Bill</a>
                                                         <p class="mb-0 d-inline"> | </p>
-                                                        <form action="" method="post" class="d-inline">
+                                                        <form action="{{ route('oilRecord.destroy', base64_encode(($record->id * 123456789) / 12098)) }}" method="post" class="d-inline">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="btn btn-link m-0 p-0">Delete Bill</button>
+                                                            <button type="submit" class="btn btn-link m-0 p-0 destroy-bill">Delete Bill</button>
                                                         </form>
                                                     </td>
                                                 </tr>
@@ -72,7 +80,7 @@
                     </div>
                 @endif
             </div>
-            <div>
+            <div class="pagination-settings">
                 <div class="float-left">
                     {{ $dates->links() }}
                 </div>
@@ -104,6 +112,21 @@
                 }, 'json');
                 e.preventDefault();
             });
+            $('#search-name').keyup(function() {
+                var name = $(this).val();
+                $.get('{{ route("oilRecord.searchOilRecord") }}', {name:name}, function(data) {
+                    $('#oil-record').html(data.name_results);
+                }, 'json');
+                $('.pagination-settings').addClass('d-none');
+            });
+            $('#oil-record').on('click', '.destroy-bill', function() {
+                if (confirm('Are you sure you want to delete bill?')) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
         });
     </script>
+    @include('components.customer-search-js')
 @endsection

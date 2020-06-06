@@ -28,6 +28,8 @@ Route::get('register/user', 'RegisterController@addUser')->name('register.addUse
 
 // Dashboard Routes
 Route::get('dashboard', 'DashboardController@index')->name('dashboard.index');
+Route::get('dashboard/roznamcha', 'DashboardController@roznamcha')->name('dashboard.roznamcha');
+Route::get('dashboard/stock', 'DashboardController@stock')->name('dashboard.stock');
 
 // Customers Routes
 Route::get('dashboard/customers', 'ProfileController@index')->name('profile.index');
@@ -41,6 +43,8 @@ Route::get('dashboard/customers/search', 'ProfileController@searchCustomers')->n
 
 // Customer Search Routes
 Route::get('search/customer', 'CustomerSearchController@searchCustomer')->name('customerSearch.searchCustomer');
+Route::post('search/customer', 'CustomerSearchController@customer')->name('customerSearch.customer');
+Route::get('customers/names', 'CustomerSearchController@namesList')->name('customerSearch.namesList');
 
 // Filling Stations Routes
 Route::get('dashboard/filling-stations', 'FillingStationController@index')->name('fillingStation.index');
@@ -55,4 +59,13 @@ Route::get('dashboard/filling-stations/search', 'FillingStationController@filter
 Route::get('search/filling-station', 'FillingStationController@searchFillingStation')->name('fillingStation.searchFillingStation');
 
 // Oil Record Routes
-Route::get('dashboard/oil', 'OilRecordController@index')->name('oilRecord.index');
+Route::get('dashboard/roznamcha/oil', 'OilRecordController@index')->name('oilRecord.index');
+Route::get('dashboard/roznamcha/oil/{id}/filling-stations', 'OilRecordController@fillingStations')->name('oilRecord.fillingStations');
+Route::get('dashboard/roznamcha/oil/{id}/filling-station/{station}/create', 'OilRecordController@create')->name('oilRecord.create');
+Route::post('dashboard/roznamcha/oil/{id}/filling-station/{station}/create', 'OilRecordController@store')->name('oilRecord.store');
+Route::get('dashboard/roznamcha/oil/{id}', 'OilRecordController@show')->name('oilRecord.show');
+Route::get('dashboard/roznamcha/oil/{id}/edit', 'OilRecordController@edit')->name('oilRecord.edit');
+Route::put('dashboard/roznamcha/oil/{id}/edit', 'OilRecordController@update')->name('oilRecord.update');
+Route::delete('dashboard/roznamcha/{id}/destroy', 'OilRecordController@destroy')->name('oilRecord.destroy');
+
+Route::get('search/oil-record', 'OilRecordController@searchOilRecord')->name('oilRecord.searchOilRecord');

@@ -4,45 +4,99 @@
     <title>{{ $profile->name ?? 'Unknown User' }} - {{ config('app.name') }}</title>
 @endsection
 
-@section('style')
-    <style>
-        .content {display: flex;flex-direction: column;justify-content: center;}
-        .avatar {width: 100px;height: 100px;overflow: hidden;}
-    </style>
-@endsection
-
 @section('content')
     <section class="container-fluid py-3">
-        @if ($profile)
-        <div class="mx-auto p-3" style="max-width: 500px;border-radius: 5px;">
-            <div class="profile-header">
-                <div class="avatar float-left mr-3" style="border: 1px solid black;border-radius: 5px;overflow: hidden;">
-                    <img src="{{ asset('images/dps/' . $profile->avatar) }}" width="100%" alt="Image not found">
-                </div>
-                <div class="float-left">
-                    <h3 class="mb-1 fw-700">{{ $profile->name ?? 'Unknown User' }}</h3>
-                    <h5 class="fw-700">{{ 'S/O ' . $profile->father_name }}</h5>
-                    <h5 class="fw-700"><i class="fas fa-address-card"></i> {{ $profile->cnic }}</h5>
-                    <h5 class="fw-700"><i class="fas fa-phone"></i> {{ $profile->phone_number }}</h5>
-                </div>
-                <br class="clear">
-            </div>
-            <hr>
-            <div>
-                <div class="row mb-3">
-                    <p class="col-md-6 mb-0"><strong>Property:</strong> {{ $profile->property . ' Acres' }}</p>
-                    <p class="col-md-6 mb-0"><strong>Role:</strong> {{ $profile->role->name }}</p>
-                    <p class="col-12 mb-0"><strong>Address:</strong> {{ $profile->address }}</p>
-                </div>
-                <div>
-                    <a href="{{ route('profile.index') }}" class="btn btn-success float-right"><i class="fas fa-users"></i> Customers</a>
-                    <a href="{{ route('profile.edit', base64_encode(($profile->id * 123456789) / 12098)) }}" class="btn btn-outline-success float-right mr-2"><i class="fas fa-edit"></i> Edit Customers</a>
+        <div class="p-0 m-0" id="filling-station-popup"></div>
+        <div class="row">
+            <aside class="col-md-3">
+                @include('components.sidebar-profile')
+            </aside>
+            <main class="col-md-9">
+                <section class="mb-3">
+                    <div class="float-left">
+                        <div class="card" style="width: 250px;">
+                            <div class="card-header">
+                                <h3 class="text-center">Rs 2000 /-</h3>
+                            </div>
+                            <div class="card-body p-2">
+                                <p class="text-center fw-700 mb-0">Balance</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="float-right">
+                        <div class="dropdown float-right">
+                            <a href="" class="btn btn-success dropdown-toggle" data-toggle="dropdown">Go for Transaction <i class="fas fa-angle-down"></i></a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <a href="" class="dropdown-item">Account Book / <span class="text-urdu-kasheeda">کھاتہ</span></a>
+                                <a href="{{ route('oilRecord.fillingStations', base64_encode(($profile->id * 123456789) / 12098)) }}" class="dropdown-item">Oil / <span class="text-urdu-kasheeda">تیل</span></a>
+                                <a href="" class="dropdown-item">Fertilizer / <span class="text-urdu-kasheeda">کھاد</span></a>
+                                <a href="" class="dropdown-item">Agricultural Medicine / <span class="text-urdu-kasheeda">زرعی ادویات</span></a>
+                                <a href="" class="dropdown-item">Wheat / <span class="text-urdu-kasheeda">گندم</span></a>
+                                <a href="" class="dropdown-item">Rice / <span class="text-urdu-kasheeda">چاول</span></a>
+                                <a href="" class="dropdown-item">Others / <span class="text-urdu-kasheeda">دیگر اشیاء</span></a>
+                            </ul>
+                        </div>
+                        <div class="dropdown float-right mr-2">
+                            <a href="" class="btn btn-success dropdown-toggle" data-toggle="dropdown">Stock Intake <i class="fas fa-angle-down"></i></a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <a href="" class="dropdown-item">Fertilizer / <span class="text-urdu-kasheeda">کھاد</span></a>
+                                <a href="" class="dropdown-item">Agricultural Medicine / <span class="text-urdu-kasheeda">زرعی ادویات</span></a>
+                                <a href="" class="dropdown-item">Wheat / <span class="text-urdu-kasheeda">گندم</span></a>
+                                <a href="" class="dropdown-item">Rice / <span class="text-urdu-kasheeda">چاول</span></a>
+                            </ul>
+                        </div>
+                    </div>
                     <br class="clear">
-                </div>
-            </div>
+                </section>
+                <section>
+                    <h3 class="text-success fw-700 mb-3">Oil / <span class="text-urdu-kasheeda">تیل</span></h3>
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="oil-table">
+                            <thead class="table-success">
+                                <tr>
+                                    <th>Filling Station / <span class="text-urdu-kasheeda">پیٹرول پمپ</span></th>
+                                    <th>Quantity / <span class="text-urdu-kasheeda">مقدار</span></th>
+                                    <th>Price Paid / <span class="text-urdu-kasheeda">ادا شدہ قیمت</span></th>
+                                    <th>Total Price / <span class="text-urdu-kasheeda">کل قیمت</span></th>
+                                    <th>Date &amp; Time / <span class="text-urdu-kasheeda">تاریخ اور وقت</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if ($oil_records->count() > 0)
+                                    @foreach ($oil_records as $record)
+                                        <tr>
+                                            <td><a data-id="{{ base64_encode(($record->filling_station_id * 123456789) / 12098) }}" class="view-station" href="">{{ $record->fillingStation->name }}</a></td>
+                                            <td>{{ $record->quantity }} Litres</td>
+                                            <td>Rs {{ $record->paid_per_litre }} /-</td>
+                                            <td>{{ $record->quantity * $record->paid_per_litre }} /-</td>
+                                            <td>{{ date('d-F-Y h:i A', strtotime($record->created_at)) }}</td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="5" class="text-center font-italic">No record to show.</td>
+                                    </tr>
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </main>
         </div>
-        @else
-            <h3 class="text-center font-italic">Nothing to Show</h3>
-        @endif
     </section>
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $('#oil-table').on('click', '.view-station', function(e) {
+                var id = $(this).data('id');
+                $.get('{{ route("fillingStation.searchFillingStation") }}', {id:id}, function(data) {
+                    $('#filling-station-popup').html(data.data_output);
+                    $('#station-search-popup').modal('show');
+                }, 'json');
+                e.preventDefault();
+            });
+        });
+    </script>
 @endsection

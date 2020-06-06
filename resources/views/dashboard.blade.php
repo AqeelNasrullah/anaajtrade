@@ -15,7 +15,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-3 p-3">
-                    <a href="" class="text-light">
+                    <a href="{{ route('dashboard.roznamcha') }}" class="text-light">
                         <div class="bg-success p-3" style="border-radius: 5px;">
                             <h1 class="text-center mb-3"><i class="fas fa-address-book"></i></h1>
                             <h4 class="text-center">Roznamcha <br> <span class="text-urdu-kasheeda">روزنامچہ</span></h4>
@@ -23,10 +23,10 @@
                     </a>
                 </div>
                 <div class="col-md-3 p-3">
-                    <a href="{{ route('oilRecord.index') }}" class="text-light">
+                    <a href="" class="text-light">
                         <div class="bg-success p-3" style="border-radius: 5px;">
                             <h1 class="text-center mb-3"><i class="fas fa-database"></i></h1>
-                            <h4 class="text-center">Oil <br> <span class="text-urdu-kasheeda">تیل</span></h4>
+                            <h4 class="text-center">Stock <br> <span class="text-urdu-kasheeda">اسٹاک</span></h4>
                         </div>
                     </a>
                 </div>
