@@ -40,4 +40,16 @@ class Profile extends Model
     {
         return $this->hasMany(OilRecord::class);
     }
+
+    // Profile has many wheat stocks
+    public function wheatStocks()
+    {
+        return $this->hasMany(WheatStock::class);
+    }
+
+    // Profile has many wheats records
+    public function wheatRecords()
+    {
+        return $this->hasMany(WheatRecord::class);
+    }
 }

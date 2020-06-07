@@ -66,6 +66,15 @@ Route::post('dashboard/roznamcha/oil/{id}/filling-station/{station}/create', 'Oi
 Route::get('dashboard/roznamcha/oil/{id}', 'OilRecordController@show')->name('oilRecord.show');
 Route::get('dashboard/roznamcha/oil/{id}/edit', 'OilRecordController@edit')->name('oilRecord.edit');
 Route::put('dashboard/roznamcha/oil/{id}/edit', 'OilRecordController@update')->name('oilRecord.update');
-Route::delete('dashboard/roznamcha/{id}/destroy', 'OilRecordController@destroy')->name('oilRecord.destroy');
+Route::delete('dashboard/roznamcha/{id}', 'OilRecordController@destroy')->name('oilRecord.destroy');
 
 Route::get('search/oil-record', 'OilRecordController@searchOilRecord')->name('oilRecord.searchOilRecord');
+
+// Wheat Stock Routes
+Route::get('dashboard/stock/wheat', 'WheatStockController@index')->name('wheatStock.index');
+Route::get('dashboard/{id}/stock/wheat/create', 'WheatStockController@create')->name('wheatStock.create');
+Route::post('dashboard/{id}/stock/wheat/create', 'WheatStockController@store')->name('wheatStock.store');
+Route::get('dashboard/stock/wheat/{id}', 'WheatStockController@show')->name('wheatStock.show');
+Route::get('dashboard/stock/wheat/{id}/edit', 'WheatStockController@edit')->name('wheatStock.edit');
+Route::put('dashboard/stock/wheat/{id}/edit', 'WheatStockController@update')->name('wheatStock.update');
+Route::delete('dashboard/stock/wheat/{id}', 'WheatStockController@destroy')->name('wheatStock.destroy');

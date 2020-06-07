@@ -34,7 +34,7 @@
                 <div id="stations-table">
                     @if ($dates->count() > 0)
                         @foreach ($dates as $date)
-                            <h3 class="mb-3 fw-700 text-success">{{ date('d-F-Y (l)') }}</h3>
+                            <h3 class="mb-3 fw-700 text-success">{{ date('d-F-Y (l)', strtotime($date->date)) }}</h3>
                             <div class="table-responsive">
                                 <table class="table table-striped">
                                     <thead class="table-success">

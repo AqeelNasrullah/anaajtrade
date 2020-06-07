@@ -41,7 +41,7 @@
                             <ul class="dropdown-menu dropdown-menu-right">
                                 <a href="" class="dropdown-item">Fertilizer / <span class="text-urdu-kasheeda">کھاد</span></a>
                                 <a href="" class="dropdown-item">Agricultural Medicine / <span class="text-urdu-kasheeda">زرعی ادویات</span></a>
-                                <a href="" class="dropdown-item">Wheat / <span class="text-urdu-kasheeda">گندم</span></a>
+                                <a href="{{ route('wheatStock.create', base64_encode(($profile->id * 123456789) / 12098)) }}" class="dropdown-item">Wheat / <span class="text-urdu-kasheeda">گندم</span></a>
                                 <a href="" class="dropdown-item">Rice / <span class="text-urdu-kasheeda">چاول</span></a>
                             </ul>
                         </div>
@@ -49,37 +49,74 @@
                     <br class="clear">
                 </section>
                 <section>
-                    <h3 class="text-success fw-700 mb-3">Oil / <span class="text-urdu-kasheeda">تیل</span></h3>
-                    <div class="table-responsive">
-                        <table class="table table-striped" id="oil-table">
-                            <thead class="table-success">
-                                <tr>
-                                    <th>Filling Station / <span class="text-urdu-kasheeda">پیٹرول پمپ</span></th>
-                                    <th>Quantity / <span class="text-urdu-kasheeda">مقدار</span></th>
-                                    <th>Price Paid / <span class="text-urdu-kasheeda">ادا شدہ قیمت</span></th>
-                                    <th>Total Price / <span class="text-urdu-kasheeda">کل قیمت</span></th>
-                                    <th>Date &amp; Time / <span class="text-urdu-kasheeda">تاریخ اور وقت</span></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if ($oil_records->count() > 0)
-                                    @foreach ($oil_records as $record)
-                                        <tr>
-                                            <td><a data-id="{{ base64_encode(($record->filling_station_id * 123456789) / 12098) }}" class="view-station" href="">{{ $record->fillingStation->name }}</a></td>
-                                            <td>{{ $record->quantity }} Litres</td>
-                                            <td>Rs {{ $record->paid_per_litre }} /-</td>
-                                            <td>{{ $record->quantity * $record->paid_per_litre }} /-</td>
-                                            <td>{{ date('d-F-Y h:i A', strtotime($record->created_at)) }}</td>
-                                        </tr>
-                                    @endforeach
-                                @else
+                    <section id="oil-section">
+                        <h3 class="text-success fw-700 mb-3">Oil / <span class="text-urdu-kasheeda">تیل</span></h3>
+                        <div class="table-responsive">
+                            <table class="table table-striped" id="oil-table">
+                                <thead class="table-success">
                                     <tr>
-                                        <td colspan="5" class="text-center font-italic">No record to show.</td>
+                                        <th>Filling Station / <span class="text-urdu-kasheeda">پیٹرول پمپ</span></th>
+                                        <th>Quantity / <span class="text-urdu-kasheeda">مقدار</span></th>
+                                        <th>Price Paid / <span class="text-urdu-kasheeda">ادا شدہ قیمت</span></th>
+                                        <th>Total Price / <span class="text-urdu-kasheeda">کل قیمت</span></th>
+                                        <th>Date &amp; Time / <span class="text-urdu-kasheeda">تاریخ اور وقت</span></th>
                                     </tr>
-                                @endif
-                            </tbody>
-                        </table>
-                    </div>
+                                </thead>
+                                <tbody>
+                                    @if ($oil_records->count() > 0)
+                                        @foreach ($oil_records as $record)
+                                            <tr>
+                                                <td><a data-id="{{ base64_encode(($record->filling_station_id * 123456789) / 12098) }}" class="view-station" href="">{{ $record->fillingStation->name }}</a></td>
+                                                <td>{{ $record->quantity }} Litres</td>
+                                                <td>Rs {{ $record->paid_per_litre }} /-</td>
+                                                <td>{{ $record->quantity * $record->paid_per_litre }} /-</td>
+                                                <td>{{ date('d-F-Y h:i A', strtotime($record->created_at)) }}</td>
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        <tr>
+                                            <td colspan="5" class="text-center font-italic">No record to show.</td>
+                                        </tr>
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                    <section id="wheat-stock-section">
+                        <h3 class="text-success fw-700 mb-3">Wheat Stocks / <span class="text-urdu-kasheeda">گندم کا اسٹاک</span></h3>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead class="table-success">
+                                    <tr>
+                                        <th class="align-middle">No of sacks / <span class="text-urdu-kasheeda">بوریوں کی تعداد</span></th>
+                                        <th class="align-middle">Weight per sack / <span class="text-urdu-kasheeda">فی بوری وزن</span></th>
+                                        <th class="align-middle">Price per 40Kg / <span class="text-urdu-kasheeda">قیمت فی من</span></th>
+                                        <th class="align-middle">Total Price / <span class="text-urdu-kasheeda">کل قیمت</span></th>
+                                        <th class="align-middle">Category / <span class="text-urdu-kasheeda">گندم کی قسم</span></th>
+                                        <th class="align-middle">Date &amp; Time / <span class="text-urdu-kasheeda">تاریخ اور وقت</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if ($wheat_stocks->count() > 0)
+                                        @foreach ($wheat_stocks as $stock)
+                                            <tr>
+                                                <td class="align-middle">{{ $stock->num_of_sack }}</td>
+                                                <td class="align-middle">{{ $stock->weight_per_sack }} Kgs</td>
+                                                <td class="align-middle">Rs {{ $stock->price }} /-</td>
+                                                <td class="align-middle">Rs {{ ((($stock->num_of_sack * $stock->weight_per_sack) / 40) * $stock->price) - ((2/100) * ((($stock->num_of_sack * $stock->weight_per_sack) / 40) * $stock->price)) }} /-</td>
+                                                <td class="align-middle">{{ $stock->category }}</td>
+                                                <td class="align-middle">{{ date('d-F-Y h:i A', strtotime($stock->created_at)) }}</td>
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        <tr>
+                                            <td colspan="6" class="text-center font-italic">No record to show.</td>
+                                        </tr>
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
                 </section>
             </main>
         </div>

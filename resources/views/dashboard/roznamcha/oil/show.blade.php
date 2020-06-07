@@ -6,6 +6,7 @@
 
 @section('style')
     <style>
+        .content {display: flex;flex-direction: column;justify-content: center;}
         .slip-mega {max-width: 600px;margin:0px auto;}
         .slip {max-width:600px;border-bottom: 1px dashed black;}
         .slip-logo {width: 100px; float: left; margin-right: 15px;}

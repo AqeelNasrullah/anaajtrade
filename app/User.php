@@ -44,4 +44,16 @@ class User extends Authenticatable
     {
         return $this->hasMany(OilRecord::class);
     }
+
+    // User has many wheat stocks
+    public function wheatStocks()
+    {
+        return $this->hasMany(WheatStock::class);
+    }
+
+    // User has many Wheat records
+    public function wheatRecords()
+    {
+        return $this->hasMany(WheatRecord::class);
+    }
 }

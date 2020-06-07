@@ -69,7 +69,7 @@
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="#">Fertilizer / <span class="text-urdu-kasheeda">کھاد</span></a>
                                         <a class="dropdown-item" href="#">Agricultural Medicine / <span class="text-urdu-kasheeda">زرعی ادویات</span></a>
-                                        <a class="dropdown-item" href="#">Wheat / <span class="text-urdu-kasheeda">گندم</span></a>
+                                        <a class="dropdown-item" href="{{ route('wheatStock.index') }}">Wheat / <span class="text-urdu-kasheeda">گندم</span></a>
                                         <a class="dropdown-item" href="#">Rice / <span class="text-urdu-kasheeda">چاول</span></a>
                                     </div>
                                 </li>
