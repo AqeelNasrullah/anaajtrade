@@ -4,6 +4,10 @@
     <title>Stock for {{ $profile->name ?? 'Unkown User' }} - {{ config('app.name') }}</title>
 @endsection
 
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('add_wheat_stock', $profile) }}
+@endsection
+
 @section('content')
     <section class="container-fluid py-3">
         <div class="row">

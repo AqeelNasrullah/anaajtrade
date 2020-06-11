@@ -20,6 +20,7 @@ class OilRecordResource extends JsonResource
             'quantity'                  =>      $this->quantity,
             'price_per_litre'           =>      $this->price_per_litre,
             'paid_per_litre'            =>      $this->paid_per_litre,
+            'user_id'                   =>      $this->user_id,
             'user'                      =>      $this->user->profile->name,
             'filling_station'           =>      $this->fillingStation->name,
             'profile'                   =>      $this->profile->name,

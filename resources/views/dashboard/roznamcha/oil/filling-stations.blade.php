@@ -4,6 +4,10 @@
     <title>Filling Stations - {{ config('app.name') }}</title>
 @endsection
 
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('filling_stations_oil_records', $profile) }}
+@endsection
+
 @section('content')
     <section class="container-fluid py-3">
         <div class="row">

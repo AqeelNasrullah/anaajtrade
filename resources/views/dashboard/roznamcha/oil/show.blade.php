@@ -18,6 +18,10 @@
     </style>
 @endsection
 
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('show_oil_records', $record) }}
+@endsection
+
 @section('content')
     <section class="content-fluid py-3">
         <div class="w-50 mx-auto px-5 mb-3 prnt">
@@ -151,7 +155,7 @@
             </div>
         </div>
         @else
-            <div class="alert alert-danger w-50 mx-auto">No record to show.</div>
+            <div class="alert alert-danger w-50 mx-auto text-center font-italic">No record to show.</div>
         @endif
     </section>
 @endsection

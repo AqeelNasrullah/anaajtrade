@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Profile;
+use App\RiceType;
 use App\WheatStock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -133,10 +134,10 @@ class WheatStockController extends Controller
                 $s_id = (base64_decode($id) * 12098) / 123456789;
                 $updated = WheatStock::find($s_id)->update([
                     'num_of_sack'               =>      trim($request->get('num_of_sacks')),
-                    'weight_per_sack'               =>      trim($request->get('weight_per_sack')),
-                    'price'               =>      trim($request->get('price_per_sack')),
-                    'commission'               =>      trim($request->get('commission')),
-                    'category'               =>      trim($request->get('category')),
+                    'weight_per_sack'           =>      trim($request->get('weight_per_sack')),
+                    'price'                     =>      trim($request->get('price_per_sack')),
+                    'commission'                =>      trim($request->get('commission')),
+                    'category'                  =>      $request->get('category'),
                 ]);
                 if ($updated) {
                     return redirect()->route('wheatStock.show', $id)->with('success', 'Wheat stock updated successfully.');

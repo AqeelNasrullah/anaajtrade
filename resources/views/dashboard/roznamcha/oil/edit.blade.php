@@ -1,7 +1,7 @@
 @extends('master.dashboard-master')
 
 @section('title')
-    <title>Generate Slip - {{ config('app.name') }}</title>
+    <title>Edit Bill - {{ config('app.name') }}</title>
 @endsection
 
 @section('style')
@@ -10,6 +10,10 @@
         .slip-logo {width: 100px; float: left; margin-right: 15px;}
         .slip-detail {width: calc(100% - 115px);float: left;}
     </style>
+@endsection
+
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('edit_oil_records', $record) }}
 @endsection
 
 @section('content')

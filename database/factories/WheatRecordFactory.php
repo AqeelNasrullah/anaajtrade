@@ -15,8 +15,9 @@ $factory->define(WheatRecord::class, function (Faker $faker) {
         'profile_id'               =>      function() {
             return Profile::all()->random();
         },
-        'quantity'              =>      rand(10, 50),
+        'quantity'              =>      rand(40, 500),
         'price_per_mann'        =>      1710,
-        'paid_per_mann'         =>      1740
+        'paid_per_mann'         =>      1740,
+        'category'              =>      'A'
     ];
 });

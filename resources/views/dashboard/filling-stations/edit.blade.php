@@ -11,6 +11,10 @@
     </style>
 @endsection
 
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('edit_filling_stations', $station) }}
+@endsection
+
 @section('content')
     <section class="container-fluid">
         <div>

@@ -11,6 +11,10 @@
     </style>
 @endsection
 
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('view_filling_stations', $station) }}
+@endsection
+
 @section('content')
     <section class="container-fluid py-3">
         <div id="data-popup" class="p-0 m-0"></div>

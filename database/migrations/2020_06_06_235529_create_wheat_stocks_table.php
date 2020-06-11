@@ -21,7 +21,7 @@ class CreateWheatStocksTable extends Migration
             $table->bigInteger('profile_id')->unsigned();
             $table->foreign('profile_id')->references('id')->on('profiles');
 
-            $table->integer('no_of_sacks')->unsigned();
+            $table->integer('num_of_sack')->unsigned();
             $table->integer('weight_per_sack')->unsigned();
             $table->integer('price')->unsigned();
             $table->integer('commission')->unsigned();

@@ -1,4 +1,4 @@
-<div class="p-3" style="border-radius: 5px;background-color: lightgray;">
+<div class="p-3" style="border-radius: 5px;background-color: lightgray;position: sticky; top: 15px;">
     <div class="mx-auto mb-2" style="width: 150px;height: 150px;border-radius: 100%;overflow: hidden;"><img src="{{ asset('images/dps/'.$profile->avatar) }}" alt="Image not found" width="100%"></div>
     <div>
         <h4 class="text-center fw-900 mb-1">{{ $profile->name ?? 'Unknown User' }}</h4>

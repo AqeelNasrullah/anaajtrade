@@ -1,4 +1,5 @@
 <section class="mb-2">
+    <div id="data-popup"></div>
     @if ($profile = session()->get('profile'))
     <div class="modal fade" id="customer-popup">
         <div class="modal-dialog">

@@ -4,6 +4,10 @@
     <title>Customers - {{ config('app.name') }}</title>
 @endsection
 
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('customers') }}
+@endsection
+
 @section('content')
     <section>
         <div class="customer-modal p-0 m-0"></div>

@@ -15,6 +15,7 @@
         {{-- Stylesheets --}}
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <link rel="stylesheet" href="{{ asset('css/fontawesome.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/bootnavbar.css') }}">
         <link rel="stylesheet" href="{{ asset('css/style.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/dashboard-master.min.css') }}">
         @yield('style')
@@ -36,7 +37,7 @@
                         <br class="clear">
                     </div>
                 </section>
-                <nav class="navbar navbar-expand-lg navbar-dark bg-success" style="border-bottom: 3px solid goldenrod;">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-success" style="border-bottom: 3px solid goldenrod;" id="navbar">
                     <div class="container">
                         <a class="navbar-brand d-md-block d-lg-none" href="#"><span class="text-urdu-kasheeda fw-700" style="font-size: large;">اناج تجارت کا نظام</span></a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarPrimary">
@@ -44,51 +45,42 @@
                         </button>
 
                         <div class="collapse navbar-collapse" id="navbarPrimary">
-                            <ul class="navbar-nav mr-auto">
-                                <li class="nav-item active">
-                                    <a class="nav-link btn btn-success mr-1" href="{{ route('dashboard.index') }}"><i class="fas fa-home"></i> Home</a>
-                                </li>
+                            <ul class="navbar-nav">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link btn btn-success mr-1 dropdown-toggle" href="#" data-toggle="dropdown">
-                                        <i class="fas fa-address-book"></i> Roznamcha / <span class="text-urdu-kasheeda">روزنامچہ</span> <i class="fas fa-angle-down"></i>
-                                    </a>
+                                    <a class="nav-link btn btn-success mr-2 dropdown-toggle" href="{{ route('dashboard.index') }}" data-toggle="dropdown"><i class="fas fa-home"></i> Dashboard Home &nbsp; <i class="fas fa-angle-down"></i></a>
                                     <ul class="dropdown-menu">
-                                        <a href="" class="dropdown-item">Account Book / <span class="text-urdu-kasheeda">کھاتہ</span></a>
-                                        <a href="{{ route('oilRecord.index') }}" class="dropdown-item">Oil / <span class="text-urdu-kasheeda">تیل</span></a>
-                                        <a href="" class="dropdown-item">Fertilizer / <span class="text-urdu-kasheeda">کھاد</span></a>
-                                        <a href="" class="dropdown-item">Agricultural Medicine / <span class="text-urdu-kasheeda">زرعی ادویات</span></a>
-                                        <a href="" class="dropdown-item">Wheat / <span class="text-urdu-kasheeda">گندم</span></a>
-                                        <a href="" class="dropdown-item">Rice / <span class="text-urdu-kasheeda">چاول</span></a>
-                                        <a href="" class="dropdown-item">Others / <span class="text-urdu-kasheeda">دیگر اشیاء</span></a>
-                                    </ul>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link btn btn-success mr-1 dropdown-toggle" href="#" data-toggle="dropdown">
-                                        <i class="fas fa-database"></i> Stock / <span class="text-urdu-kasheeda">اسٹاک</span> <i class="fas fa-angle-down"></i>
-                                    </a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">Fertilizer / <span class="text-urdu-kasheeda">کھاد</span></a>
-                                        <a class="dropdown-item" href="#">Agricultural Medicine / <span class="text-urdu-kasheeda">زرعی ادویات</span></a>
-                                        <a class="dropdown-item" href="{{ route('wheatStock.index') }}">Wheat / <span class="text-urdu-kasheeda">گندم</span></a>
-                                        <a class="dropdown-item" href="#">Rice / <span class="text-urdu-kasheeda">چاول</span></a>
-                                    </div>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="" class="nav-link btn btn-success mr-1"><i class="fas fa-dollar-sign"></i> Prices / <span class="text-urdu-kasheeda">قیمتیں</span></a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a href="" class="nav-link btn btn-success dropdown-toggle" data-toggle="dropdown">
-                                        <i class="fas fa-plus"></i> More / <span class="text-urdu-kasheeda">مزید</span> <i class="fas fa-angle-down"></i>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <a href="{{ route('profile.index') }}" class="dropdown-item"><i class="fas fa-users"></i> Customers / <span class="text-urdu-kasheeda">خریدار</span></a>
-                                        <a href="{{ route('fillingStation.index') }}" class="dropdown-item"><i class="fas fa-gas-pump"></i> Filling Stations / <span class="text-urdu-kasheeda">پیٹرول پمپ</span></a>
-                                        <a href="" class="dropdown-item"><i class="fas fa-layer-group"></i> Fertilizer Traders / <span class="text-urdu-kasheeda">کھاد کے تاجر</span></a>
-                                        <a href="" class="dropdown-item"><i class="fas fa-file-prescription"></i> Medicine Traders / <span class="text-urdu-kasheeda">ادویات کے تاجر</span></a>
+                                        <li class="dropdown">
+                                            <a href="{{ route('dashboard.roznamcha') }}" class="dropdown-item dropdown-toggle" data-toggle="dropdown"><i class="fas fa-address-book"></i> Roznamcha / <span class="text-urdu-kasheeda">روزنامچہ</span> &nbsp; <i class="fas fa-angle-right"></i></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="" class="dropdown-item">Account Book / <span class="text-urdu-kasheeda">روزنامچہ</span></a></li>
+                                                <li><a href="{{ route('oilRecord.index') }}" class="dropdown-item">Oil / <span class="text-urdu-kasheeda">تیل</span></a></li>
+                                                <li><a href="" class="dropdown-item">Fertilizer / <span class="text-urdu-kasheeda">کھاد</span></a></li>
+                                                <li><a href="" class="dropdown-item">Agricultural Medicine / <span class="text-urdu-kasheeda">زرعی ادویات</span></a></li>
+                                                <li><a href="{{ route('wheatRecord.index') }}" class="dropdown-item">Wheat / <span class="text-urdu-kasheeda">گندم</span></a></li>
+                                                <li><a href="{{ route('riceRecord.index') }}" class="dropdown-item">Rice / <span class="text-urdu-kasheeda">چاول</span></a></li>
+                                                <li><a href="" class="dropdown-item">Others / <span class="text-urdu-kasheeda">دیگر اشیاء</span></a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a href="" class="dropdown-item dropdown-toggler" data-toggle="dropdown"><i class="fas fa-database"></i> Stock / <span class="text-urdu-kasheeda">اسٹاک</span> &nbsp; <i class="fas fa-angle-right"></i></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="" class="dropdown-item">Fertilizer / <span class="text-urdu-kasheeda">کھاد</span></a></li>
+                                                <li><a href="" class="dropdown-item">Agricultural Medicine / <span class="text-urdu-kasheeda">زرعی ادویات</span></a></li>
+                                                <li><a href="{{ route('wheatStock.index') }}" class="dropdown-item">Wheat / <span class="text-urdu-kasheeda">گندم</span></a></li>
+                                                <li><a href="{{ route('riceStock.index') }}" class="dropdown-item">Rice / <span class="text-urdu-kasheeda">چاول</span></a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="" class="dropdown-item"><i class="fas fa-dollar-sign"></i> Prices / <span class="text-urdu-kasheeda">قیمتیں</span></a></li>
+                                        <li><a href="{{ route('profile.index') }}" class="dropdown-item"><i class="fas fa-users"></i> Customers / <span class="text-urdu-kasheeda">خریدار</span></a></li>
+                                        <li><a href="{{ route('fillingStation.index') }}" class="dropdown-item"><i class="fas fa-gas-pump"></i> Filling Stations / <span class="text-urdu-kasheeda">پیٹرول پمپ</span></a></li>
+                                        <li><a href="" class="dropdown-item"><i class="fas fa-layer-group"></i> Fertilizer Traders / <span class="text-urdu-kasheeda">کھاد کے تاجر</span></a></li>
+                                        <li><a href="" class="dropdown-item"><i class="fas fa-file-prescription"></i> Medicine Traders / <span class="text-urdu-kasheeda">ادویات کے تاجر</span></a></li>
+                                        <li><a href="" class="dropdown-item"></a></li>
                                     </ul>
                                 </li>
                             </ul>
-                            <ul class="navbar-nav">
+                            @yield('breadcrumbs')
+                            <ul class="navbar-nav ml-auto">
                                 <li class="nav-item dropdown">
                                     <a class="nav-link btn btn-success dropdown-toggle px-3" href="#" data-toggle="dropdown">
                                         <div style="width: 30px;height: 30px;float: left;margin-right: 5px;border-radius: 100%;overflow: hidden;">
@@ -98,6 +90,7 @@
                                         <br class="clear">
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="{{ route('welcome') }}"><i class="fas fa-home"></i> Home</a>
                                         <a class="dropdown-item" href="#"><i class="fas fa-user-tie"></i> Profile</a>
                                         <a class="dropdown-item" href="#"><i class="fas fa-unlock"></i> Change Password</a>
                                         <div class="dropdown-divider"></div>
@@ -123,11 +116,14 @@
         {{-- Script Files --}}
         <script src="{{ asset('js/app.js') }}"></script>
         <script src="{{ asset('js/fontawesome.min.js') }}"></script>
+        <script src="{{ asset('js/bootnavbar.js') }}"></script>
         <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
         <script>
             $(document).ready(function() {
                 var height = $('.header').outerHeight() + $('.footer').outerHeight();
                 $('.content').css('min-height', 'calc(100vh - ' + height + 'px)');
+
+                $('#navbar').bootnavbar();
             });
         </script>
         @yield('script')

@@ -4,6 +4,10 @@
     <title>Filling Stations - {{ config('app.name') }}</title>
 @endsection
 
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('filling_stations') }}
+@endsection
+
 @section('content')
     <section>
         <div class="station-search-result m-0 p-0"></div>

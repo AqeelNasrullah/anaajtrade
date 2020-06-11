@@ -15,6 +15,10 @@
     </style>
 @endsection
 
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('view_wheat_stock', $stock) }}
+@endsection
+
 @section('content')
     <section class="container-fluid py-3">
         <div class="slip">

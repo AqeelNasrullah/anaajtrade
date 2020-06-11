@@ -10,6 +10,10 @@
     </style>
 @endsection
 
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('home') }}
+@endsection
+
 @section('content')
     <section>
         <div class="container">

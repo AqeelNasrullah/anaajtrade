@@ -10,6 +10,10 @@
     </style>
 @endsection
 
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('new_customers') }}
+@endsection
+
 @section('content')
     <section>
         <div class="container py-3">

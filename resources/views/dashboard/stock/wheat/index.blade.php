@@ -4,16 +4,27 @@
     <title>Wheat Stock - {{ config('app.name') }}</title>
 @endsection
 
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('wheat_stock') }}
+@endsection
+
 @section('content')
     <section class="container-fluid py-3">
         @include('components.customer-search')
 
-        <div id="data-popup"></div>
         <section>
             <h1 class="text-success text-center fw-900 mb-3">Wheat Stock / <span class="text-urdu-kasheeda">گندم کا اسٹاک</span></h1>
 
             @include('components.error')
             @include('components.success')
+
+            <div class="mb-3">
+                <select name="" id="select-page" class="form-control float-right" style="width:175px">
+                    <option value="0">Wheat Stock</option>
+                    <option value="1">Wheat Records</option>
+                </select>
+                <br class="clear">
+            </div>
 
             <div id="wheat-stock-tables">
                 @if ($dates->count() > 0)
@@ -50,9 +61,9 @@
                                                 <td class="align-middle">{{ $record->category }}</td>
                                                 <td class="align-middle">{{ date('h:i A', strtotime($record->created_at)) }}</td>
                                                 <td class="align-middle">
-                                                    <a href="{{ route('wheatStock.show', base64_encode(($record->id * 123456789) / 12098)) }}" class="d-inline">View Slip</a>
+                                                    <a href="{{ route('wheatStock.show', base64_encode(($record->id * 123456789) / 12098)) }}" class="d-inline">View</a>
                                                     <p class="mb-0 d-inline"> | </p>
-                                                    <a href="{{ route('wheatStock.edit', base64_encode(($record->id * 123456789) / 12098)) }}" class="d-inline">Edit Record</a>
+                                                    <a href="{{ route('wheatStock.edit', base64_encode(($record->id * 123456789) / 12098)) }}" class="d-inline">Edit</a>
                                                     <p class="mb-0 d-inline"> | </p>
                                                     <form action="{{ route('wheatStock.destroy', base64_encode(($record->id * 123456789) / 12098)) }}" method="post" class="d-inline">
                                                         @csrf
@@ -104,6 +115,14 @@
                     return true;
                 } else {
                     return false;
+                }
+            });
+            $('#select-page').change(function() {
+                var page_id = $(this).val();
+                if (page_id == 1) {
+                    window.location.href = "{{ route('wheatRecord.index') }}";
+                } else {
+                    window.location.href = "{{ route('wheatStock.index') }}";
                 }
             });
         });

@@ -4,9 +4,12 @@
     <title>Oil - {{ config('app.name') }}</title>
 @endsection
 
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('oil_records') }}
+@endsection
+
 @section('content')
     <section class="container-fluid py-3">
-        <div id="data-popup" class="p-0 m-0"></div>
 
         @include('components.customer-search')
 

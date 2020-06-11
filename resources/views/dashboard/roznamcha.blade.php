@@ -10,6 +10,10 @@
     </style>
 @endsection
 
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('roznamcha') }}
+@endsection
+
 @section('content')
     <section>
         <div class="container">
@@ -44,14 +48,14 @@
                     </a>
                 </div>
                 <div class="col-md-4 px-3 mb-3">
-                    <a href="" class="text-light">
+                    <a href="{{ route('wheatRecord.index') }}" class="text-light">
                         <div class="bg-success px-2 py-4" style="border-radius: 5px;">
                             <h4 class="text-center fw-700">Wheat<br><span class="text-urdu-kasheeda">کندم</span></h4>
                         </div>
                     </a>
                 </div>
                 <div class="col-md-4 px-3 mb-3">
-                    <a href="" class="text-light">
+                    <a href="{{ route('riceRecord.index') }}" class="text-light">
                         <div class="bg-success px-2 py-4" style="border-radius: 5px;">
                             <h4 class="text-center fw-700">Rice<br><span class="text-urdu-kasheeda">چاول</span></h4>
                         </div>

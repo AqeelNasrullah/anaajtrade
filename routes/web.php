@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 // Auth Routes
 Route::get('login', 'LoginController@index')->name('login.index');
@@ -78,3 +78,30 @@ Route::get('dashboard/stock/wheat/{id}', 'WheatStockController@show')->name('whe
 Route::get('dashboard/stock/wheat/{id}/edit', 'WheatStockController@edit')->name('wheatStock.edit');
 Route::put('dashboard/stock/wheat/{id}/edit', 'WheatStockController@update')->name('wheatStock.update');
 Route::delete('dashboard/stock/wheat/{id}', 'WheatStockController@destroy')->name('wheatStock.destroy');
+
+// Wheat Record Routes
+Route::get('dashboard/roznamcha/wheat', 'WheatRecordController@index')->name('wheatRecord.index');
+Route::get('dashboard/{id}/roznamcha/wheat/create', 'WheatRecordController@create')->name('wheatRecord.create');
+Route::post('dashboard/{id}/roznamcha/wheat/create', 'WheatRecordController@store')->name('wheatRecord.store');
+Route::get('dashboard/roznamcha/wheat/{id}', 'WheatRecordController@show')->name('wheatRecord.show');
+Route::get('dashboard/roznamcha/wheat/{id}/edit', 'WheatRecordController@edit')->name('wheatRecord.edit');
+Route::put('dashboard/roznamcha/wheat/{id}/edit', 'WheatRecordController@update')->name('wheatRecord.update');
+Route::delete('dashboard/roznamcha/wheat/{id}/edit', 'WheatRecordController@destroy')->name('wheatRecord.destroy');
+
+// Rice Stock Routes
+Route::get('dashboard/stock/rice', 'RiceStockController@index')->name('riceStock.index');
+Route::get('dashboard/{id}/stock/rice/create', 'RiceStockController@create')->name('riceStock.create');
+Route::post('dashboard/{id}/stock/rice/create', 'RiceStockController@store')->name('riceStock.store');
+Route::get('dashboard/stock/rice/{id}', 'RiceStockController@show')->name('riceStock.show');
+Route::get('dashboard/stock/rice/{id}/edit', 'RiceStockController@edit')->name('riceStock.edit');
+Route::put('dashboard/stock/rice/{id}/edit', 'RiceStockController@update')->name('riceStock.update');
+Route::delete('dashboard/rice/wheat/{id}', 'RiceStockController@destroy')->name('riceStock.destroy');
+
+// Rice Record Routes
+Route::get('dashboard/roznamcha/rice', 'RiceRecordController@index')->name('riceRecord.index');
+Route::get('dashboard/{id}/roznamcha/rice/create', 'RiceRecordController@create')->name('riceRecord.create');
+Route::post('dashboard/{id}/roznamcha/rice/create', 'RiceRecordController@store')->name('riceRecord.store');
+Route::get('dashboard/roznamcha/rice/{id}', 'RiceRecordController@show')->name('riceRecord.show');
+Route::get('dashboard/roznamcha/rice/{id}/edit', 'RiceRecordController@edit')->name('riceRecord.edit');
+Route::put('dashboard/roznamcha/rice/{id}/edit', 'RiceRecordController@update')->name('riceRecord.update');
+Route::delete('dashboard/roznamcha/rice/{id}/edit', 'RiceRecordController@destroy')->name('riceRecord.destroy');

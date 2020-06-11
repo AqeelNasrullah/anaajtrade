@@ -24,7 +24,7 @@ class CreateWheatRecordsTable extends Migration
             $table->integer('quantity')->unsigned();
             $table->integer('price_per_mann')->unsigned();
             $table->integer('paid_per_mann')->unsigned();
-
+            $table->string('category');
             $table->string('status')->nullable()->default('unpaid');
 
             $table->timestamps();

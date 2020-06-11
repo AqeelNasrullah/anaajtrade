@@ -11,6 +11,10 @@
     </style>
 @endsection
 
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('add_filling_stations') }}
+@endsection
+
 @section('content')
     <section class="container-fluid">
         <h1 class="text-center text-success mb-3 fw-900">Create Filling Station / <span class="text-urdu-kasheeda">پیٹرول پمپ شامل کریں</span></h1>

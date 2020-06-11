@@ -52,4 +52,16 @@ class Profile extends Model
     {
         return $this->hasMany(WheatRecord::class);
     }
+
+    // Profile has many rice stocks
+    public function riceStocks()
+    {
+        return $this->hasMany(RiceStock::class);
+    }
+
+    // Profile has many rice records
+    public function riceRecords()
+    {
+        return $this->hasMany(RiceRecord::class);
+    }
 }

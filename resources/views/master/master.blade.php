@@ -15,6 +15,7 @@
         {{-- Stylesheets --}}
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <link rel="stylesheet" href="{{ asset('css/fontawesome.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/bootnavbar.css') }}">
         <link rel="stylesheet" href="{{ asset('css/style.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/master.min.css') }}">
         @yield('style')
@@ -23,7 +24,7 @@
     <body>
         <main class="main">
             <header class="header">
-                <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-success" id="navbar">
                     <div class="container">
                         <a class="navbar-brand text-light" href="{{ url('') }}" style="font-size: x-large !important;"><span class="text-urdu-kasheeda">اناج تجارت کا نظام</span></a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarPrimary">
@@ -77,11 +78,14 @@
         {{-- Script Files --}}
         <script src="{{ asset('js/app.js') }}"></script>
         <script src="{{ asset('js/fontawesome.min.js') }}"></script>
+        <script src="{{ asset('js/bootnavbar.js') }}"></script>
         <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
         <script>
             $(document).ready(function() {
                 var height = $('.header').outerHeight() + $('.footer').outerHeight();
                 $('.content').css('min-height', 'calc(100vh - ' + height + 'px)');
+
+                $('#navbar').bootnavbar();
             });
         </script>
         @yield('script')

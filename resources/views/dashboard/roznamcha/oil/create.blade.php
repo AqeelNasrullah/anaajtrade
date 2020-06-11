@@ -12,6 +12,10 @@
     </style>
 @endsection
 
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('add_oil_records', $profile, $station) }}
+@endsection
+
 @section('content')
     <section class="content-fluid py-3">
         @if ($station && $profile)

@@ -4,6 +4,10 @@
     <title>{{ $profile->name ?? 'Unknown User' }} - {{ config('app.name') }}</title>
 @endsection
 
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('edit_customers', $profile) }}
+@endsection
+
 @section('content')
     <section class="container-fluid py-3">
         <div class="p-0 m-0" id="filling-station-popup"></div>
@@ -31,8 +35,8 @@
                                 <a href="{{ route('oilRecord.fillingStations', base64_encode(($profile->id * 123456789) / 12098)) }}" class="dropdown-item">Oil / <span class="text-urdu-kasheeda">تیل</span></a>
                                 <a href="" class="dropdown-item">Fertilizer / <span class="text-urdu-kasheeda">کھاد</span></a>
                                 <a href="" class="dropdown-item">Agricultural Medicine / <span class="text-urdu-kasheeda">زرعی ادویات</span></a>
-                                <a href="" class="dropdown-item">Wheat / <span class="text-urdu-kasheeda">گندم</span></a>
-                                <a href="" class="dropdown-item">Rice / <span class="text-urdu-kasheeda">چاول</span></a>
+                                <a href="{{ route('wheatRecord.create', base64_encode(($profile->id * 123456789) / 12098)) }}" class="dropdown-item">Wheat / <span class="text-urdu-kasheeda">گندم</span></a>
+                                <a href="{{ route('riceRecord.create', base64_encode(($profile->id * 123456789) / 12098)) }}" class="dropdown-item">Rice / <span class="text-urdu-kasheeda">چاول</span></a>
                                 <a href="" class="dropdown-item">Others / <span class="text-urdu-kasheeda">دیگر اشیاء</span></a>
                             </ul>
                         </div>
@@ -42,7 +46,7 @@
                                 <a href="" class="dropdown-item">Fertilizer / <span class="text-urdu-kasheeda">کھاد</span></a>
                                 <a href="" class="dropdown-item">Agricultural Medicine / <span class="text-urdu-kasheeda">زرعی ادویات</span></a>
                                 <a href="{{ route('wheatStock.create', base64_encode(($profile->id * 123456789) / 12098)) }}" class="dropdown-item">Wheat / <span class="text-urdu-kasheeda">گندم</span></a>
-                                <a href="" class="dropdown-item">Rice / <span class="text-urdu-kasheeda">چاول</span></a>
+                                <a href="{{ route('riceStock.create', base64_encode(($profile->id * 123456789) / 12098)) }}" class="dropdown-item">Rice / <span class="text-urdu-kasheeda">چاول</span></a>
                             </ul>
                         </div>
                     </div>
@@ -111,6 +115,111 @@
                                     @else
                                         <tr>
                                             <td colspan="6" class="text-center font-italic">No record to show.</td>
+                                        </tr>
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                    <section id="wheat-record-section">
+                        <h3 class="text-success mb-3 fw-700">Wheat / <span class="text-urdu-kasheeda">گندم</span></h3>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead class="table-success">
+                                    <tr>
+                                        <th class="align-middle">Quantity / <span class="text-urdu-kasheeda">مقدار</span></th>
+                                        <th class="align-middle">Price paid per 40Kgs / <span class="text-urdu-kasheeda">فی من ادائیگی</span></th>
+                                        <th class="align-middle">Total Price / <span class="text-urdu-kasheeda">کل قیمت</span></th>
+                                        <th class="align-middle">Category / <span class="text-urdu-kasheeda">گندم کی قسم</span></th>
+                                        <th class="align-middle">Date &amp; Time / <span class="text-urdu-kasheeda">تاریخ اور وقت</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if ($wheat_records->count() > 0)
+                                        @foreach ($wheat_records as $record)
+                                            <tr>
+                                                <td class="align-middle">{{ $record->quantity }} Kgs</td>
+                                                <td class="align-middle">Rs {{ $record->paid_per_mann }} /-</td>
+                                                <td class="align-middle">Rs {{ ($record->quantity / 40) * $record->paid_per_mann }} /-</td>
+                                                <td class="align-middle">{{ $record->category }}</td>
+                                                <td class="align-middle">{{ date('d-F-Y h:i A', strtotime($record->created_at)) }}</td>
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        <tr>
+                                            <td class="text-center font-italic" colspan="5">No record to show.</td>
+                                        </tr>
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                    <section id="wheat-stock-section">
+                        <h3 class="text-success fw-700 mb-3">Rice Stocks / <span class="text-urdu-kasheeda">چاول کا اسٹاک</span></h3>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead class="table-success">
+                                    <tr>
+                                        <th class="align-middle">No of sacks / <span class="text-urdu-kasheeda">بوریوں کی تعداد</span></th>
+                                        <th class="align-middle">Weight per sack / <span class="text-urdu-kasheeda">فی بوری وزن</span></th>
+                                        <th class="align-middle">Price per 40Kg / <span class="text-urdu-kasheeda">قیمت فی من</span></th>
+                                        <th class="align-middle">Total Price / <span class="text-urdu-kasheeda">کل قیمت</span></th>
+                                        <th class="align-middle">Rice Type / <span class="text-urdu-kasheeda">چاول کی قسم</span></th>
+                                        <th class="align-middle">Category / <span class="text-urdu-kasheeda">چاول کا معیار</span></th>
+                                        <th class="align-middle">Date &amp; Time / <span class="text-urdu-kasheeda">تاریخ اور وقت</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if ($rice_stocks->count() > 0)
+                                        @foreach ($rice_stocks as $stock)
+                                            <tr>
+                                                <td class="align-middle">{{ $stock->num_of_sack }}</td>
+                                                <td class="align-middle">{{ $stock->weight_per_sack }} Kgs</td>
+                                                <td class="align-middle">Rs {{ $stock->price }} /-</td>
+                                                <td class="align-middle">Rs {{ ((($stock->num_of_sack * $stock->weight_per_sack) / 40) * $stock->price) - ((2/100) * ((($stock->num_of_sack * $stock->weight_per_sack) / 40) * $stock->price)) }} /-</td>
+                                                <td class="align-middle">{{ $stock->riceType->name }}</td>
+                                                <td class="align-middle">{{ $stock->category }}</td>
+                                                <td class="align-middle">{{ date('d-F-Y h:i A', strtotime($stock->created_at)) }}</td>
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        <tr>
+                                            <td colspan="7" class="text-center font-italic">No record to show.</td>
+                                        </tr>
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                    <section id="wheat-record-section">
+                        <h3 class="text-success mb-3 fw-700">Rice / <span class="text-urdu-kasheeda">چاول</span></h3>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead class="table-success">
+                                    <tr>
+                                        <th class="align-middle">Quantity / <span class="text-urdu-kasheeda">مقدار</span></th>
+                                        <th class="align-middle">Price paid per 40Kgs / <span class="text-urdu-kasheeda">فی من ادائیگی</span></th>
+                                        <th class="align-middle">Total Price / <span class="text-urdu-kasheeda">کل قیمت</span></th>
+                                        <th class="align-middle">Rice Type / <span class="text-urdu-kasheeda">چاول کی قسم</span></th>
+                                        <th class="align-middle">Category / <span class="text-urdu-kasheeda">چاول کا معیار</span></th>
+                                        <th class="align-middle">Date &amp; Time / <span class="text-urdu-kasheeda">تاریخ اور وقت</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if ($rice_records->count() > 0)
+                                        @foreach ($rice_records as $record)
+                                            <tr>
+                                                <td class="align-middle">{{ $record->quantity }} Kgs</td>
+                                                <td class="align-middle">Rs {{ $record->paid_per_mann }} /-</td>
+                                                <td class="align-middle">Rs {{ ($record->quantity / 40) * $record->paid_per_mann }} /-</td>
+                                                <td class="align-middle">{{ $record->riceType->name }}</td>
+                                                <td class="align-middle">{{ $record->category }}</td>
+                                                <td class="align-middle">{{ date('d-F-Y h:i A', strtotime($record->created_at)) }}</td>
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        <tr>
+                                            <td class="text-center font-italic" colspan="6">No record to show.</td>
                                         </tr>
                                     @endif
                                 </tbody>

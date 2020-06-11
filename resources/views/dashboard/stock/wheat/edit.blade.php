@@ -4,14 +4,25 @@
     <title>Edit Stock - {{ config('app.name') }}</title>
 @endsection
 
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('edit_wheat_stock', $stock) }}
+@endsection
+
 @section('content')
     <section class="container-fluid py-3">
-        <h1 class="text-success fw-900 text-center mb-3">Add Wheat Stock / <span class="text-urdu-kasheeda">گندم کا اسٹاک شامل کریں</span></h1>
+        <h1 class="text-success fw-900 text-center mb-3">Update Wheat Stock / <span class="text-urdu-kasheeda">چاول کا اسٹاک تبدیل کریں</span></h1>
         <div style="max-width:700px;margin:0px auto;">
             @include('components.error')
             <form action="{{ route('wheatStock.update', base64_encode(($stock->id * 123456789) / 12098)) }}" method="post">
                 @csrf
                 @method('PUT')
+                <div class="row">
+                    <p class="mb-1 col-md-6"><strong>Customer:</strong> {{ $stock->profile->name }}</p>
+                    <p class="mb-1 col-md-6"><strong>Phone Number:</strong> {{ $stock->profile->phone_number }}</p>
+                    <p class="mb-1 col-md-6"><strong>CNIC:</strong> {{ $stock->profile->cnic }}</p>
+                    <p class="mb-1 col-md-6"><strong>Address:</strong> {{ $stock->profile->address }}</p>
+                </div>
+                <hr>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
