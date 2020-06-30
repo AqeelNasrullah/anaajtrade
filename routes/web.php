@@ -58,6 +58,11 @@ Route::delete('dashboard/filling-station/{id}', 'FillingStationController@destro
 Route::get('dashboard/filling-stations/search', 'FillingStationController@filterFillingStation')->name('fillingStation.filterFillingStation');
 Route::get('search/filling-station', 'FillingStationController@searchFillingStation')->name('fillingStation.searchFillingStation');
 
+// Account Book Routes
+Route::get('dashboard/roznamcha/account-book', 'AccountBookController@index')->name('accountBook.index');
+Route::get('dashboard/customer/{id}/roznamcha/account-book/create', 'AccountBookController@create')->name('accountBook.create');
+Route::post('dashboard/customer/{id}/roznamcha/account-book/create', 'AccountBookController@store')->name('accountBook.store');
+
 // Oil Record Routes
 Route::get('dashboard/roznamcha/oil', 'OilRecordController@index')->name('oilRecord.index');
 Route::get('dashboard/roznamcha/oil/{id}/filling-stations', 'OilRecordController@fillingStations')->name('oilRecord.fillingStations');
@@ -72,8 +77,8 @@ Route::get('search/oil-record', 'OilRecordController@searchOilRecord')->name('oi
 
 // Wheat Stock Routes
 Route::get('dashboard/stock/wheat', 'WheatStockController@index')->name('wheatStock.index');
-Route::get('dashboard/{id}/stock/wheat/create', 'WheatStockController@create')->name('wheatStock.create');
-Route::post('dashboard/{id}/stock/wheat/create', 'WheatStockController@store')->name('wheatStock.store');
+Route::get('dashboard/customer/{id}/stock/wheat/create', 'WheatStockController@create')->name('wheatStock.create');
+Route::post('dashboard/customer/{id}/stock/wheat/create', 'WheatStockController@store')->name('wheatStock.store');
 Route::get('dashboard/stock/wheat/{id}', 'WheatStockController@show')->name('wheatStock.show');
 Route::get('dashboard/stock/wheat/{id}/edit', 'WheatStockController@edit')->name('wheatStock.edit');
 Route::put('dashboard/stock/wheat/{id}/edit', 'WheatStockController@update')->name('wheatStock.update');
@@ -81,8 +86,8 @@ Route::delete('dashboard/stock/wheat/{id}', 'WheatStockController@destroy')->nam
 
 // Wheat Record Routes
 Route::get('dashboard/roznamcha/wheat', 'WheatRecordController@index')->name('wheatRecord.index');
-Route::get('dashboard/{id}/roznamcha/wheat/create', 'WheatRecordController@create')->name('wheatRecord.create');
-Route::post('dashboard/{id}/roznamcha/wheat/create', 'WheatRecordController@store')->name('wheatRecord.store');
+Route::get('dashboard/customer/{id}/roznamcha/wheat/create', 'WheatRecordController@create')->name('wheatRecord.create');
+Route::post('dashboard/customer/{id}/roznamcha/wheat/create', 'WheatRecordController@store')->name('wheatRecord.store');
 Route::get('dashboard/roznamcha/wheat/{id}', 'WheatRecordController@show')->name('wheatRecord.show');
 Route::get('dashboard/roznamcha/wheat/{id}/edit', 'WheatRecordController@edit')->name('wheatRecord.edit');
 Route::put('dashboard/roznamcha/wheat/{id}/edit', 'WheatRecordController@update')->name('wheatRecord.update');
@@ -90,8 +95,8 @@ Route::delete('dashboard/roznamcha/wheat/{id}/edit', 'WheatRecordController@dest
 
 // Rice Stock Routes
 Route::get('dashboard/stock/rice', 'RiceStockController@index')->name('riceStock.index');
-Route::get('dashboard/{id}/stock/rice/create', 'RiceStockController@create')->name('riceStock.create');
-Route::post('dashboard/{id}/stock/rice/create', 'RiceStockController@store')->name('riceStock.store');
+Route::get('dashboard/customer/{id}/stock/rice/create', 'RiceStockController@create')->name('riceStock.create');
+Route::post('dashboard/customer/{id}/stock/rice/create', 'RiceStockController@store')->name('riceStock.store');
 Route::get('dashboard/stock/rice/{id}', 'RiceStockController@show')->name('riceStock.show');
 Route::get('dashboard/stock/rice/{id}/edit', 'RiceStockController@edit')->name('riceStock.edit');
 Route::put('dashboard/stock/rice/{id}/edit', 'RiceStockController@update')->name('riceStock.update');
@@ -99,8 +104,8 @@ Route::delete('dashboard/rice/wheat/{id}', 'RiceStockController@destroy')->name(
 
 // Rice Record Routes
 Route::get('dashboard/roznamcha/rice', 'RiceRecordController@index')->name('riceRecord.index');
-Route::get('dashboard/{id}/roznamcha/rice/create', 'RiceRecordController@create')->name('riceRecord.create');
-Route::post('dashboard/{id}/roznamcha/rice/create', 'RiceRecordController@store')->name('riceRecord.store');
+Route::get('dashboard/customer/{id}/roznamcha/rice/create', 'RiceRecordController@create')->name('riceRecord.create');
+Route::post('dashboard/customer/{id}/roznamcha/rice/create', 'RiceRecordController@store')->name('riceRecord.store');
 Route::get('dashboard/roznamcha/rice/{id}', 'RiceRecordController@show')->name('riceRecord.show');
 Route::get('dashboard/roznamcha/rice/{id}/edit', 'RiceRecordController@edit')->name('riceRecord.edit');
 Route::put('dashboard/roznamcha/rice/{id}/edit', 'RiceRecordController@update')->name('riceRecord.update');

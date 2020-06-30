@@ -7,11 +7,39 @@
 .dropdown-menu {border-top: 2px solid goldenrod !important;}
 .dropdown-toggle::after {content: none !important;}
 
+.preloader {width: 100%;height: 100%;position: fixed;top: 0px;right: 0px;bottom: 0px;left: 0px;z-index: 1000000000;
+    background-color: lightgrey;}
+.preloader-circle {width: 100px;height: 100px;border-radius: 100%;position: relative;border-top: 2px solid goldenrod;
+    border-bottom: 2px solid transparent;border-left: 2px solid transparent;border-right: 2px solid transparent;
+    animation: rotate 2s infinite ease; -webkit-animation: rotate 2s infinite ease;
+}
+.preloader-img {position: absolute;width: 75px;}
+
 .nav-item > .btn-success {background-color: rgba(0,128,0,1.00);border: none !important;}
 .navbar-toggler {border: 1px solid white !important;}
 
 .footer {background-color: black; padding: 7px 15px;border-top: 2px solid goldenrod;} .footer > p {font-size: smaller;}
 
+@keyframes rotate {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@-webkit-keyframes rotate {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
 
 @media screen and (max-width: 991px) {
     .nav-item > .btn-success {margin-right: 0px !important;margin-top: 5px !important;}

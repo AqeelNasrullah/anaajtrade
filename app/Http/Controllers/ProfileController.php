@@ -120,10 +120,12 @@ class ProfileController extends Controller
             $wheat_records = Auth::user()->wheatRecords()->where('profile_id', $d_id)->latest()->get();
             $rice_records = Auth::user()->riceRecords()->where('profile_id', $d_id)->latest()->get();
             $oil_records = Auth::user()->oilRecords()->where('profile_id', $d_id)->latest()->get();
+            $account_books = Auth::user()->accountBooks()->where('profile_id', $d_id)->latest()->get();
             if ($profile) {
                 return view('dashboard.customers.show', [
                     'profile' => $profile, 'oil_records' => $oil_records, 'wheat_stocks' => $wheat_stocks,
-                    'wheat_records' => $wheat_records, 'rice_stocks' => $rice_stocks, 'rice_records' => $rice_records
+                    'wheat_records' => $wheat_records, 'rice_stocks' => $rice_stocks, 'rice_records' => $rice_records,
+                    'account_books' => $account_books
                     ]);
             } else {
                 return redirect()->route('profile.index');

@@ -22,6 +22,12 @@
     </head>
 
     <body>
+        <section class="preloader d-flex justify-content-center align-items-center">
+            <div class="preloader-circle"></div>
+            <div class="preloader-img">
+                <img src="{{ asset('images/thumb.png') }}" width="100%" alt="image not found">
+            </div>
+        </section>
         <main class="main">
             <header class="header">
                 <nav class="navbar navbar-expand-lg navbar-dark bg-success" id="navbar">
@@ -86,6 +92,12 @@
                 $('.content').css('min-height', 'calc(100vh - ' + height + 'px)');
 
                 $('#navbar').bootnavbar();
+
+                $(window).on('load', function () {
+                    $('.preloader').fadeOut('slow', function () {
+                        $(this).remove();
+                    });
+                });
             });
         </script>
         @yield('script')

@@ -22,6 +22,12 @@
     </head>
 
     <body>
+        <section class="preloader d-flex justify-content-center align-items-center">
+            <div class="preloader-circle"></div>
+            <div class="preloader-img">
+                <img src="{{ asset('images/thumb.png') }}" width="100%" alt="image not found">
+            </div>
+        </section>
         <main class="page">
             <header class="header">
                 <section class="container-fluid header-inner py-3 d-none d-lg-block">
@@ -49,10 +55,11 @@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link btn btn-success mr-2 dropdown-toggle" href="{{ route('dashboard.index') }}" data-toggle="dropdown"><i class="fas fa-home"></i> Dashboard Home &nbsp; <i class="fas fa-angle-down"></i></a>
                                     <ul class="dropdown-menu">
+                                        <a href="{{ route('dashboard.index') }}" class="dropdown-item"><i class="fas fa-home"></i> Dashboard Home</a>
                                         <li class="dropdown">
                                             <a href="{{ route('dashboard.roznamcha') }}" class="dropdown-item dropdown-toggle" data-toggle="dropdown"><i class="fas fa-address-book"></i> Roznamcha / <span class="text-urdu-kasheeda">روزنامچہ</span> &nbsp; <i class="fas fa-angle-right"></i></a>
                                             <ul class="dropdown-menu">
-                                                <li><a href="" class="dropdown-item">Account Book / <span class="text-urdu-kasheeda">روزنامچہ</span></a></li>
+                                                <li><a href="{{ route('accountBook.index') }}" class="dropdown-item">Account Book / <span class="text-urdu-kasheeda">روزنامچہ</span></a></li>
                                                 <li><a href="{{ route('oilRecord.index') }}" class="dropdown-item">Oil / <span class="text-urdu-kasheeda">تیل</span></a></li>
                                                 <li><a href="" class="dropdown-item">Fertilizer / <span class="text-urdu-kasheeda">کھاد</span></a></li>
                                                 <li><a href="" class="dropdown-item">Agricultural Medicine / <span class="text-urdu-kasheeda">زرعی ادویات</span></a></li>
@@ -124,6 +131,12 @@
                 $('.content').css('min-height', 'calc(100vh - ' + height + 'px)');
 
                 $('#navbar').bootnavbar();
+
+                $(window).on('load', function () {
+                    $('.preloader').fadeOut('slow', function () {
+                        $(this).remove();
+                    });
+                });
             });
         </script>
         @yield('script')

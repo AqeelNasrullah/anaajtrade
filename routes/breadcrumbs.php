@@ -1,6 +1,9 @@
 <?php
 
 // Home
+
+use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
+
 Breadcrumbs::for('home', function($trail) {
     $trail->push('Home', route('dashboard.index'));
 });
@@ -58,6 +61,19 @@ Breadcrumbs::for('edit_filling_stations', function($trail, $station) {
     $trail->parent('filling_stations');
     $trail->push($station->name, route('fillingStation.edit', base64_encode(($station->id * 123456789) / 12098)));
 });
+
+// Home >> Roznamcha >> Account Book
+Breadcrumbs::for('account_books', function($trail) {
+    $trail->parent('roznamcha');
+    $trail->push('Account Book', route('accountBook.index'));
+});
+
+// Home >> Customer >> { User } >> Create
+Breadcrumbs::for('account_books_create', function($trail, $profile) {
+    $trail->parent('view_customers', $profile);
+    $trail->push('Add Account Book', route('accountBook.create', base64_encode(($profile->id * 123456789) / 12098)));
+});
+
 
 // Home >> Roznamcha >> Oil
 Breadcrumbs::for('oil_records', function($trail) {

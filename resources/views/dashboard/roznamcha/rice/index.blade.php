@@ -54,7 +54,7 @@
                                                     <td class="align-middle">Rs {{ $record->price_per_mann }} /-</td>
                                                     <td class="align-middle">RS {{ $record->paid_per_mann }} /-</td>
                                                     <td class="align-middle">Rs {{ ($record->quantity / 40) * $record->paid_per_mann }} /-</td>
-                                                    <td class="align-middle">{{ $record->rice_type_id }}</td>
+                                                    <td class="align-middle">{{ $record->riceType->name }}</td>
                                                     <td class="align-middle">{{ $record->category }}</td>
                                                     <td class="align-middle">{{ date('h:i A', strtotime($record->created_at)) }}</td>
                                                     <td class="align-middle">

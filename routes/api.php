@@ -14,15 +14,54 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/*-- Routes for Auth --*/
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'auth'
+
+], function ($router) {
+
+    Route::post('login', 'AuthController@login');
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+    Route::post('me', 'AuthController@me');
+
+});
+
+/**
+ * Create Service Routes
+ */
+
+//  Create customer routes
+Route::post('customer/create', 'CreateServiceController@customer');
+
+/**
+ * Read Service Routes
+ */
+
 // Customers API Routes
-Route::get('customers', 'ReadServiceController@getCustomers');
-Route::get('customer/{id}', 'ReadServiceController@customer');
+Route::post('customers', 'ReadServiceController@getCustomers');
+Route::post('customer/{id}', 'ReadServiceController@customer');
 // Oil Companies API Routes
-Route::get('oil-companies', 'ReadServiceController@getOilCompanies');
-Route::get('oil-company/{id}', 'ReadServiceController@oilCompany');
+Route::post('oil-companies', 'ReadServiceController@getOilCompanies');
+Route::post('oil-company/{id}', 'ReadServiceController@oilCompany');
 // Filling Stations API Routes
-Route::get('filling-stations', 'ReadServiceController@getFillingStations');
-Route::get('filling-station/{id}', 'ReadServiceController@fillingStation');
+Route::post('filling-stations', 'ReadServiceController@getFillingStations');
+Route::post('filling-station/{id}', 'ReadServiceController@fillingStation');
 // Oil Records API Routes
-Route::get('oil-records', 'ReadServiceController@getOilRecords');
-Route::get('oil-record/{id}', 'ReadServiceController@oilRecord');
+Route::post('oil-records', 'ReadServiceController@getOilRecords');
+Route::post('oil-record/{id}', 'ReadServiceController@oilRecord');
+
+/**
+ * Update Service Routes
+ */
+
+//  update customer routes
+Route::post('customer/{id}/update', 'UpdateServiceController@customer');
+
+/**
+ * Delete Service Routes
+ */
+
+ Route::post('customer/{id}/delete', 'DeleteServiceController@customer');

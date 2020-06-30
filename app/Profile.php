@@ -35,6 +35,12 @@ class Profile extends Model
         return $this->belongsToMany(User::class);
     }
 
+    // Profile has many account books
+    public function accountBooks()
+    {
+        return $this->hasMany(AccountBook::class);
+    }
+
     // Profile has many oil records
     public function oilRecords()
     {

@@ -31,7 +31,7 @@
                         <div class="dropdown float-right">
                             <a href="" class="btn btn-success dropdown-toggle" data-toggle="dropdown">Go for Transaction <i class="fas fa-angle-down"></i></a>
                             <ul class="dropdown-menu dropdown-menu-right">
-                                <a href="" class="dropdown-item">Account Book / <span class="text-urdu-kasheeda">کھاتہ</span></a>
+                                <a href="{{ route('accountBook.create', base64_encode(($profile->id * 123456789) / 12098)) }}" class="dropdown-item">Account Book / <span class="text-urdu-kasheeda">کھاتہ</span></a>
                                 <a href="{{ route('oilRecord.fillingStations', base64_encode(($profile->id * 123456789) / 12098)) }}" class="dropdown-item">Oil / <span class="text-urdu-kasheeda">تیل</span></a>
                                 <a href="" class="dropdown-item">Fertilizer / <span class="text-urdu-kasheeda">کھاد</span></a>
                                 <a href="" class="dropdown-item">Agricultural Medicine / <span class="text-urdu-kasheeda">زرعی ادویات</span></a>
@@ -51,6 +51,35 @@
                         </div>
                     </div>
                     <br class="clear">
+                </section>
+                <section id="account-section">
+                    <h3 class="text-success fw-700 mb-3">Account Book / <span class="text-urdu-kasheeda">کھاتہ</span></h3>
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="oil-table">
+                            <thead class="table-success">
+                                <tr>
+                                    <th>Amount / <span class="text-urdu-kasheeda">رقم</span></th>
+                                    <th>Amount Type / <span class="text-urdu-kasheeda">رقم کی قسم</span></th>
+                                    <th>Date &amp; Time / <span class="text-urdu-kasheeda">تاریخ اور وقت</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if ($account_books->count() > 0)
+                                    @foreach ($account_books as $record)
+                                        <tr>
+                                            <td>Rs {{ $record->amount }} /-</td>
+                                            <td>{{ $record->type }}</td>
+                                            <td>{{ date('d-F-Y h:i A', strtotime($record->created_at)) }}</td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="5" class="text-center font-italic">No record to show.</td>
+                                    </tr>
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
                 </section>
                 <section>
                     <section id="oil-section">

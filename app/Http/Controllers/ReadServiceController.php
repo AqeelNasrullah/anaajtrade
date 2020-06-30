@@ -10,14 +10,18 @@ use App\Http\Resources\ProfileResource;
 use App\OilCompany;
 use App\OilRecord;
 use App\Profile;
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 
 class ReadServiceController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth:api');
+    }
+
     // Customer Read Services
     public function getCustomers()
     {
-        return ProfileResource::collection(Profile::all());
+        return ProfileResource::collection(auth()->guard('api')->user()->manyProfiles()->latest()->get());
     }
 
     public function customer($id)
@@ -39,7 +43,7 @@ class ReadServiceController extends Controller
     // Filling Station Read Services
     public function getFillingStations()
     {
-        return FillingStationResource::collection(FillingStation::all());
+        return FillingStationResource::collection(auth()->guard('api')->user()->manyFillingStations()->latest()->get());
     }
 
     public function fillingStation($id)
@@ -50,7 +54,7 @@ class ReadServiceController extends Controller
     // Oil Records Read Services
     public function getOilRecords()
     {
-        return OilRecordResource::collection(OilRecord::all());
+        return OilRecordResource::collection(auth()->guard('api')->user()->oilRecords()->latest()->get());
     }
 
     public function oilRecord($id)
