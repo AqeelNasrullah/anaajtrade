@@ -74,6 +74,18 @@ In order to ensure that the Laravel community is welcoming to all, please review
 
 If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
+## Clone or Download the project
+
+Use **git clone <url>**. Get url by clicking on Code button at top right corner or simply download the zip folder. Follow the steps to setup or download dependencies.
+- Open cmd or terminal inside project directory
+- Type command **composer install** and hit enter.
+- Type command **npm install** and hit enter.
+- Copy **.env.example** file and change the name to **.env**.
+- Update file with your database credentials.
+- Type command **php artisan migrate** and hit enter.
+- Type command **php artisan db:seed** and hit enter.
+- Now type command **php artisan serve** and hit enter to start laravel developement server.
+
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
