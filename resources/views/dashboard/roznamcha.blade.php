@@ -61,7 +61,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-md-4 px-3">
+                <div class="col-md-4 offset-md-4 px-3">
                     <a href="" class="text-light">
                         <div class="bg-success px-2 py-4" style="border-radius: 5px;">
                             <h4 class="text-center fw-700">Others<br><span class="text-urdu-kasheeda">دیگر اشیاء</span></h4>

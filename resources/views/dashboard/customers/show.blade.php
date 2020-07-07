@@ -28,6 +28,7 @@
                         </div>
                     </div>
                     <div class="float-right">
+                        <a href="{{ route('profile.index') }}" class="btn btn-outline-danger mr-2"><i class="fas fa-times"></i> Close</a>
                         <div class="dropdown float-right">
                             <a href="" class="btn btn-success dropdown-toggle" data-toggle="dropdown">Go for Transaction <i class="fas fa-angle-down"></i></a>
                             <ul class="dropdown-menu dropdown-menu-right">

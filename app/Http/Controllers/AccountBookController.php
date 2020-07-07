@@ -84,9 +84,13 @@ class AccountBookController extends Controller
      * @param  \App\AccountBook  $accountBook
      * @return \Illuminate\Http\Response
      */
-    public function show(AccountBook $accountBook)
+    public function show($id)
     {
-        //
+        if ($id) {
+            $s_id = (base64_decode($id) * 12098) / 123456789;
+            $record = AccountBook::find($s_id);
+            return view('dashboard.roznamcha.account-book.show', ['record' => $record]);
+        }
     }
 
     /**

@@ -23,11 +23,11 @@
                             <table class="table table-striped">
                                 <thead class="table-success">
                                     <tr>
-                                        <th>Name / <span class="text-urdu-kasheeda">نام</span></th>
-                                        <th>Amount / <span class="text-urdu-kasheeda">رقم</span></th>
-                                        <th>Amount Type / <span class="text-urdu-kasheeda">رقم کی قسم</span></th>
-                                        <th>Time / <span class="text-urdu-kasheeda">وقت</span></th>
-                                        <th></th>
+                                        <th style="width: 20%;">Name / <span class="text-urdu-kasheeda">نام</span></th>
+                                        <th style="width: 20%;">Amount / <span class="text-urdu-kasheeda">رقم</span></th>
+                                        <th style="width: 20%;">Amount Type / <span class="text-urdu-kasheeda">رقم کی قسم</span></th>
+                                        <th style="width: 20%;">Time / <span class="text-urdu-kasheeda">وقت</span></th>
+                                        <th style="width: 20%;"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -39,7 +39,7 @@
                                                 <td>{{ $record->type }}</td>
                                                 <td>{{ date('h:i A', strtotime($record->created_at)) }}</td>
                                                 <td>
-                                                    <a href="" class="d-inline">View</a>
+                                                    <a href="{{ route('accountBook.show', base64_encode(($record->id * 123456789) / 12098)) }}" class="d-inline">View</a>
                                                     <p class="mb-0 d-inline"> | </p>
                                                     <a href="" class="d-inline">Edit</a>
                                                 </td>

@@ -33,7 +33,7 @@
                 </div>
             </aside>
             <main class="col-md-9">
-                <h1 class="text-center fw-900 text-success">Oil Records / <span class="text-urdu-kasheeda">تیل کا ریکارڈ</span></h1>
+                <h1 class="text-center fw-900 text-success mb-3">Oil Records / <span class="text-urdu-kasheeda">تیل کا ریکارڈ</span></h1>
 
                 <div id="stations-table">
                     @if ($dates->count() > 0)

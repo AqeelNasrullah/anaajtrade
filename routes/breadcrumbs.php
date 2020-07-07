@@ -74,6 +74,11 @@ Breadcrumbs::for('account_books_create', function($trail, $profile) {
     $trail->push('Add Account Book', route('accountBook.create', base64_encode(($profile->id * 123456789) / 12098)));
 });
 
+// Home >> Account Book >> View Account Book
+Breadcrumbs::for('view_account_books', function($trail, $record) {
+    $trail->parent('account_books');
+    $trail->push('View Account Book', route('accountBook.show', base64_encode(($record->id * 123456789) / 12098)));
+});
 
 // Home >> Roznamcha >> Oil
 Breadcrumbs::for('oil_records', function($trail) {

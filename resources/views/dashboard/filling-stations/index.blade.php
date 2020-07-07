@@ -48,7 +48,7 @@
                                 <td class="align-middle">{{ $station->address }}</td>
                                 <td class="align-middle">{{ $station->oilCompany->name }}</td>
                                 <td class="align-middle">
-                                    <a class="d-inline station-popup" data-id="{{ base64_encode(($station->id * 123456789) / 12098) }}" href="">View</a>
+                                    <a class="d-inline station-popup" data-id="{{ base64_encode(($station->id * 123456789) / 12098) }}" href="{{ route('fillingStation.show', base64_encode(($station->id * 123456789) / 12098)) }}">View</a>
                                     <p class="mb-0 d-inline"> | </p>
                                     <a class="d-inline" href="{{ route('fillingStation.edit', base64_encode(($station->id * 123456789) / 12098)) }}">Edit</a>
                                     <p class="mb-0 d-inline"> | </p>
@@ -92,14 +92,14 @@
                 }, 'json');
             });
 
-            $('#stations-table').on('click', '.station-popup', function(e) {
-                var id = $(this).data('id');
-                $.get('{{ route("fillingStation.searchFillingStation") }}', {id:id}, function(data){
-                    $('.station-search-result').html(data.data_output);
-                    $('#station-search-popup').modal('show');
-                }, 'json');
-                e.preventDefault();
-            });
+            // $('#stations-table').on('click', '.station-popup', function(e) {
+            //     var id = $(this).data('id');
+            //     $.get('{{ route("fillingStation.searchFillingStation") }}', {id:id}, function(data){
+            //         $('.station-search-result').html(data.data_output);
+            //         $('#station-search-popup').modal('show');
+            //     }, 'json');
+            //     e.preventDefault();
+            // });
 
             $('#stations-table').on('click', '.stations-delete', function() {
                 if (confirm('Are you sure you want to delete filling station?')) {

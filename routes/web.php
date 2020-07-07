@@ -62,6 +62,7 @@ Route::get('search/filling-station', 'FillingStationController@searchFillingStat
 Route::get('dashboard/roznamcha/account-book', 'AccountBookController@index')->name('accountBook.index');
 Route::get('dashboard/customer/{id}/roznamcha/account-book/create', 'AccountBookController@create')->name('accountBook.create');
 Route::post('dashboard/customer/{id}/roznamcha/account-book/create', 'AccountBookController@store')->name('accountBook.store');
+Route::get('dashboard/roznamcha/account-book/{id}', 'AccountBookController@show')->name('accountBook.show');
 
 // Oil Record Routes
 Route::get('dashboard/roznamcha/oil', 'OilRecordController@index')->name('oilRecord.index');

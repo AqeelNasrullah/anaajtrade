@@ -50,7 +50,7 @@
                                 <td class="align-middle">{{ $profile->address }}</td>
                                 <td class="align-middle">{{ $profile->role->name }}</td>
                                 <td class="align-middle">
-                                    <a class="d-inline view-customer" data-id="{{ base64_encode(($profile->id * 123456789) / 12098) }}" href="">View</a>
+                                    <a class="d-inline view-customer" href="{{ route('profile.show', base64_encode(($profile->id * 123456789) / 12098)) }}">View</a>
                                     <p class="mb-0 d-inline">|</p>
                                     <a class="d-inline" href="{{ route('profile.edit', base64_encode(($profile->id * 123456789) / 12098)) }}">Edit</a>
                                     <p class="mb-0 d-inline">|</p>
@@ -89,14 +89,14 @@
                     $('.pager, .show-results').addClass('d-none');
                 }, 'json');
             });
-            $('#customer-table').on('click', '.view-customer',function(e) {
-                var id = $(this).data('id');
-                $.get('{{ route("customerSearch.searchCustomer") }}', {id:id}, function(data) {
-                    $('.customer-modal').html(data.profile);
-                    $('#display-customer').modal('show');
-                }, 'json');
-                e.preventDefault();
-            });
+            // $('#customer-table').on('click', '.view-customer',function(e) {
+            //     var id = $(this).data('id');
+            //     $.get('{{ route("customerSearch.searchCustomer") }}', {id:id}, function(data) {
+            //         $('.customer-modal').html(data.profile);
+            //         $('#display-customer').modal('show');
+            //     }, 'json');
+            //     e.preventDefault();
+            // });
             $('#customer-table').on('click', '.delete-customer', function() {
                 if (confirm('Are you sure you want to delete customer?')) {
                     return true;

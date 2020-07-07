@@ -10,6 +10,7 @@ class LoginController extends Controller
 {
     public function index()
     {
+        // echo request()->headers->get('referer');
         if (Auth::check())
         {
             return redirect()->route('dashboard.index');
@@ -38,7 +39,7 @@ class LoginController extends Controller
             ];
 
             if (Auth::attempt($data)) {
-                return redirect()->route('dashboard.index');
+                    return redirect()->route('dashboard.index');
             } else {
                 return redirect()->back()->with('error', 'Phone number or password is incorrect.')->withInput();
             }
