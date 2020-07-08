@@ -41,7 +41,7 @@
                                                 <td>
                                                     <a href="{{ route('accountBook.show', base64_encode(($record->id * 123456789) / 12098)) }}" class="d-inline">View</a>
                                                     <p class="mb-0 d-inline"> | </p>
-                                                    <a href="" class="d-inline">Edit</a>
+                                                    <a href="{{ route('accountBook.edit', base64_encode(($record->id * 123456789) / 12098)) }}" class="d-inline">Edit</a>
                                                 </td>
                                             </tr>
                                         @endif

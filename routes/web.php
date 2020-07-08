@@ -63,6 +63,9 @@ Route::get('dashboard/roznamcha/account-book', 'AccountBookController@index')->n
 Route::get('dashboard/customer/{id}/roznamcha/account-book/create', 'AccountBookController@create')->name('accountBook.create');
 Route::post('dashboard/customer/{id}/roznamcha/account-book/create', 'AccountBookController@store')->name('accountBook.store');
 Route::get('dashboard/roznamcha/account-book/{id}', 'AccountBookController@show')->name('accountBook.show');
+Route::get('dashboard/roznamcha/account-book/{id}/edit', 'AccountBookController@edit')->name('accountBook.edit');
+Route::put('dashboard/roznamcha/account-book/{id}/edit', 'AccountBookController@update')->name('accountBook.update');
+Route::delete('dashboard/roznamcha/account-book/{id}', 'AccountBookController@destroy')->name('accountBook.destroy');
 
 // Oil Record Routes
 Route::get('dashboard/roznamcha/oil', 'OilRecordController@index')->name('oilRecord.index');

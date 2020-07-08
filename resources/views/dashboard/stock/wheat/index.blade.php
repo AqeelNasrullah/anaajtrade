@@ -35,16 +35,16 @@
                             <table class="table table-striped">
                                 <thead class="table-success">
                                     <tr>
-                                        <th class="align-middle">Name / <span class="text-urdu-kasheeda">نام</span></th>
-                                        <th class="align-middle">No of Sacks / <span class="text-urdu-kasheeda">بوریوں کی تعداد</span></th>
-                                        <th class="align-middle">Weight per sack / <span class="text-urdu-kasheeda">فی بوری وزن</span></th>
-                                        <th class="align-middle">Price per 40KG / <span class="text-urdu-kasheeda">قیمت فی من</span></th>
-                                        <th class="align-middle">Total Price / <span class="text-urdu-kasheeda">کل قیمت</span></th>
-                                        <th class="align-middle">Commission / <span class="text-urdu-kasheeda">منافع</span></th>
-                                        <th class="align-middle">Commissioned Price / <span class="text-urdu-kasheeda">منافع کی ساتھ قیمت</span></th>
-                                        <th class="align-middle">Category / <span class="text-urdu-kasheeda">گندم کی قسم</span></th>
-                                        <th class="align-middle">Time / <span class="text-urdu-kasheeda">وقت</span></th>
-                                        <th></th>
+                                        <th style="width: 15%" class="align-middle">Name / <span class="text-urdu-kasheeda">نام</span></th>
+                                        <th style="width: 5%" class="align-middle">No of Sacks / <span class="text-urdu-kasheeda">بوریوں کی تعداد</span></th>
+                                        <th style="width: 10%" class="align-middle">Weight per sack / <span class="text-urdu-kasheeda">فی بوری وزن</span></th>
+                                        <th style="width: 10%" class="align-middle">Price per 40KG / <span class="text-urdu-kasheeda">قیمت فی من</span></th>
+                                        <th style="width: 12%" class="align-middle">Total Price / <span class="text-urdu-kasheeda">کل قیمت</span></th>
+                                        <th style="width: 10%" class="align-middle">Commission / <span class="text-urdu-kasheeda">منافع</span></th>
+                                        <th style="width: 13%" class="align-middle">Commissioned Price / <span class="text-urdu-kasheeda">منافع کی ساتھ قیمت</span></th>
+                                        <th style="width: 8%" class="align-middle">Category / <span class="text-urdu-kasheeda">گندم کی قسم</span></th>
+                                        <th style="width: 7%" class="align-middle">Time / <span class="text-urdu-kasheeda">وقت</span></th>
+                                        <th style="width: 10%"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -64,12 +64,6 @@
                                                     <a href="{{ route('wheatStock.show', base64_encode(($record->id * 123456789) / 12098)) }}" class="d-inline">View</a>
                                                     <p class="mb-0 d-inline"> | </p>
                                                     <a href="{{ route('wheatStock.edit', base64_encode(($record->id * 123456789) / 12098)) }}" class="d-inline">Edit</a>
-                                                    <p class="mb-0 d-inline"> | </p>
-                                                    <form action="{{ route('wheatStock.destroy', base64_encode(($record->id * 123456789) / 12098)) }}" method="post" class="d-inline">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button class="btn btn-link m-0 p-0 delete-stock" type="submit">Delete</button>
-                                                    </form>
                                                 </td>
                                             </tr>
                                         @endif
@@ -109,13 +103,6 @@
                     $('#display-customer').modal('show');
                 }, 'json');
                 e.preventDefault();
-            });
-            $('#wheat-stock-tables').on('click', '.delete-stock',function() {
-                if (confirm('Are you sure you want to delete wheat stock?')) {
-                    return true;
-                } else {
-                    return false;
-                }
             });
             $('#select-page').change(function() {
                 var page_id = $(this).val();

@@ -208,15 +208,9 @@ class OilRecordController extends Controller
                                     <td class="align-middle"><a data-id="'. base64_encode(($record->station_id * 123456789) / 12098) .'" class="view-stations" href="">' . $record->station_name . '</a></td>
                                     <td class="align-middle">' . date('d-F-Y h:i A', strtotime($record->created_at)) . '</td>
                                     <td class="align-middle">
-                                        <a href="' . route('oilRecord.show', base64_encode(($record->id * 123456789) / 12098)) . '" class="d-inline">View Bill</a>
+                                        <a href="' . route('oilRecord.show', base64_encode(($record->id * 123456789) / 12098)) . '" class="d-inline">View</a>
                                         <p class="mb-0 d-inline"> | </p>
-                                        <a href="' . route('oilRecord.edit', base64_encode(($record->id * 123456789) / 12098)) . '" class="d-inline">Edit Bill</a>
-                                        <p class="mb-0 d-inline"> | </p>
-                                        <form action="' . route('oilRecord.destroy', base64_encode(($record->id * 123456789) / 12098)) . '" method="post" class="d-inline">
-                                            '. csrf_field() .'
-                                            ' . method_field('DELETE') . '
-                                            <button type="submit" class="btn btn-link m-0 p-0 destroy-bill">Delete Bill</button>
-                                        </form>
+                                        <a href="' . route('oilRecord.edit', base64_encode(($record->id * 123456789) / 12098)) . '" class="d-inline">Edit</a>
                                     </td>
                                 </tr>';
                             }

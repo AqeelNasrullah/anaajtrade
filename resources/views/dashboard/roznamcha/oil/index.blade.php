@@ -32,14 +32,14 @@
                             <table class="table table-striped" id="oil-record-table">
                                 <thead class="table-success">
                                     <tr>
-                                        <th class="align-middle">Customer / <span class="text-urdu-kasheeda">خریدار</span></th>
-                                        <th class="align-middle">Quantity / <span class="text-urdu-kasheeda">مقدار</span></th>
-                                        <th class="align-middle">Price / <span class="text-urdu-kasheeda">قیمت</span></th>
-                                        <th class="align-middle">Price Paid / <span class="text-urdu-kasheeda">ادا شدہ قیمت</span></th>
-                                        <th class="align-middle">Total Price / <span class="text-urdu-kasheeda">کل قیمت</span></th>
-                                        <th class="align-middle">Filling Station / <span class="text-urdu-kasheeda">پیٹرول پمپ</span></th>
-                                        <th class="align-middle">Time / <span class="text-urdu-kasheeda">وقت</span></th>
-                                        <th></th>
+                                        <th style="width: 20%;" class="align-middle">Customer / <span class="text-urdu-kasheeda">خریدار</span></th>
+                                        <th style="width: 10%;" class="align-middle">Quantity / <span class="text-urdu-kasheeda">مقدار</span></th>
+                                        <th style="width: 10%;" class="align-middle">Price / <span class="text-urdu-kasheeda">قیمت</span></th>
+                                        <th style="width: 10%;" class="align-middle">Price Paid / <span class="text-urdu-kasheeda">ادا شدہ قیمت</span></th>
+                                        <th style="width: 10%;" class="align-middle">Total Price / <span class="text-urdu-kasheeda">کل قیمت</span></th>
+                                        <th style="width: 20%;" class="align-middle">Filling Station / <span class="text-urdu-kasheeda">پیٹرول پمپ</span></th>
+                                        <th style="width: 10%;" class="align-middle">Time / <span class="text-urdu-kasheeda">وقت</span></th>
+                                        <th style="width: 10%;"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -55,15 +55,9 @@
                                                     <td class="align-middle"><a href="" data-id="{{ base64_encode(($record->fillingStation->id * 123456789) / 12098) }}" class="view-stations">{{ $record->fillingStation->name }}</a></td>
                                                     <td class="align-middle">{{ date('h:i A', strtotime($record->created_at)) }}</td>
                                                     <td class="align-middle">
-                                                        <a href="{{ route('oilRecord.show', base64_encode(($record->id * 123456789) / 12098)) }}" class="d-inline">View Bill</a>
+                                                        <a href="{{ route('oilRecord.show', base64_encode(($record->id * 123456789) / 12098)) }}" class="d-inline">View</a>
                                                         <p class="mb-0 d-inline"> | </p>
-                                                        <a href="{{ route('oilRecord.edit', base64_encode(($record->id * 123456789) / 12098)) }}" class="d-inline">Edit Bill</a>
-                                                        <p class="mb-0 d-inline"> | </p>
-                                                        <form action="{{ route('oilRecord.destroy', base64_encode(($record->id * 123456789) / 12098)) }}" method="post" class="d-inline">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-link m-0 p-0 destroy-bill">Delete Bill</button>
-                                                        </form>
+                                                        <a href="{{ route('oilRecord.edit', base64_encode(($record->id * 123456789) / 12098)) }}" class="d-inline">Edit</a>
                                                     </td>
                                                 </tr>
                                             @endif
@@ -121,13 +115,6 @@
                     $('#oil-record').html(data.name_results);
                 }, 'json');
                 $('.pagination-settings').addClass('d-none');
-            });
-            $('#oil-record').on('click', '.destroy-bill', function() {
-                if (confirm('Are you sure you want to delete bill?')) {
-                    return true;
-                } else {
-                    return false;
-                }
             });
         });
     </script>

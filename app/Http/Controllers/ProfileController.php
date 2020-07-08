@@ -201,7 +201,7 @@ class ProfileController extends Controller
                 'role_id'               =>      $request->get('role')
             ]);
             if ($updateCustomer) {
-                return redirect()->route('profile.show', $id)->with('success', 'Customer updated successfully.');
+                return redirect()->route('profile.index')->with('success', 'Customer updated successfully.');
             } else {
                 return back()->with('error', 'An error occured while updating customer.')->withInput();
             }

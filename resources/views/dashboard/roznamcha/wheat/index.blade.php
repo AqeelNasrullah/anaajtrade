@@ -33,14 +33,14 @@
                             <table class="table table-striped">
                                 <thead class="table-success">
                                     <tr>
-                                        <th class="align-middle">Name / <span class="text-urdu-kasheeda">نام</span></th>
-                                        <th class="align-middle">Quantity / <span class="text-urdu-kasheeda">مقدار</span></th>
-                                        <th class="align-middle">Price per 40Kgs / <span class="text-urdu-kasheeda">قیمت فی من</span></th>
-                                        <th class="align-middle">Paid per 40Kgs / <span class="text-urdu-kasheeda">فی من ادائیگی</span></th>
-                                        <th class="align-middle">Total Price / <span class="text-urdu-kasheeda">کل قیمت</span></th>
-                                        <th class="align-middle">Category / <span class="text-urdu-kasheeda">گندم کی قسم</span></th>
-                                        <th class="align-middle">Time / <span class="text-urdu-kasheeda">وقت</span></th>
-                                        <th class="align-middle"><span class="text-urdu-kasheeda"></span></th>
+                                        <th style="width: 20%" class="align-middle">Name / <span class="text-urdu-kasheeda">نام</span></th>
+                                        <th style="width: 10%" class="align-middle">Quantity / <span class="text-urdu-kasheeda">مقدار</span></th>
+                                        <th style="width: 10%" class="align-middle">Price per 40Kgs / <span class="text-urdu-kasheeda">قیمت فی من</span></th>
+                                        <th style="width: 10%" class="align-middle">Paid per 40Kgs / <span class="text-urdu-kasheeda">فی من ادائیگی</span></th>
+                                        <th style="width: 20%" class="align-middle">Total Price / <span class="text-urdu-kasheeda">کل قیمت</span></th>
+                                        <th style="width: 10%" class="align-middle">Category / <span class="text-urdu-kasheeda">گندم کی قسم</span></th>
+                                        <th style="width: 10%" class="align-middle">Time / <span class="text-urdu-kasheeda">وقت</span></th>
+                                        <th style="width: 10%" class="align-middle"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -59,12 +59,6 @@
                                                         <a href="{{ route('wheatRecord.show', base64_encode(($record->id * 123456789) / 12098)) }}" class="d-inline">View</a>
                                                         <p class="mb-0 d-inline"> | </p>
                                                         <a href="{{ route('wheatRecord.edit', base64_encode(($record->id * 123456789) / 12098)) }}" class="d-inline">Edit</a>
-                                                        <p class="mb-0 d-inline"> | </p>
-                                                        <form action="{{ route('wheatRecord.destroy', base64_encode(($record->id * 123456789) / 12098)) }}" method="post" class="d-inline">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-link p-0 m-0 delete-wheat-record">Delete</button>
-                                                        </form>
                                                     </td>
                                                 </tr>
                                             @endif
@@ -107,13 +101,6 @@
                     $('#display-customer').modal('show');
                 }, 'json');
                 e.preventDefault();
-            });
-            $('#wheat-record-tables').on('click', '.delete-wheat-record', function() {
-                if (confirm('Are you sure you want to delete wheat record?')) {
-                    return true;
-                } else {
-                    return false;
-                }
             });
             $('#select-page').change(function() {
                 var page_id = $(this).val();

@@ -33,8 +33,8 @@
                 <div class="col-md-3 p-3">
                     <a href="" class="text-light">
                         <div class="bg-success p-3" style="border-radius: 5px;">
-                            <h1 class="text-center mb-3"><i class="fas fa-dollar-sign"></i></h1>
-                            <h4 class="text-center">Prices <br> <span class="text-urdu-kasheeda">قیمتیں</span></h4>
+                            <h1 class="text-center mb-3"><i class="fas fa-chart-bar"></i></h1>
+                            <h4 class="text-center">Statistics <br> <span class="text-urdu-kasheeda">اعداد و شمار</span></h4>
                         </div>
                     </a>
                 </div>

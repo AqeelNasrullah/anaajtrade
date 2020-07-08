@@ -24,6 +24,11 @@
             @include('components.success')
             <div class="print-section mb-3">
                 <button class="print-slip btn btn-success float-right"><i class="fas fa-print"></i> Print</button>
+                <form action="{{ route('riceRecord.destroy', base64_encode(($record->id * 123456789) / 12098)) }}" method="post" class="d-inline">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger delete-wheat float-right mr-2"><i class="fas fa-trash-alt"></i> Delete</button>
+                </form>
                 <a href="{{ route('riceRecord.index') }}" class="btn btn-outline-danger float-right mr-2"><i class="fas fa-times"></i> Close</a>
                 <br class="clear">
             </div>
@@ -94,6 +99,14 @@
         $(document).ready(function() {
             $('.print-slip').click(function() {
                 window.print();
+            });
+
+            $('.delete-wheat').click(function() {
+                if (confirm('Are you sure you want to delete?')) {
+                    return true;
+                } else {
+                    return false;
+                }
             });
         });
     </script>

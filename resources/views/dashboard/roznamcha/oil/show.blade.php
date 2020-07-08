@@ -26,6 +26,11 @@
     <section class="content-fluid py-3">
         <div class="w-50 mx-auto px-5 mb-3 prnt">
             <button class="btn btn-success float-right print-slip"><i class="fas fa-print"></i> Print</button>
+            <form action="{{ route('oilRecord.destroy', base64_encode(($record->id * 123456789) / 12098)) }}" method="post" class="d-inline">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger destroy-bill float-right mr-2"><i class="fas fa-trash-alt"></i> Delete Bill</button>
+            </form>
             <a href="{{ route('oilRecord.index') }}" class="btn btn-outline-danger float-right mr-2"><i class="fas fa-times"></i> Close</a>
             <br class="clear">
         </div>
@@ -165,6 +170,14 @@
         $(document).ready(function() {
             $('.print-slip').click(function() {
                 window.print();
+            });
+
+            $('.destroy-bill').click(function() {
+                if (confirm('Are you sure you want to delete?')) {
+                    return true;
+                } else {
+                    return false;
+                }
             });
         });
     </script>

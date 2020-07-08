@@ -62,7 +62,7 @@ class AccountBookController extends Controller
                 $s_id = (base64_decode($id) * 12098) / 123456789;
                 $added = Auth::user()->accountBooks()->create([
                     'amount'                    =>      $request->get('amount'),
-                    'type'               =>      $request->get('amount_type'),
+                    'type'                      =>      $request->get('amount_type'),
                     'profile_id'                =>      $s_id
                 ]);
 
@@ -101,7 +101,11 @@ class AccountBookController extends Controller
      */
     public function edit($id)
     {
-        //
+        if ($id) {
+            $s_id = (base64_decode($id) * 12098) / 123456789;
+            $record = AccountBook::find($s_id);
+            return view('dashboard.roznamcha.account-book.edit', ['record' => $record]);
+        }
     }
 
     /**
@@ -111,9 +115,31 @@ class AccountBookController extends Controller
      * @param  \App\AccountBook  $accountBook
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, AccountBook $accountBook)
+    public function update(Request $request, $id)
     {
-        //
+        if ($id) {
+            $validator = Validator::make($request->all(), [
+                'amount'            =>      'required|numeric|min:0',
+                'type'              =>      'required'
+            ]);
+
+            if ($validator->fails()) {
+                return back()->withErrors($validator);
+            } else {
+                $s_id = (base64_decode($id) * 12098) / 123456789;
+                $updated = AccountBook::find($s_id)->update([
+                    'amount'            =>      $request->get('amount'),
+                    'type'              =>      $request->get('type')
+                ]);
+                if ($updated) {
+                    return redirect()->route('accountBook.show', $id)->with('success', 'Account book updated successfully.');
+                } else {
+                    return back()->with('error', 'An error occured while updating account book.');
+                }
+
+            }
+
+        }
     }
 
     /**
@@ -122,8 +148,16 @@ class AccountBookController extends Controller
      * @param  \App\AccountBook  $accountBook
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AccountBook $accountBook)
+    public function destroy($id)
     {
-        //
+        if ($id) {
+            $s_id = (base64_decode($id) * 12098) / 123456789;
+            $deleted = AccountBook::destroy($s_id);
+            if ($deleted) {
+                return redirect()->route('accountBook.index')->with('success', 'Account book deleted successfully.');
+            } else {
+                return redirect()->route('accountBook.show', $id)->with('error', 'An error occured while deleting account book.');
+            }
+        }
     }
 }

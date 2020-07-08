@@ -24,6 +24,11 @@
         <div class="slip">
             <div class="mb-3 print">
                 <button class="btn btn-success float-right print-slip"><i class="fas fa-print"></i> Print</button>
+                <form action="{{ route('riceStock.destroy', base64_encode(($stock->id * 123456789) / 12098)) }}" method="post" class="d-inline">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-danger delete-stock float-right mr-2" type="submit"><i class="fas fa-trash-alt"></i> Delete</button>
+                </form>
                 <a href="{{ route('riceStock.index') }}" class="btn btn-outline-danger float-right mr-2"><i class="fas fa-times"></i> Close</a>
                 <br class="clear">
             </div>
@@ -117,6 +122,14 @@
         $(document).ready(function() {
             $('.print-slip').click(function() {
                 window.print();
+            });
+
+            $('.delete-stock').click(function() {
+                if (confirm('Are you sure you want to delete?')) {
+                    return true;
+                } else {
+                    return false;
+                }
             });
         });
     </script>

@@ -28,7 +28,11 @@
             <a href="{{ route('accountBook.index') }}" class="btn btn-outline-danger float-right mr-2"><i class="fas fa-times"></i> Close</a>
             <br class="clear">
         </div>
+
+
         <diV class="slip w-50 mx-auto">
+            @include('components.success')
+            @include('components.error')
             <div class="slip-inner">
                 <h3 class="text-center fw-700 mb-3">Account Book / <span class="text-urdu-kasheeda">کھاتہ</span></h3>
                 <div class="row mb-3" style="border-bottom: 1px solid lightgrey;">

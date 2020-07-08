@@ -80,6 +80,12 @@ Breadcrumbs::for('view_account_books', function($trail, $record) {
     $trail->push('View Account Book', route('accountBook.show', base64_encode(($record->id * 123456789) / 12098)));
 });
 
+// Home >> Account Book >> View Account Book
+Breadcrumbs::for('edit_account_books', function($trail, $record) {
+    $trail->parent('account_books');
+    $trail->push('Edit Account Book', route('accountBook.edit', base64_encode(($record->id * 123456789) / 12098)));
+});
+
 // Home >> Roznamcha >> Oil
 Breadcrumbs::for('oil_records', function($trail) {
     $trail->parent('roznamcha');
