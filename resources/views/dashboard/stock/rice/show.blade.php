@@ -69,7 +69,8 @@
                     <p class="col-6 mb-0">Rs {{ (($stock->commission / 100) * (($stock->num_of_sack * $stock->weight_per_sack) / 40) * $stock->price) }} /-</p>
                     <p class="col-6 text-right">Total Price (after commission):</p>
                     <p class="col-6">Rs {{ ((($stock->num_of_sack * $stock->weight_per_sack) / 40) * $stock->price) - (($stock->commission / 100) * (($stock->num_of_sack * $stock->weight_per_sack) / 40) * $stock->price) }} /-</p>
-                    <p class="col-12">Signature:</p>
+                    <p class="col-6">Signature:</p>
+                    <p class="col-6 mb-0"><strong>Date &amp; Time:</strong> {{ date('d-F-Y h:i A', strtotime($stock->created_at)) }}</p>
                 </div>
             </div>
             <div class="slip-inner mb-3" style="border-bottom: 1px dashed black;">
@@ -107,7 +108,8 @@
                     <p class="col-6 mb-0">Rs {{ (($stock->commission / 100) * (($stock->num_of_sack * $stock->weight_per_sack) / 40) * $stock->price) }} /-</p>
                     <p class="col-6 text-right">Total Price (after commission):</p>
                     <p class="col-6">Rs {{ ((($stock->num_of_sack * $stock->weight_per_sack) / 40) * $stock->price) - (($stock->commission / 100) * (($stock->num_of_sack * $stock->weight_per_sack) / 40) * $stock->price) }} /-</p>
-                    <p class="col-12">Signature:</p>
+                    <p class="col-6">Signature:</p>
+                    <p class="col-6 mb-0"><strong>Date &amp; Time:</strong> {{ date('d-F-Y h:i A', strtotime($stock->created_at)) }}</p>
                 </div>
             </div>
             @else

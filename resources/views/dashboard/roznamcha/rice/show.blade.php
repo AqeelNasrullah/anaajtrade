@@ -58,6 +58,7 @@
                         <p class="col-md-6 mb-1"><strong>Total Price (paid):</strong> Rs {{ ($record->quantity / 40) * $record->paid_per_mann }} /-</p>
                         <p class="col-md-6 mb-1"><strong>Rice Type:</strong> {{ $record->rice_type_id }}</p>
                         <p class="col-md-6 mb-1"><strong>Category:</strong> {{ $record->category }}</p>
+                        <p class="col-md-6 mb-0"><strong>Date &amp; Time:</strong> {{ date('d-F-Y h:i A', strtotime($record->created_at)) }}</p>
                         <p class="col-md-12"><strong>Signature:</strong></p>
                     </div>
                 </div>
@@ -86,6 +87,7 @@
                         <p class="col-md-6 mb-1"><strong>Total Price (paid):</strong> Rs {{ ($record->quantity / 40) * $record->paid_per_mann }} /-</p>
                         <p class="col-md-6 mb-1"><strong>Rice Type:</strong> {{ $record->riceType->name }}</p>
                         <p class="col-md-6 mb-1"><strong>Category:</strong> {{ $record->category }}</p>
+                        <p class="col-md-6 mb-0"><strong>Date &amp; Time:</strong> {{ date('d-F-Y h:i A', strtotime($record->created_at)) }}</p>
                         <p class="col-md-12"><strong>Signature:</strong></p>
                     </div>
                 </div>

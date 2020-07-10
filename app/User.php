@@ -76,6 +76,12 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(RiceRecord::class);
     }
 
+    // User has many others
+    public function others()
+    {
+        return $this->hasMany(Other::class);
+    }
+
 
 
     /*---------------------------------------------------------------------------------------*/

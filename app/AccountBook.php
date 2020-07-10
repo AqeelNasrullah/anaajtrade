@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class AccountBook extends Model
 {
     // Fillable Properties
-    protected $fillable = ['profile_id', 'user_id', 'amount', 'type', 'status'];
+    protected $fillable = [
+        'profile_id', 'user_id', 'amount', 'type', 'status'
+    ];
 
     // Account book belongs to User
     public function user()

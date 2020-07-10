@@ -65,7 +65,7 @@
                                                 <li><a href="" class="dropdown-item">Agricultural Medicine / <span class="text-urdu-kasheeda">زرعی ادویات</span></a></li>
                                                 <li><a href="{{ route('wheatRecord.index') }}" class="dropdown-item">Wheat / <span class="text-urdu-kasheeda">گندم</span></a></li>
                                                 <li><a href="{{ route('riceRecord.index') }}" class="dropdown-item">Rice / <span class="text-urdu-kasheeda">چاول</span></a></li>
-                                                <li><a href="" class="dropdown-item">Others / <span class="text-urdu-kasheeda">دیگر اشیاء</span></a></li>
+                                                <li><a href="{{ route('other.index') }}" class="dropdown-item">Others / <span class="text-urdu-kasheeda">دیگر اشیاء</span></a></li>
                                             </ul>
                                         </li>
                                         <li class="dropdown">

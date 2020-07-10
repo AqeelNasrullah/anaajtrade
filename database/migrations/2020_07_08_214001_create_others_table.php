@@ -15,6 +15,16 @@ class CreateOthersTable extends Migration
     {
         Schema::create('others', function (Blueprint $table) {
             $table->id();
+
+            $table->bigInteger('profile_id')->unsigned();
+            $table->foreign('profile_id')->references('id')->on('profiles');
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
+
+            $table->text('description');
+            $table->integer('amount')->unsigned();
+            $table->string('status')->default('unpaid');
+
             $table->timestamps();
         });
     }

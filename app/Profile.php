@@ -70,4 +70,10 @@ class Profile extends Model
     {
         return $this->hasMany(RiceRecord::class);
     }
+
+    // Profile has many others
+    public function others()
+    {
+        return $this->hasMany(Other::class);
+    }
 }

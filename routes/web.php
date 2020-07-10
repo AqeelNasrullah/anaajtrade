@@ -95,7 +95,7 @@ Route::post('dashboard/customer/{id}/roznamcha/wheat/create', 'WheatRecordContro
 Route::get('dashboard/roznamcha/wheat/{id}', 'WheatRecordController@show')->name('wheatRecord.show');
 Route::get('dashboard/roznamcha/wheat/{id}/edit', 'WheatRecordController@edit')->name('wheatRecord.edit');
 Route::put('dashboard/roznamcha/wheat/{id}/edit', 'WheatRecordController@update')->name('wheatRecord.update');
-Route::delete('dashboard/roznamcha/wheat/{id}/edit', 'WheatRecordController@destroy')->name('wheatRecord.destroy');
+Route::delete('dashboard/roznamcha/wheat/{id}', 'WheatRecordController@destroy')->name('wheatRecord.destroy');
 
 // Rice Stock Routes
 Route::get('dashboard/stock/rice', 'RiceStockController@index')->name('riceStock.index');
@@ -113,4 +113,13 @@ Route::post('dashboard/customer/{id}/roznamcha/rice/create', 'RiceRecordControll
 Route::get('dashboard/roznamcha/rice/{id}', 'RiceRecordController@show')->name('riceRecord.show');
 Route::get('dashboard/roznamcha/rice/{id}/edit', 'RiceRecordController@edit')->name('riceRecord.edit');
 Route::put('dashboard/roznamcha/rice/{id}/edit', 'RiceRecordController@update')->name('riceRecord.update');
-Route::delete('dashboard/roznamcha/rice/{id}/edit', 'RiceRecordController@destroy')->name('riceRecord.destroy');
+Route::delete('dashboard/roznamcha/rice/{id}', 'RiceRecordController@destroy')->name('riceRecord.destroy');
+
+// Others Routes
+Route::get('dashboard/roznamcha/other', 'OtherController@index')->name('other.index');
+Route::get('dashboard/customer/{id}/roznamcha/other/create', 'OtherController@create')->name('other.create');
+Route::post('dashboard/customer/{id}/roznamcha/other/create', 'OtherController@store')->name('other.store');
+Route::get('dashboard/roznamcha/other/{id}', 'OtherController@show')->name('other.show');
+Route::get('dashboard/roznamcha/other/{id}/edit', 'OtherController@edit')->name('other.edit');
+Route::put('dashboard/roznamcha/other/{id}/edit', 'OtherController@update')->name('other.update');
+Route::delete('dashboard/roznamcha/other/{id}', 'OtherController@destroy')->name('other.destroy');

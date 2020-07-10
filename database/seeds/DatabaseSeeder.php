@@ -4,6 +4,7 @@ use App\AccountBook;
 use App\FillingStation;
 use App\OilCompany;
 use App\OilRecord;
+use App\Other;
 use App\Profile;
 use App\RiceRecord;
 use App\RiceStock;
@@ -42,6 +43,7 @@ class DatabaseSeeder extends Seeder
         // factory(WheatRecord::class, 3000)->create();
         // factory(RiceStock::class, 1000)->create();
         // factory(RiceRecord::class, 3000)->create();
-        factory(AccountBook::class, 5000)->create();
+        // factory(AccountBook::class, 5000)->create();
+        // factory(Other::class, 5000)->create();
     }
 }

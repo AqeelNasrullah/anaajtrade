@@ -164,6 +164,30 @@ Breadcrumbs::for('edit_rice_records', function($trail, $record) {
     $trail->push('Edit Bill', route('riceRecord.show', base64_encode(($record->id * 123456789) / 12098)));
 });
 
+// Home >> Roznamcha >> Others
+Breadcrumbs::for('others', function($trail) {
+    $trail->parent('roznamcha');
+    $trail->push('Other Records', route('other.index'));
+});
+
+// Home >> Customer >> {User} >> Add Other
+Breadcrumbs::for('add_other', function($trail, $profile) {
+    $trail->parent('view_customers', $profile);
+    $trail->push('Add Other Record', route('other.create', base64_encode(($profile->id * 123456789) / 12098)));
+});
+
+// Home >> Roznamcha >> Others >> View Record
+Breadcrumbs::for('view_other', function($trail, $other) {
+    $trail->parent('others');
+    $trail->push('View Record', route('other.show', base64_encode(($other->id * 123456789) / 12098)));
+});
+
+// Home >> Roznamcha >> Others >> Edit Record
+Breadcrumbs::for('edit_other', function($trail, $other) {
+    $trail->parent('others');
+    $trail->push('Edit Record', route('other.edit', base64_encode(($other->id * 123456789) / 12098)));
+});
+
 // Home >> Stock
 Breadcrumbs::for('stock', function($trail) {
     $trail->parent('home');

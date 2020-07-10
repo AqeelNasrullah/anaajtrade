@@ -57,7 +57,8 @@
                         <p class="col-md-6 mb-1"><strong>Paid price per 40Kgs:</strong> Rs {{ $wheat_record->paid_per_mann }} /-</p>
                         <p class="col-md-6 mb-1"><strong>Total Price (paid):</strong> Rs {{ ($wheat_record->quantity / 40) * $wheat_record->paid_per_mann }} /-</p>
                         <p class="col-md-6 mb-1"><strong>Category:</strong> {{ $wheat_record->category }}</p>
-                        <p class="col-md-12"><strong>Signature:</strong></p>
+                        <p class="col-md-6"><strong>Signature:</strong></p>
+                        <p class="col-md-6 mb-0"><strong>Date &amp; Time:</strong> {{ date('d-F-Y h:i A', strtotime($wheat_record->created_at)) }}</p>
                     </div>
                 </div>
                 <div class="slip-inner">
@@ -84,7 +85,8 @@
                         <p class="col-md-6 mb-1"><strong>Paid price per 40Kgs:</strong> Rs {{ $wheat_record->paid_per_mann }} /-</p>
                         <p class="col-md-6 mb-1"><strong>Total Price (paid):</strong> Rs {{ ($wheat_record->quantity / 40) * $wheat_record->paid_per_mann }} /-</p>
                         <p class="col-md-6 mb-1"><strong>Category:</strong> {{ $wheat_record->category }}</p>
-                        <p class="col-md-12"><strong>Signature:</strong></p>
+                        <p class="col-md-6"><strong>Signature:</strong></p>
+                        <p class="col-md-6 mb-0"><strong>Date &amp; Time:</strong> {{ date('d-F-Y h:i A', strtotime($wheat_record->created_at)) }}</p>
                     </div>
                 </div>
             </div>

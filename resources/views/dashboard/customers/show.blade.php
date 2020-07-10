@@ -38,7 +38,7 @@
                                 <a href="" class="dropdown-item">Agricultural Medicine / <span class="text-urdu-kasheeda">زرعی ادویات</span></a>
                                 <a href="{{ route('wheatRecord.create', base64_encode(($profile->id * 123456789) / 12098)) }}" class="dropdown-item">Wheat / <span class="text-urdu-kasheeda">گندم</span></a>
                                 <a href="{{ route('riceRecord.create', base64_encode(($profile->id * 123456789) / 12098)) }}" class="dropdown-item">Rice / <span class="text-urdu-kasheeda">چاول</span></a>
-                                <a href="" class="dropdown-item">Others / <span class="text-urdu-kasheeda">دیگر اشیاء</span></a>
+                                <a href="{{ route('other.create', base64_encode(($profile->id * 123456789) / 12098)) }}" class="dropdown-item">Others / <span class="text-urdu-kasheeda">دیگر اشیاء</span></a>
                             </ul>
                         </div>
                         <div class="dropdown float-right mr-2">
@@ -250,6 +250,35 @@
                                     @else
                                         <tr>
                                             <td class="text-center font-italic" colspan="6">No record to show.</td>
+                                        </tr>
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                    <section id="account-section">
+                        <h3 class="text-success fw-700 mb-3">Others / <span class="text-urdu-kasheeda">دیگر اشیاء</span></h3>
+                        <div class="table-responsive">
+                            <table class="table table-striped" id="oil-table">
+                                <thead class="table-success">
+                                    <tr>
+                                        <th>Description / <span class="text-urdu-kasheeda">تفصیل</span></th>
+                                        <th>Amount / <span class="text-urdu-kasheeda">رقم</span></th>
+                                        <th>Date &amp; Time / <span class="text-urdu-kasheeda">تاریخ اور وقت</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if ($others->count() > 0)
+                                        @foreach ($others as $record)
+                                            <tr>
+                                                <td>{{ $record->description }}</td>
+                                                <td>Rs {{ $record->amount }} /-</td>
+                                                <td>{{ date('d-F-Y h:i A', strtotime($record->created_at)) }}</td>
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        <tr>
+                                            <td colspan="5" class="text-center font-italic">No record to show.</td>
                                         </tr>
                                     @endif
                                 </tbody>

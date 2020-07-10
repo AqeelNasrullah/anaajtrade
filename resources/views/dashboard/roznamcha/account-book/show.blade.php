@@ -54,7 +54,8 @@
                 <div class="row">
                     <p class="col-md-6 mb-1"><strong>Amount:</strong> {{ 'Rs ' . $record->amount . ' /-' }}</p>
                     <p class="col-md-6 mb-1"><strong>Amount Type:</strong> {{ $record->type }}</p>
-                    <p class="col-md-12 mb-0"><strong>Signature:</strong></p>
+                    <p class="col-md-6 mb-0"><strong>Signature:</strong></p>
+                    <p class="col-md-6 mb-0"><strong>Date &amp; Time:</strong> {{ date('d-F-Y h:i A', strtotime($record->created_at)) }}</p>
                 </div>
             </div>
             <hr>
@@ -79,7 +80,8 @@
                 <div class="row">
                     <p class="col-md-6 mb-1"><strong>Amount:</strong> {{ 'Rs ' . $record->amount . ' /-' }}</p>
                     <p class="col-md-6 mb-1"><strong>Amount Type:</strong> {{ $record->type }}</p>
-                    <p class="col-md-12 mb-0"><strong>Signature:</strong></p>
+                    <p class="col-md-6 mb-0"><strong>Signature:</strong></p>
+                    <p class="col-md-6 mb-0"><strong>Date &amp; Time:</strong> {{ date('d-F-Y h:i A', strtotime($record->created_at)) }}</p>
                 </div>
             </div>
         </diV>
