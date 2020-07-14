@@ -1,6 +1,7 @@
 <?php
 
 use App\AccountBook;
+use App\FertilizerTrader;
 use App\FillingStation;
 use App\OilCompany;
 use App\OilRecord;
@@ -25,7 +26,7 @@ class DatabaseSeeder extends Seeder
         // $this->call(UserSeeder::class);
         // factory(Profile::class, 100)->create();
         // factory(User::class, 20)->create();
-        // $users = User::all();
+        $users = User::all();
         // Profile::all()->each(function($profile) use ($users) {
         //     $profile->manyUsers()->attach(
         //         $users->random()
@@ -45,5 +46,11 @@ class DatabaseSeeder extends Seeder
         // factory(RiceRecord::class, 3000)->create();
         // factory(AccountBook::class, 5000)->create();
         // factory(Other::class, 5000)->create();
+        factory(FertilizerTrader::class, 500)->create();
+        FertilizerTrader::all()->each(function($trader) use ($users) {
+            $trader->manyUsers()->attach(
+                $users->random(rand(1, $users->count()))->pluck('id')->toArray()
+            );
+        });
     }
 }

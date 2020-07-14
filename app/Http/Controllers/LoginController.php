@@ -10,7 +10,6 @@ class LoginController extends Controller
 {
     public function index()
     {
-        // echo request()->headers->get('referer');
         if (Auth::check())
         {
             return redirect()->route('dashboard.index');

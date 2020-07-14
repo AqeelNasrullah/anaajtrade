@@ -58,6 +58,15 @@ Route::delete('dashboard/filling-station/{id}', 'FillingStationController@destro
 Route::get('dashboard/filling-stations/search', 'FillingStationController@filterFillingStation')->name('fillingStation.filterFillingStation');
 Route::get('search/filling-station', 'FillingStationController@searchFillingStation')->name('fillingStation.searchFillingStation');
 
+// Fertilizer Traders Routes
+Route::get('dashboard/fertilizer-traders', 'FertilizerTraderController@index')->name('fertilizerTraders.index');
+Route::get('dashboard/fertilizer-trader/create', 'FertilizerTraderController@create')->name('fertilizerTraders.create');
+Route::post('dashboard/fertilizer-trader/create', 'FertilizerTraderController@store')->name('fertilizerTraders.store');
+Route::get('dashboard/fertilizer-trader/{id}', 'FertilizerTraderController@show')->name('fertilizerTraders.show');
+Route::get('dashboard/fertilizer-trader/{id}/edit', 'FertilizerTraderController@edit')->name('fertilizerTraders.edit');
+Route::put('dashboard/fertilizer-trader/{id}/edit', 'FertilizerTraderController@update')->name('fertilizerTraders.update');
+Route::delete('dashboard/fertilizer-trader/{id}', 'FertilizerTraderController@destroy')->name('fertilizerTraders.destroy');
+
 // Account Book Routes
 Route::get('dashboard/roznamcha/account-book', 'AccountBookController@index')->name('accountBook.index');
 Route::get('dashboard/customer/{id}/roznamcha/account-book/create', 'AccountBookController@create')->name('accountBook.create');

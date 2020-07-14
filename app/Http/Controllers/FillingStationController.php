@@ -59,9 +59,9 @@ class FillingStationController extends Controller
         } else {
             $station = FillingStation::where('phone_number', addslashes(htmlentities(trim($request->get('phone_number')))))->first();
             if ($station) {
-                $attached = FillingStationUser::where('filling_station_id', $station->id)->where('user_id', Auth::User()->id)->first();
+                $attached = Auth::user()->manyFillingStations()->where('filling_station_id', $station->id)->first();
                 if($attached) {
-                    return redirect()->route('fillingStation.create')->with('success', 'Filling station already exists.')->withInput();
+                    return redirect()->route('fillingStation.index')->with('success', 'Filling station already exists.')->withInput();
                 } else {
                     Auth::User()->manyFillingStations()->attach($station);
                     return redirect()->route('fillingStation.index')->with('success', 'Filling station created successfully.');

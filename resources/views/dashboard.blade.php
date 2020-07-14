@@ -46,11 +46,19 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-md-3 offset-md-3 p-3">
+                <div class="col-md-3 p-3">
                     <a href="{{ route('fillingStation.index') }}" class="text-light">
                         <div class="bg-success p-3" style="border-radius: 5px;">
                             <h1 class="text-center mb-3"><i class="fas fa-gas-pump"></i></h1>
                             <h4 class="text-center">Filling Stations <br> <span class="text-urdu-kasheeda">پیٹرول پمپ</span></h4>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3 p-3">
+                    <a href="{{ route('fertilizerTraders.index') }}" class="text-light">
+                        <div class="bg-success p-3" style="border-radius: 5px;">
+                            <h1 class="text-center mb-3"><i class="fas fa-layer-group"></i></h1>
+                            <h4 class="text-center">Fertilizer Traders <br> <span class="text-urdu-kasheeda">کھاد کے تاجر</span></h4>
                         </div>
                     </a>
                 </div>

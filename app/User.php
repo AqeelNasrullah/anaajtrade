@@ -82,6 +82,12 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Other::class);
     }
 
+    // User belongs to many fertilizer traders
+    public function manyFertilizerTraders()
+    {
+        return $this->belongsToMany(FertilizerTrader::class);
+    }
+
 
 
     /*---------------------------------------------------------------------------------------*/

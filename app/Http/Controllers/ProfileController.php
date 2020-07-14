@@ -66,9 +66,9 @@ class ProfileController extends Controller
             $phone_number = '+92 ' . substr(addslashes(htmlentities(trim($request->get('phone_number')))), 1);
             $profile = Profile::where('phone_number', $phone_number)->first();
             if($profile) {
-                $attached = ProfileUser::where('profile_id', $profile->id)->where('user_id', Auth::User()->id)->first();
+                $attached = Auth::user()->manyProfiles()->where('profile_id', $profile->id)->first();
                 if ($attached) {
-                    return redirect()->route('profile.create')->with('success', 'Customer already exists.')->withInput();
+                    return redirect()->route('profile.index')->with('success', 'Customer already exists.')->withInput();
                 } else {
                     Auth::User()->manyProfiles()->attach($profile);
                     return redirect()->route('profile.index')->with('success', 'Customer created successfully.');

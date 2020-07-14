@@ -59,7 +59,31 @@ Breadcrumbs::for('view_filling_stations', function($trail, $station) {
 // Home >> Filling Stations >> Edit Filling Station
 Breadcrumbs::for('edit_filling_stations', function($trail, $station) {
     $trail->parent('filling_stations');
-    $trail->push($station->name, route('fillingStation.edit', base64_encode(($station->id * 123456789) / 12098)));
+    $trail->push('Edit Filling Station', route('fillingStation.edit', base64_encode(($station->id * 123456789) / 12098)));
+});
+
+// Home >> Fertilizer Traders
+Breadcrumbs::for('fertilizer_traders', function($trail) {
+    $trail->parent('home');
+    $trail->push('Fertilizer Traders', route('fertilizerTraders.index'));
+});
+
+// Home >> Fertilizer Traders >> Create Fertilizer Trader
+Breadcrumbs::for('create_fertilizer_traders', function($trail) {
+    $trail->parent('fertilizer_traders');
+    $trail->push('Create Fertilizer Trader', route('fertilizerTraders.create'));
+});
+
+// Home >> Fertilizer Traders >> View Fertilizer Trader
+Breadcrumbs::for('view_fertilizer_traders', function($trail, $trader) {
+    $trail->parent('fertilizer_traders');
+    $trail->push('View Fertilizer Trader', route('fertilizerTraders.show', base64_encode(($trader->id * 123456789) / 12098)));
+});
+
+// Home >> Fertilizer Traders >> Edit Fertilizer Trader
+Breadcrumbs::for('edit_fertilizer_traders', function($trail, $trader) {
+    $trail->parent('fertilizer_traders');
+    $trail->push('Edit Fertilizer Trader', route('fertilizerTraders.edit', base64_encode(($trader->id * 123456789) / 12098)));
 });
 
 // Home >> Roznamcha >> Account Book
