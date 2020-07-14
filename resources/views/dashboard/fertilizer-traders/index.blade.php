@@ -23,21 +23,21 @@
             <table class="table table-striped">
                 <thead class="table-success">
                     <tr>
-                        <th class="align-middle"></th>
-                        <th class="align-middle">Name / <span class="text-urdu-kasheeda">نام</span></th>
-                        <th class="align-middle">Phone Number / <span class="text-urdu-kasheeda">فون نمبر</span></th>
-                        <th class="align-middle">Address / <span class="text-urdu-kasheeda">پتہ</span></th>
-                        <th class="align-middle"></th>
+                        <th style="width: 5%;" class="align-middle"></th>
+                        <th style="width: 20%;" class="align-middle">Name / <span class="text-urdu-kasheeda">نام</span></th>
+                        <th style="width: 20%;" class="align-middle">Phone Number / <span class="text-urdu-kasheeda">فون نمبر</span></th>
+                        <th style="width: 40%;" class="align-middle">Address / <span class="text-urdu-kasheeda">پتہ</span></th>
+                        <th style="width: 15%;" class="align-middle"></th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="traders-table-body">
                     @forelse ($traders as $trader)
                         <tr>
-                            <td style="width: 5%;" class="align-middle"><img src="{{ asset('images/logos/' . $trader->avatar) }}" alt="Logo not found" width="45px"></td>
-                            <td style="width: 20%;" class="align-middle">{{ $trader->name }}</td>
-                            <td style="width: 20%;" class="align-middle">{{ $trader->phone_number }}</td>
-                            <td style="width: 40%;" class="align-middle">{{ $trader->address }}</td>
-                            <td style="width: 15%;" class="align-middle">
+                            <td class="align-middle"><img src="{{ asset('images/logos/' . $trader->avatar) }}" alt="Logo not found" width="45px"></td>
+                            <td class="align-middle">{{ $trader->name }}</td>
+                            <td class="align-middle">{{ $trader->phone_number }}</td>
+                            <td class="align-middle">{{ $trader->address }}</td>
+                            <td class="align-middle">
                                 <a href="{{ route('fertilizerTraders.show', base64_encode(($trader->id * 123456789) / 12098)) }}" class="d-inline">View</a>
                                 <p class="d-inline mb-0"> | </p>
                                 <a href="{{ route('fertilizerTraders.edit', base64_encode(($trader->id * 123456789) / 12098)) }}" class="d-inline">Edit</a>
@@ -61,7 +61,7 @@
             <div class="pagination">
                 {{ $traders->links() }}
             </div>
-            <p>Showing {{ $traders->firstItem() ?? 0 }} - {{ $traders->lastItem() ?? 0 }} of {{ $traders->total() ?? 0 }} results</p>
+            <p class="results">Showing {{ $traders->firstItem() ?? 0 }} - {{ $traders->lastItem() ?? 0 }} of {{ $traders->total() ?? 0 }} results</p>
         </div>
     </section>
 @endsection
@@ -69,6 +69,18 @@
 @section('script')
     <script>
         $(document).ready(function() {
+            $('#search').keyup(function() {
+                var name = $(this).val();
+                $.get('{{ route("fertilizerTraders.searchFertilizerTrader") }}', {name:name}, function(data) {
+                    $('#traders-table-body').html(data.data_output);
+                    if (data.flag == 1) {
+                        $('.pagination, .results').addClass('d-none');
+                    } else {
+                        $('.pagination, .results').removeClass('d-none');
+                    }
+                }, 'json');
+            });
+
             $('#fertilizer-traders-table').on('click', '.delete-trader', function() {
                 if (confirm('Are you sure you want to delete?')) {
                     return true;

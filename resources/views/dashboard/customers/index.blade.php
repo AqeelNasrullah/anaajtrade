@@ -86,7 +86,11 @@
                 var customer = $(this).val();
                 $.get('{{ route("profile.searchCustomers") }}', {name:customer}, function(data) {
                     $('#customers-table').html(data.data_output);
-                    $('.pager, .show-results').addClass('d-none');
+                    if (data.flag == 1) {
+                        $('.pager, .show-results').addClass('d-none');
+                    } else {
+                        $('.pager, .show-results').removeClass('d-none');
+                    }
                 }, 'json');
             });
             // $('#customer-table').on('click', '.view-customer',function(e) {

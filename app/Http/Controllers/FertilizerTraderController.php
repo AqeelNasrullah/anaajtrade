@@ -190,4 +190,48 @@ class FertilizerTraderController extends Controller
             }
         }
     }
+
+    public function searchFertilizerTraders(Request $request)
+    {
+        if ($request->ajax()) {
+            $name = $request->get('name');
+            $traders = ""; $output = ""; $flag = 0;
+            if ($name != "") {
+                $flag = 1;
+                $traders = Auth::user()->manyFertilizerTraders()->where('name', 'like', '%' . $name . '%')->latest()->get();
+            } else {
+                $traders = Auth::user()->manyFertilizerTraders()->latest()->paginate(10);
+            }
+            if ($traders->count() > 0) {
+                foreach ($traders as $trader) {
+                    $output .= '<tr>
+                        <td class="align-middle"><img src="' . asset('images/logos/' . $trader->avatar) . '" width="45px" alt="Image not found"></td>
+                        <td class="align-middle">' . $trader->name . '</td>
+                        <td class="align-middle">' . $trader->phone_number . '</td>
+                        <td class="align-middle">' . $trader->address . '</td>
+                        <td class="align-middle">
+                            <a href="' . route('fertilizerTraders.show', base64_encode(($trader->id * 123456789) / 12098)) . '" class="d-inline">View</a>
+                            <p class="d-inline mb-0"> | </p>
+                            <a href="' . route('fertilizerTraders.edit', base64_encode(($trader->id * 123456789) / 12098)) . '" class="d-inline">Edit</a>
+                            <p class="d-inline mb-0"> | </p>
+                            <form action="' . route('fertilizerTraders.destroy', base64_encode(($trader->id * 123456789) / 12098)) . '" method="post">
+                                ' . csrf_field() . '
+                                ' . method_field('DELETE') . '
+                                <button type="submit" class="m-0 p-0 btn btn-link delete-trader d-inline">Delete</button>
+                            </form>
+                        </td>
+                    </tr>';
+                }
+            } else {
+                $output .= '<tr>
+                    <td colspan="5" class="text-center font-italic">No record to show.</td>
+                </tr>';
+            }
+            $data = [
+                'data_output'            =>      $output,
+                'flag'                   =>      $flag
+            ];
+            return json_encode($data);
+        }
+    }
 }

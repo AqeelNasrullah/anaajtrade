@@ -190,12 +190,14 @@ class FillingStationController extends Controller
         if ($request->ajax()) {
             $search = $request->get('station');
             $output = '';
+            $stations = ""; $flag = 0;
             if ($search != "") {
+                $flag = 1;
                 $stations = Auth::User()->manyFillingStations()->where(function($query) use ($search) {
                     $query->where('name', 'like', '%'. $search . '%')->orWhere('phone_number', 'like', '%'. $search . '%');
                 })->latest()->get();
             } else {
-                $stations = Auth::user()->manyFillingStations()->latest()->get();
+                $stations = Auth::user()->manyFillingStations()->latest()->paginate(10);
             }
 
             if ($stations->count() > 0) {
@@ -225,7 +227,7 @@ class FillingStationController extends Controller
                 </tr>';
             }
 
-            $data = ['data_output'=>$output];
+            $data = ['data_output'=>$output, 'flag'=>$flag];
             return json_encode($data);
         }
     }

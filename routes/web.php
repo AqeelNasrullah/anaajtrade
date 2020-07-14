@@ -67,6 +67,8 @@ Route::get('dashboard/fertilizer-trader/{id}/edit', 'FertilizerTraderController@
 Route::put('dashboard/fertilizer-trader/{id}/edit', 'FertilizerTraderController@update')->name('fertilizerTraders.update');
 Route::delete('dashboard/fertilizer-trader/{id}', 'FertilizerTraderController@destroy')->name('fertilizerTraders.destroy');
 
+Route::get('dashboard/fertilizer-traders/search', 'FertilizerTraderController@searchFertilizerTraders')->name('fertilizerTraders.searchFertilizerTrader');
+
 // Account Book Routes
 Route::get('dashboard/roznamcha/account-book', 'AccountBookController@index')->name('accountBook.index');
 Route::get('dashboard/customer/{id}/roznamcha/account-book/create', 'AccountBookController@create')->name('accountBook.create');

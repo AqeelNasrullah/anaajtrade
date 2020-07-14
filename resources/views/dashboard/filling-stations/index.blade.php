@@ -88,7 +88,11 @@
                 var station = $(this).val();
                 $.get('{{ route("fillingStation.filterFillingStation") }}', {station:station}, function(data) {
                     $('#stations-table-body').html(data.data_output);
-                    $('.pagination, .no-of-results').addClass('d-none');
+                    if (data.flag) {
+                        $('.pagination, .no-of-results').addClass('d-none');
+                    } else {
+                        $('.pagination, .no-of-results').removeClass('d-none');
+                    }
                 }, 'json');
             });
 

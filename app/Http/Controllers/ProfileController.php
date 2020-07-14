@@ -234,13 +234,15 @@ class ProfileController extends Controller
             $name = $request->get('name');
             $output = '';
             $profiles='';
+            $flag = 0;
 
             if ($name !== "") {
                 $profiles = Auth::User()->manyProfiles()->where(function($query) use ($name) {
                     $query->where('name', 'like', '%'.$name.'%')->orWhere('phone_number', 'like', '%'.$name.'%')->orWhere('cnic', 'like', '%'.$name.'%');
                 })->latest()->get();
+                $flag = 1;
             } else {
-                $profiles = Auth::User()->manyProfiles()->latest()->get();
+                $profiles = Auth::User()->manyProfiles()->latest()->paginate(10);
             }
             $total_profiles = $profiles->count();
             if($total_profiles > 0) {
@@ -272,7 +274,8 @@ class ProfileController extends Controller
             }
 
             $data = [
-                'data_output'           =>  $output
+                'data_output'           =>  $output,
+                'flag'                  =>  $flag
             ];
             return json_encode($data);
         }
