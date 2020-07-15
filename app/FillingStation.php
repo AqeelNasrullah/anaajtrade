@@ -32,6 +32,6 @@ class FillingStation extends Model
     // Filling station belongs to many users
     public function manyUsers()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class)->withTimestamps();
     }
 }

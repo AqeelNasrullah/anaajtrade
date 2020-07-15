@@ -22,7 +22,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $customers = Auth::User()->manyProfiles()->latest()->paginate(10);
+        $customers = Auth::User()->manyProfiles()->orderBy('profile_user.created_at', 'DESC')->paginate(10);
         return view('dashboard.customers.index', ['customers'=>$customers]);
     }
 
@@ -239,10 +239,10 @@ class ProfileController extends Controller
             if ($name !== "") {
                 $profiles = Auth::User()->manyProfiles()->where(function($query) use ($name) {
                     $query->where('name', 'like', '%'.$name.'%')->orWhere('phone_number', 'like', '%'.$name.'%')->orWhere('cnic', 'like', '%'.$name.'%');
-                })->latest()->get();
+                })->orderBy('profile_user.created_at', 'DESC')->get();
                 $flag = 1;
             } else {
-                $profiles = Auth::User()->manyProfiles()->latest()->paginate(10);
+                $profiles = Auth::User()->manyProfiles()->orderBy('profile_user.created_at', 'DESC')->paginate(10);
             }
             $total_profiles = $profiles->count();
             if($total_profiles > 0) {

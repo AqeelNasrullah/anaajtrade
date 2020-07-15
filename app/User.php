@@ -31,13 +31,13 @@ class User extends Authenticatable implements JWTSubject
     // User belongs to many filling stations
     public function manyFillingStations()
     {
-        return $this->belongsToMany(FillingStation::class);
+        return $this->belongsToMany(FillingStation::class)->withTimestamps();
     }
 
     // User belongs to many profiles
     public function manyProfiles()
     {
-        return $this->belongsToMany(Profile::class);
+        return $this->belongsToMany(Profile::class)->withTimestamps();
     }
 
     // User has many account books
@@ -85,10 +85,14 @@ class User extends Authenticatable implements JWTSubject
     // User belongs to many fertilizer traders
     public function manyFertilizerTraders()
     {
-        return $this->belongsToMany(FertilizerTrader::class);
+        return $this->belongsToMany(FertilizerTrader::class)->withTimestamps();
     }
 
-
+    // User has many fertilizer stocks
+    public function fertilizerStocks()
+    {
+        return $this->hasMany(FertilizerStock::class);
+    }
 
     /*---------------------------------------------------------------------------------------*/
 

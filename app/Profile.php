@@ -32,7 +32,7 @@ class Profile extends Model
     // Profile belongs to many users
     public function manyUsers()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class)->withTimestamps();
     }
 
     // Profile has many account books

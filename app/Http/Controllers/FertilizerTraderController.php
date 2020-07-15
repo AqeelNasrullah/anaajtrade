@@ -20,7 +20,7 @@ class FertilizerTraderController extends Controller
      */
     public function index()
     {
-        $traders = Auth::user()->manyFertilizerTraders()->latest()->paginate(10);
+        $traders = Auth::user()->manyFertilizerTraders()->orderBy('fertilizer_trader_user.created_at', 'DESC')->paginate(10);
         return view('dashboard.fertilizer-traders.index', ['traders' => $traders]);
     }
 
@@ -198,9 +198,9 @@ class FertilizerTraderController extends Controller
             $traders = ""; $output = ""; $flag = 0;
             if ($name != "") {
                 $flag = 1;
-                $traders = Auth::user()->manyFertilizerTraders()->where('name', 'like', '%' . $name . '%')->latest()->get();
+                $traders = Auth::user()->manyFertilizerTraders()->where('name', 'like', '%' . $name . '%')->orderBy('fertilizer_trader_user.created_at', 'DESC')->get();
             } else {
-                $traders = Auth::user()->manyFertilizerTraders()->latest()->paginate(10);
+                $traders = Auth::user()->manyFertilizerTraders()->orderBy('fertilizer_trader_user.created_at', 'DESC')->paginate(10);
             }
             if ($traders->count() > 0) {
                 foreach ($traders as $trader) {

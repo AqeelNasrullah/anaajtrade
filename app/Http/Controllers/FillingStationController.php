@@ -22,7 +22,7 @@ class FillingStationController extends Controller
      */
     public function index()
     {
-        $fillingStations = Auth::User()->manyFillingStations()->latest()->paginate(10);
+        $fillingStations = Auth::User()->manyFillingStations()->orderBy('filling_station_user.created_at', 'DESC')->paginate(10);
         return view('dashboard.filling-stations.index', ['stations' => $fillingStations]);
     }
 
@@ -195,9 +195,9 @@ class FillingStationController extends Controller
                 $flag = 1;
                 $stations = Auth::User()->manyFillingStations()->where(function($query) use ($search) {
                     $query->where('name', 'like', '%'. $search . '%')->orWhere('phone_number', 'like', '%'. $search . '%');
-                })->latest()->get();
+                })->orderBy('filling_station_user.created_at', 'DESC')->get();
             } else {
-                $stations = Auth::user()->manyFillingStations()->latest()->paginate(10);
+                $stations = Auth::user()->manyFillingStations()->orderBy('filling_station_user.created_at', 'DESC')->paginate(10);
             }
 
             if ($stations->count() > 0) {
