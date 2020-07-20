@@ -61,7 +61,7 @@
                                             <ul class="dropdown-menu">
                                                 <li><a href="{{ route('accountBook.index') }}" class="dropdown-item">Account Book / <span class="text-urdu-kasheeda">روزنامچہ</span></a></li>
                                                 <li><a href="{{ route('oilRecord.index') }}" class="dropdown-item">Oil / <span class="text-urdu-kasheeda">تیل</span></a></li>
-                                                <li><a href="" class="dropdown-item">Fertilizer / <span class="text-urdu-kasheeda">کھاد</span></a></li>
+                                                <li><a href="{{ route('fertilizerRecord.index') }}" class="dropdown-item">Fertilizer / <span class="text-urdu-kasheeda">کھاد</span></a></li>
                                                 <li><a href="" class="dropdown-item">Agricultural Medicine / <span class="text-urdu-kasheeda">زرعی ادویات</span></a></li>
                                                 <li><a href="{{ route('wheatRecord.index') }}" class="dropdown-item">Wheat / <span class="text-urdu-kasheeda">گندم</span></a></li>
                                                 <li><a href="{{ route('riceRecord.index') }}" class="dropdown-item">Rice / <span class="text-urdu-kasheeda">چاول</span></a></li>
@@ -71,7 +71,7 @@
                                         <li class="dropdown">
                                             <a href="" class="dropdown-item dropdown-toggler" data-toggle="dropdown"><i class="fas fa-database"></i> Stock / <span class="text-urdu-kasheeda">اسٹاک</span> &nbsp; <i class="fas fa-angle-right"></i></a>
                                             <ul class="dropdown-menu">
-                                                <li><a href="" class="dropdown-item">Fertilizer / <span class="text-urdu-kasheeda">کھاد</span></a></li>
+                                                <li><a href="{{ route('fertilizerStock.index') }}" class="dropdown-item">Fertilizer / <span class="text-urdu-kasheeda">کھاد</span></a></li>
                                                 <li><a href="" class="dropdown-item">Agricultural Medicine / <span class="text-urdu-kasheeda">زرعی ادویات</span></a></li>
                                                 <li><a href="{{ route('wheatStock.index') }}" class="dropdown-item">Wheat / <span class="text-urdu-kasheeda">گندم</span></a></li>
                                                 <li><a href="{{ route('riceStock.index') }}" class="dropdown-item">Rice / <span class="text-urdu-kasheeda">چاول</span></a></li>

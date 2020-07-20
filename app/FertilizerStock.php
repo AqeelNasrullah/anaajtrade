@@ -22,7 +22,7 @@ class FertilizerStock extends Model
     }
 
     // Fertilizer stock belongs to fertilizer trader
-    public function fetilizerTrader()
+    public function fertilizerTrader()
     {
         return $this->belongsTo(FertilizerTrader::class);
     }

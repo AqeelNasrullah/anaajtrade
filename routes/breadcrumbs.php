@@ -77,7 +77,7 @@ Breadcrumbs::for('create_fertilizer_traders', function($trail) {
 // Home >> Fertilizer Traders >> View Fertilizer Trader
 Breadcrumbs::for('view_fertilizer_traders', function($trail, $trader) {
     $trail->parent('fertilizer_traders');
-    $trail->push('View Fertilizer Trader', route('fertilizerTraders.show', base64_encode(($trader->id * 123456789) / 12098)));
+    $trail->push($trader->name, route('fertilizerTraders.show', base64_encode(($trader->id * 123456789) / 12098)));
 });
 
 // Home >> Fertilizer Traders >> Edit Fertilizer Trader
@@ -138,6 +138,30 @@ Breadcrumbs::for('show_oil_records', function($trail, $oil_record) {
 Breadcrumbs::for('edit_oil_records', function($trail, $oil_record) {
     $trail->parent('oil_records');
     $trail->push('Edit Oil Bill', route('profile.edit', base64_encode(($oil_record->id * 123456789) / 12098)));
+});
+
+// Home >> Roznamcha >> Fertilizer Record
+Breadcrumbs::for('fertilizer_records', function($trail) {
+    $trail->parent('roznamcha');
+    $trail->push('Fertilizer Records', route('fertilizerRecord.index'));
+});
+
+// Home >> Customer >> {User} >> Add Fertilizer Record
+Breadcrumbs::for('add_fertilizer_records', function($trail, $profile) {
+    $trail->parent('view_customers', $profile);
+    $trail->push('Add Fertilizer Record', route('fertilizerRecord.create', base64_encode(($profile->id * 123456789) / 12098)));
+});
+
+// Home >> Roznamcha >> Fertilizer Record >> View Fertilizer Record
+Breadcrumbs::for('view_fertilizer_records', function($trail, $record) {
+    $trail->parent('fertilizer_records', $record);
+    $trail->push('View Fertilizer Record', route('fertilizerRecord.show', base64_encode(($record->id * 123456789) / 12098)));
+});
+
+// Home >> Roznamcha >> Fertilizer Record >> Edit Fertilizer Record
+Breadcrumbs::for('edit_fertilizer_records', function($trail, $record) {
+    $trail->parent('fertilizer_records', $record);
+    $trail->push('Edit Fertilizer Record', route('fertilizerRecord.show', base64_encode(($record->id * 123456789) / 12098)));
 });
 
 // Home >> Roznamcha >> Wheat Records
@@ -216,6 +240,30 @@ Breadcrumbs::for('edit_other', function($trail, $other) {
 Breadcrumbs::for('stock', function($trail) {
     $trail->parent('home');
     $trail->push('Stock', route('dashboard.stock'));
+});
+
+// Home >> Stock >> Fertilizer Stock
+Breadcrumbs::for('fertilizer_stocks', function($trail) {
+    $trail->parent('stock');
+    $trail->push('Fertilizer Stock', route('fertilizerStock.index'));
+});
+
+// Home >> Fertilizer Trader >> { Fertilizer Trader } >> Add Fertilizer Stock
+Breadcrumbs::for('create_fertilizer_stocks', function($trail, $trader) {
+    $trail->parent('view_fertilizer_traders', $trader);
+    $trail->push('Add Fertilizer Trader', route('fertilizerStock.create', base64_encode(($trader->id * 123456789) / 12098)));
+});
+
+// Home >> Stock >> Fertilizer Stock >> View Fertilizer Stock
+Breadcrumbs::for('view_fertilizer_stocks', function($trail, $stock) {
+    $trail->parent('fertilizer_stocks');
+    $trail->push('View Fertilizer Stock', route('fertilizerStock.show', base64_encode(($stock->id * 123456789) / 12098)));
+});
+
+// Home >> Stock >> Fertilizer Stock >> Edit Fertilizer Stock
+Breadcrumbs::for('edit_fertilizer_stocks', function($trail, $stock) {
+    $trail->parent('fertilizer_stocks');
+    $trail->push('Edit Fertilizer Stock', route('fertilizerStock.edit', base64_encode(($stock->id * 123456789) / 12098)));
 });
 
 // Home >> Stock >> Wheat Stock

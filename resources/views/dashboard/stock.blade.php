@@ -21,7 +21,7 @@
 
             <div class="row">
                 <div class="col-md-4 px-3 mb-3">
-                    <a href="" class="text-light">
+                    <a href="{{ route('fertilizerStock.index') }}" class="text-light">
                         <div class="bg-success px-2 py-4" style="border-radius: 5px;">
                             <h4 class="text-center fw-700">Fertilizer<br><span class="text-urdu-kasheeda">کھاد</span></h4>
                         </div>

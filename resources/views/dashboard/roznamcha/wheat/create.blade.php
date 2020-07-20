@@ -13,9 +13,6 @@
         <div class="row">
             <aside class="col-md-3">
                 @include('components.sidebar-profile')
-                <section class="pt-3">
-                    <h4><strong>Remaining Stock:</strong> {{ $rem_stock }} Kgs</h4>
-                </section>
             </aside>
             <main class="col-md-9">
                 <h1 class="text-center mb-3 text-success fw-900">Add Wheat Record / <span class="text-urdu-kasheeda">گندم کا ریکارڈ شامل کریں</span></h1>

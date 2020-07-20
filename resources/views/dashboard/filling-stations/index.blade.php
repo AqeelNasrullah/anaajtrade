@@ -73,7 +73,7 @@
                     {{ $stations->links() }}
                 </div>
                 <div class="float-right no-of-results">
-                    <p class="mb-0">Showing {{ $stations->firstItem() .' - '. $stations->lastItem() }} of {{ $stations->total() }} results</p>
+                    <p class="mb-0">Showing {{ $stations->firstItem() ?? 0 }} - {{ $stations->lastItem() ?? 0 }} of {{ $stations->total() }} results</p>
                 </div>
                 <br class="clear">
             </div>

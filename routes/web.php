@@ -90,6 +90,27 @@ Route::delete('dashboard/roznamcha/{id}', 'OilRecordController@destroy')->name('
 
 Route::get('search/oil-record', 'OilRecordController@searchOilRecord')->name('oilRecord.searchOilRecord');
 
+// Fertilizer Stock Routes
+Route::get('dashboard/stock/fertilizer', 'FertilizerStockController@index')->name('fertilizerStock.index');
+Route::get('dashboard/fertilizer-trader/{id}/create', 'FertilizerStockController@create')->name('fertilizerStock.create');
+Route::post('dashboard/fertilizer-trader/{id}/create', 'FertilizerStockController@store')->name('fertilizerStock.store');
+Route::get('dashboard/stock/fertilizer/{id}', 'FertilizerStockController@show')->name('fertilizerStock.show');
+Route::get('dashboard/stock/fertilizer/{id}/edit', 'FertilizerStockController@edit')->name('fertilizerStock.edit');
+Route::put('dashboard/stock/fertilizer/{id}/edit', 'FertilizerStockController@update')->name('fertilizerStock.update');
+Route::delete('dashboard/stock/fertilizer/{id}', 'FertilizerStockController@destroy')->name('fertilizerStock.destroy');
+
+Route::post('dashboard/stock/fertilizer/search-trader', 'FertilizerStockSearchController@searchFertilizerTrader')->name('fertilizerStockSearch.searchFertilizerTrader');
+Route::get('dashboard/traders/list', 'FertilizerStockSearchController@tradersList')->name('fertilizerStockSearch.tradersList');
+
+// Fertilizer Record Routes
+Route::get('dashboard/roznamcha/fertilizer', 'FertilizerRecordController@index')->name('fertilizerRecord.index');
+Route::get('dashboard/customer/{id}/roznamcha/fertilizer/create', 'FertilizerRecordController@create')->name('fertilizerRecord.create');
+Route::post('dashboard/customer/{id}/roznamcha/fertilizer/create', 'FertilizerRecordController@store')->name('fertilizerRecord.store');
+Route::get('dashboard/roznamcha/fertilizer/{id}', 'FertilizerRecordController@show')->name('fertilizerRecord.show');
+Route::get('dashboard/roznamcha/fertilizer/{id}/edit', 'FertilizerRecordController@edit')->name('fertilizerRecord.edit');
+Route::put('dashboard/roznamcha/fertilizer/{id}/edit', 'FertilizerRecordController@update')->name('fertilizerRecord.update');
+Route::delete('dashboard/roznamcha/fertilizer/{id}', 'FertilizerRecordController@destroy')->name('fertilizerRecord.destroy');
+
 // Wheat Stock Routes
 Route::get('dashboard/stock/wheat', 'WheatStockController@index')->name('wheatStock.index');
 Route::get('dashboard/customer/{id}/stock/wheat/create', 'WheatStockController@create')->name('wheatStock.create');

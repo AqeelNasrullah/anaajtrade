@@ -31,8 +31,41 @@
                 </div>
             </aside>
             <main class="col-md-9">
-                <h1 class="text-center text-success fw-900 mb-3">Fertilizer Record / <span class="text-urdu-kasheeda">کھاد کا ریکارڈ</span></h1>
-                <p class="alert alert-danger font-italic text-center w-50 mx-auto">Noting to show.</p>
+                <div class="d-flex mb-3" style="justify-content: space-between;">
+                    <h4><strong>Stock: 3000 Sacks</strong></h4>
+                    <a href="{{ route('fertilizerStock.create', base64_encode(($trader->id * 123456789) / 12098)) }}" class="btn btn-success"><i class="fas fa-plus"></i> Add Fertilizer Stock</a>
+                </div>
+                <h1 class="text-center text-success fw-900 mb-3">Fertilizer Stocks / <span class="text-urdu-kasheeda">کھاد کا اسٹاک</span></h1>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead class="table-success">
+                            <tr>
+                                <th>Quantity / <span class="text-urdu-kasheeda">مقدار</span></th>
+                                <th>Weight per Sack / <span class="text-urdu-kasheeda">فی بوری وزن</span></th>
+                                <th>Price per Sack / <span class="text-urdu-kasheeda">فی بوری قیمت</span></th>
+                                <th>Total Price / <span class="text-urdu-kasheeda">کل قیمت</span></th>
+                                <th>Type / <span class="text-urdu-kasheeda">قسم</span></th>
+                                <th>Date &amp; Time / <span class="text-urdu-kasheeda">تاریخ اور وقت</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($stocks as $stock)
+                                <tr>
+                                    <td>{{ $stock->quantity }} Sacks</td>
+                                    <td>{{ $stock->weight }} Kgs</td>
+                                    <td>Rs {{ $stock->price }} /-</td>
+                                    <td>Rs {{ $stock->quantity * $stock->price }} /-</td>
+                                    <td>{{ $stock->type }}</td>
+                                    <td>{{ date('d-F-Y h:i A', strtotime($stock->created_at)) }}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="6" class="text-center font-italic">No record to show.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
             </main>
         </section>
     </section>

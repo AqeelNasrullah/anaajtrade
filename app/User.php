@@ -94,6 +94,12 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(FertilizerStock::class);
     }
 
+    // User has many fertilizer records
+    public function fertilizerRecords()
+    {
+        return $this->hasMany(FertilizerRecord::class);
+    }
+
     /*---------------------------------------------------------------------------------------*/
 
     /**
