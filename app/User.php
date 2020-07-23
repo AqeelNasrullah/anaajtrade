@@ -100,6 +100,18 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(FertilizerRecord::class);
     }
 
+    // User belongs to many medicine traders
+    public function manyMedicineTraders()
+    {
+        return $this->belongsToMany(MedicineTrader::class)->withTimestamps();
+    }
+
+    // User has many medicine stocks
+    public function medicineStocks()
+    {
+        return $this->hasMany(MedicineStock::class);
+    }
+
     /*---------------------------------------------------------------------------------------*/
 
     /**

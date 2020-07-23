@@ -72,7 +72,7 @@
                                             <a href="" class="dropdown-item dropdown-toggler" data-toggle="dropdown"><i class="fas fa-database"></i> Stock / <span class="text-urdu-kasheeda">اسٹاک</span> &nbsp; <i class="fas fa-angle-right"></i></a>
                                             <ul class="dropdown-menu">
                                                 <li><a href="{{ route('fertilizerStock.index') }}" class="dropdown-item">Fertilizer / <span class="text-urdu-kasheeda">کھاد</span></a></li>
-                                                <li><a href="" class="dropdown-item">Agricultural Medicine / <span class="text-urdu-kasheeda">زرعی ادویات</span></a></li>
+                                                <li><a href="{{ route('medicineStock.index') }}" class="dropdown-item">Agricultural Medicine / <span class="text-urdu-kasheeda">زرعی ادویات</span></a></li>
                                                 <li><a href="{{ route('wheatStock.index') }}" class="dropdown-item">Wheat / <span class="text-urdu-kasheeda">گندم</span></a></li>
                                                 <li><a href="{{ route('riceStock.index') }}" class="dropdown-item">Rice / <span class="text-urdu-kasheeda">چاول</span></a></li>
                                             </ul>
@@ -81,8 +81,7 @@
                                         <li><a href="{{ route('profile.index') }}" class="dropdown-item"><i class="fas fa-users"></i> Customers / <span class="text-urdu-kasheeda">خریدار</span></a></li>
                                         <li><a href="{{ route('fillingStation.index') }}" class="dropdown-item"><i class="fas fa-gas-pump"></i> Filling Stations / <span class="text-urdu-kasheeda">پیٹرول پمپ</span></a></li>
                                         <li><a href="{{ route('fertilizerTraders.index') }}" class="dropdown-item"><i class="fas fa-layer-group"></i> Fertilizer Traders / <span class="text-urdu-kasheeda">کھاد کے تاجر</span></a></li>
-                                        <li><a href="" class="dropdown-item"><i class="fas fa-file-prescription"></i> Medicine Traders / <span class="text-urdu-kasheeda">ادویات کے تاجر</span></a></li>
-                                        <li><a href="" class="dropdown-item"></a></li>
+                                        <li><a href="{{ route('medicineTraders.index') }}" class="dropdown-item"><i class="fas fa-file-prescription"></i> Medicine Traders / <span class="text-urdu-kasheeda">ادویات کے تاجر</span></a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -97,8 +96,7 @@
                                         <br class="clear">
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="{{ route('welcome') }}"><i class="fas fa-home"></i> Home</a>
-                                        <a class="dropdown-item" href="#"><i class="fas fa-user-tie"></i> Profile</a>
+                                        <a class="dropdown-item" href="#"><i class="fas fa-user-tie"></i> My Profile</a>
                                         <a class="dropdown-item" href="#"><i class="fas fa-unlock"></i> Change Password</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="{{ route('login.logout') }}"><i class="fas fa-power-off"></i> Logout</a>

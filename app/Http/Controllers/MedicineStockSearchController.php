@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
-class FertilizerStockSearchController extends Controller
+class MedicineStockSearchController extends Controller
 {
-    public function searchFertilizerTrader(Request $request)
+    public function searchMedicineTrader(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name'              =>      'required_without_all:phone_number',
@@ -20,18 +20,18 @@ class FertilizerStockSearchController extends Controller
         } else {
             if ($request->get('name') != "") {
                 $name = addslashes(htmlentities($request->get('name')));
-                $traders = Auth::user()->manyFertilizerTraders()->where('name', 'like', '%' . $name . '%')->get();
+                $traders = Auth::user()->manyMedicineTraders()->where('name', 'like', '%' . $name . '%')->get();
                 if ($traders->count() > 0) {
                     return back()->with('traders', $traders);
                 } else {
-                    return back()->with('error', 'Fertilizer trader not found. <a href="' . route('fertilizerTraders.create') . '" class="alert-link">Add Fertilizer Trader</a>')->withInput();
+                    return back()->with('error', 'Medicine trader not found. <a href="' . route('medicineTraders.create') . '" class="alert-link">Add Medicine Trader</a>')->withInput();
                 }
             } else if ($request->get('phone_number') != "") {
-                $stock = Auth::user()->manyFertilizerTraders()->where('phone_number', '+92 ' . substr($request->get('phone_number'), 1))->first();
+                $stock = Auth::user()->manyMedicineTraders()->where('phone_number', '+92 ' . substr($request->get('phone_number'), 1))->first();
                 if ($stock) {
-                    return redirect()->route('fertilizerTraders.show', base64_encode(($stock->id * 123456789) / 12098));
+                    return redirect()->route('medicineTraders.show', base64_encode(($stock->id * 123456789) / 12098));
                 } else {
-                    return back()->with('error', 'Fertilizer trader not found. <a href="' . route('fertilizerTraders.create') . '" class="alert-link">Add Fertilizer Trader</a>')->withInput();
+                    return back()->with('error', 'Medicine trader not found. <a href="' . route('medicineTraders.create') . '" class="alert-link">Add Medicine Trader</a>')->withInput();
                 }
             }
         }
@@ -44,10 +44,10 @@ class FertilizerStockSearchController extends Controller
             $output = '';
 
             if ($name) {
-                $profiles = Auth::user()->manyFertilizerTraders()->where('name', 'like', '%' . $name . '%')->get();
+                $profiles = Auth::user()->manyMedicineTraders()->where('name', 'like', '%' . $name . '%')->get();
                 if ($profiles->count() > 0) {
                     foreach ($profiles as $profile) {
-                        $output .= '<a href="' . route('fertilizerTraders.show', base64_encode(($profile->id * 123456789) / 12098)) . '" class="dropdown-item px-2">
+                        $output .= '<a href="' . route('medicineTraders.show', base64_encode(($profile->id * 123456789) / 12098)) . '" class="dropdown-item px-2">
                         <span style="width:50px;float:left;margin-right:10px;"><img src="' . asset('images/logos/'. $profile->avatar) . '" width="100%" alt="Image not found"></span>
                         <span style="width:calc(100% - 60px);float:left;">
                             <h5 class="fw-700">' . $profile->name . '</h5>

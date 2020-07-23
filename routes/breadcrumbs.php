@@ -86,6 +86,30 @@ Breadcrumbs::for('edit_fertilizer_traders', function($trail, $trader) {
     $trail->push('Edit Fertilizer Trader', route('fertilizerTraders.edit', base64_encode(($trader->id * 123456789) / 12098)));
 });
 
+// Home >> Medicine Traders
+Breadcrumbs::for('medicine_traders', function($trail) {
+    $trail->parent('home');
+    $trail->push('Medicine Traders', route('medicineTraders.index'));
+});
+
+// Home >> Medicine Traders >> Create Medicine Trader
+Breadcrumbs::for('create_medicine_traders', function($trail) {
+    $trail->parent('medicine_traders');
+    $trail->push('Create Medicine Trader', route('medicineTraders.create'));
+});
+
+// Home >> Medicine Traders >> View Medicine Trader
+Breadcrumbs::for('view_medicine_traders', function($trail, $trader) {
+    $trail->parent('medicine_traders');
+    $trail->push($trader->name, route('medicineTraders.show', base64_encode(($trader->id * 123456789) / 12098)));
+});
+
+// Home >> Medicine Traders >> Edit Medicine Trader
+Breadcrumbs::for('edit_medicine_traders', function($trail, $trader) {
+    $trail->parent('medicine_traders');
+    $trail->push('Edit Medicine Trader', route('medicineTraders.edit', base64_encode(($trader->id * 123456789) / 12098)));
+});
+
 // Home >> Roznamcha >> Account Book
 Breadcrumbs::for('account_books', function($trail) {
     $trail->parent('roznamcha');
@@ -264,6 +288,30 @@ Breadcrumbs::for('view_fertilizer_stocks', function($trail, $stock) {
 Breadcrumbs::for('edit_fertilizer_stocks', function($trail, $stock) {
     $trail->parent('fertilizer_stocks');
     $trail->push('Edit Fertilizer Stock', route('fertilizerStock.edit', base64_encode(($stock->id * 123456789) / 12098)));
+});
+
+// Home >> Stock >> Medicine Stock
+Breadcrumbs::for('medicine_stocks', function($trail) {
+    $trail->parent('stock');
+    $trail->push('Medicine Stock', route('medicineStock.index'));
+});
+
+// Home >> Medicine Trader >> { Medicine Trader } >> Add Medicine Stock
+Breadcrumbs::for('create_medicine_stocks', function($trail, $trader) {
+    $trail->parent('view_medicine_traders', $trader);
+    $trail->push('Add Medicine Trader', route('medicineStock.create', base64_encode(($trader->id * 123456789) / 12098)));
+});
+
+// Home >> Stock >> Medicine Stock >> View Medicine Stock
+Breadcrumbs::for('view_medicine_stocks', function($trail, $stock) {
+    $trail->parent('medicine_stocks');
+    $trail->push('View Medicine Stock', route('medicineStock.show', base64_encode(($stock->id * 123456789) / 12098)));
+});
+
+// Home >> Stock >> Medicine Stock >> Edit Medicine Stock
+Breadcrumbs::for('edit_medicine_stocks', function($trail, $stock) {
+    $trail->parent('medicine_stocks');
+    $trail->push('Edit Medicine Stock', route('medicineStock.edit', base64_encode(($stock->id * 123456789) / 12098)));
 });
 
 // Home >> Stock >> Wheat Stock

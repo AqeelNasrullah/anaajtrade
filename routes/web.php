@@ -69,6 +69,17 @@ Route::delete('dashboard/fertilizer-trader/{id}', 'FertilizerTraderController@de
 
 Route::get('dashboard/fertilizer-traders/search', 'FertilizerTraderController@searchFertilizerTraders')->name('fertilizerTraders.searchFertilizerTrader');
 
+// Medicine Traders Routes
+Route::get('dashboard/medicine-traders', 'MedicineTraderController@index')->name('medicineTraders.index');
+Route::get('dashboard/medicine-trader/create', 'MedicineTraderController@create')->name('medicineTraders.create');
+Route::post('dashboard/medicine-trader/create', 'MedicineTraderController@store')->name('medicineTraders.store');
+Route::get('dashboard/medicine-trader/{id}', 'MedicineTraderController@show')->name('medicineTraders.show');
+Route::get('dashboard/medicine-trader/{id}/edit', 'MedicineTraderController@edit')->name('medicineTraders.edit');
+Route::put('dashboard/medicine-trader/{id}/edit', 'MedicineTraderController@update')->name('medicineTraders.update');
+Route::delete('dashboard/medicine-trader/{id}', 'MedicineTraderController@destroy')->name('medicineTraders.destroy');
+
+Route::get('dashboard/medicine-traders/search', 'MedicineTraderController@searchMedicineTraders')->name('medicineTraders.searchMedicineTrader');
+
 // Account Book Routes
 Route::get('dashboard/roznamcha/account-book', 'AccountBookController@index')->name('accountBook.index');
 Route::get('dashboard/customer/{id}/roznamcha/account-book/create', 'AccountBookController@create')->name('accountBook.create');
@@ -110,6 +121,18 @@ Route::get('dashboard/roznamcha/fertilizer/{id}', 'FertilizerRecordController@sh
 Route::get('dashboard/roznamcha/fertilizer/{id}/edit', 'FertilizerRecordController@edit')->name('fertilizerRecord.edit');
 Route::put('dashboard/roznamcha/fertilizer/{id}/edit', 'FertilizerRecordController@update')->name('fertilizerRecord.update');
 Route::delete('dashboard/roznamcha/fertilizer/{id}', 'FertilizerRecordController@destroy')->name('fertilizerRecord.destroy');
+
+// Medicine Stock Routes
+Route::get('dashboard/stock/medicine', 'MedicineStockController@index')->name('medicineStock.index');
+Route::get('dashboard/medicine-trader/{id}/create', 'MedicineStockController@create')->name('medicineStock.create');
+Route::post('dashboard/medicine-trader/{id}/create', 'MedicineStockController@store')->name('medicineStock.store');
+Route::get('dashboard/stock/medicine/{id}', 'MedicineStockController@show')->name('medicineStock.show');
+Route::get('dashboard/stock/medicine/{id}/edit', 'MedicineStockController@edit')->name('medicineStock.edit');
+Route::put('dashboard/stock/medicine/{id}/edit', 'MedicineStockController@update')->name('medicineStock.update');
+Route::delete('dashboard/stock/medicine/{id}', 'MedicineStockController@destroy')->name('medicineStock.destroy');
+
+Route::post('dashboard/stock/medicine/search-trader', 'MedicineStockSearchController@searchMedicineTrader')->name('medicineStockSearch.searchMedicineTrader');
+Route::get('dashboard/medicine-traders/list', 'MedicineStockSearchController@tradersList')->name('medicineStockSearch.tradersList');
 
 // Wheat Stock Routes
 Route::get('dashboard/stock/wheat', 'WheatStockController@index')->name('wheatStock.index');

@@ -1,25 +1,25 @@
 @extends('master.dashboard-master')
 
 @section('title')
-    <title>Fertilizer Stock - {{ config('app.name') }}</title>
+    <title>Medicine Stock - {{ config('app.name') }}</title>
 @endsection
 
 @section('breadcrumbs')
-    {{ Breadcrumbs::render('fertilizer_stocks') }}
+    {{ Breadcrumbs::render('medicine_stocks') }}
 @endsection
 
 @section('content')
     <section class="container-fluid py-3">
         <div class="fertilizer-trader-search mb-3" id="search-trader">
-            <h1 class="text-center text-success mb-3 fw-900">Search Fertilizer Trader / <span class="text-urdu-kasheeda">کھاد کے تاجر تلاش کریں</span></h1>
+            <h1 class="text-center text-success mb-3 fw-900">Search Medicine Trader / <span class="text-urdu-kasheeda">ادویات کے تاجر تلاش کریں</span></h1>
             @include('components.error')
-            <form action="{{ route('fertilizerStockSearch.searchFertilizerTrader') }}" method="post">
+            <form action="{{ route('medicineStockSearch.searchMedicineTrader') }}" method="post">
                 @csrf
                 <div class="row">
                     <div class="col-md-3 offset-md-2">
                         <div class="dropdown">
                             <input type="text" name="name" id="trader-name" placeholder="Name" class="form-control" data-toggle="dropdown">
-                            <ul class="dropdown-menu d-none" id="fertilizer-traders">
+                            <ul class="dropdown-menu d-none" id="medicine-traders">
                             </ul>
                         </div>
                     </div>
@@ -49,7 +49,7 @@
                                 <td>{{ $trader->name }}</td>
                                 <td>{{ $trader->phone_number }}</td>
                                 <td>{{ $trader->address }}</td>
-                                <td><a href="{{ route('fertilizerTraders.show', base64_encode(($trader->id * 123456789) / 12098)) }}">View</a></td>
+                                <td><a href="{{ route('medicineTraders.show', base64_encode(($trader->id * 123456789) / 12098)) }}">View</a></td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -59,14 +59,14 @@
         </div>
 
         <div class="stock-content">
-            <h1 class="text-center fw-900 mb-3 text-success">Fertilizer Stock / <span class="text-urdu-kasheeda">کھاد کا اسٹاک</span></h1>
+            <h1 class="text-center fw-900 mb-3 text-success">Medicine Stock / <span class="text-urdu-kasheeda">کھاد کا اسٹاک</span></h1>
 
             @include('components.success')
 
             <div>
                 <select id="fertilizer" class="form-control float-right" style="width: 175px;">
-                    <option value="0">Fertilizer Stock</option>
-                    <option value="1">Fertilizer Record</option>
+                    <option value="0">Medicine Stock</option>
+                    <option value="1">Medicine Record</option>
                 </select>
                 <br class="clear">
             </div>
@@ -78,11 +78,11 @@
                         <thead class="table-success">
                             <tr>
                                 <th style="width: 20%" class="align-middle">Trader / <span class="text-urdu-kasheeda">تاجر</span></th>
-                                <th style="width: 7%" class="align-middle">Type / <span class="text-urdu-kasheeda">قسم</span></th>
                                 <th style="width: 10%" class="align-middle">Quantity / <span class="text-urdu-kasheeda">مقدار</span></th>
-                                <th style="width: 15%" class="align-middle">Weight per sack / <span class="text-urdu-kasheeda">وزن فی بوری</span></th>
-                                <th style="width: 15%" class="align-middle">Price per sack / <span class="text-urdu-kasheeda">قیمت فی بوری</span></th>
-                                <th style="width: 13%" class="align-middle">Total Price / <span class="text-urdu-kasheeda">کل قیمت</span></th>
+                                <th style="width: 10%" class="align-middle">Price / <span class="text-urdu-kasheeda">قیمت</span></th>
+                                <th style="width: 10%" class="align-middle">Total Price / <span class="text-urdu-kasheeda">کل قیمت</span></th>
+                                <th style="width: 15%" class="align-middle">Medicine Name / <span class="text-urdu-kasheeda">دوائی کا نام</span></th>
+                                <th style="width: 15%" class="align-middle">Medicine Type / <span class="text-urdu-kasheeda">دوائی کی قسم</span></th>
                                 <th style="width: 10%" class="align-middle">Time / <span class="text-urdu-kasheeda">وقت</span></th>
                                 <th style="width: 10%" class="align-middle"></th>
                             </tr>
@@ -91,17 +91,17 @@
                             @forelse ($stocks as $stock)
                                 @if ($date->date == date('Y-m-d', strtotime($stock->created_at)))
                                     <tr>
-                                        <td class="align-middle"><a href="">{{ $stock->fertilizerTrader->name }}</a></td>
-                                        <td class="align-middle">{{ $stock->type }}</td>
-                                        <td class="align-middle">{{ $stock->quantity }} Sacks</td>
-                                        <td class="align-middle">{{ $stock->weight }} Kgs</td>
+                                        <td class="align-middle"><a href="">{{ $stock->medicineTrader->name }}</a></td>
+                                        <td class="align-middle">{{ $stock->quantity }}</td>
                                         <td class="align-middle">Rs {{ $stock->price }} /-</td>
                                         <td class="align-middle">Rs {{ $stock->quantity * $stock->price }} /-</td>
+                                        <td class="align-middle">{{ $stock->medicinetype->name }}</td>
+                                        <td class="align-middle">{{ $stock->medicinetype->type }}</td>
                                         <td class="align-middle">{{ date('h:i A', strtotime($stock->created_at)) }}</td>
                                         <td class="align-middle">
-                                            <a href="{{ route('fertilizerStock.show', base64_encode(($stock->id * 123456789) / 12098)) }}" class="d-inline">View</a>
+                                            <a href="{{ route('medicineStock.show', base64_encode(($stock->id * 123456789) / 12098)) }}" class="d-inline">View</a>
                                             <p class="d-inline mb-0"> | </p>
-                                            <a href="{{ route('fertilizerStock.edit', base64_encode(($stock->id * 123456789) / 12098)) }}" class="d-inline">Edit</a>
+                                            <a href="{{ route('medicineStock.edit', base64_encode(($stock->id * 123456789) / 12098)) }}" class="d-inline">Edit</a>
                                         </td>
                                     </tr>
                                 @endif
@@ -132,16 +132,16 @@
         $(document).ready(function() {
             $('#search-trader').on('keyup', '#trader-name', function() {
                 var name = $(this).val();
-                $.get("{{ route('fertilizerStockSearch.tradersList') }}", {name:name}, function(data) {
-                    $('#fertilizer-traders').removeClass('d-none');
-                    $('#fertilizer-traders').html(data.list);
+                $.get("{{ route('medicineStockSearch.tradersList') }}", {name:name}, function(data) {
+                    $('#medicine-traders').removeClass('d-none');
+                    $('#medicine-traders').html(data.list);
                 }, 'json');
             });
 
             $('#fertilizer').change(function() {
                 var inte = $(this).val();
                 if(inte == 0) {
-                    window.location.href = "{{ route('fertilizerStock.index') }}";
+                    window.location.href = "{{ route('medicineStock.index') }}";
                 } else if (inte == 1) {
                     window.location.href = "{{ route('fertilizerRecord.index') }}";
                 }

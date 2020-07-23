@@ -15,6 +15,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-3 p-3">
+                    <a href="" class="text-light">
+                        <div class="bg-success p-3" style="border-radius: 5px;">
+                            <h1 class="text-center mb-3"><i class="fas fa-chart-bar"></i></h1>
+                            <h4 class="text-center">Statistics <br> <span class="text-urdu-kasheeda">اعداد و شمار</span></h4>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3 p-3">
                     <a href="{{ route('dashboard.roznamcha') }}" class="text-light">
                         <div class="bg-success p-3" style="border-radius: 5px;">
                             <h1 class="text-center mb-3"><i class="fas fa-address-book"></i></h1>
@@ -27,14 +35,6 @@
                         <div class="bg-success p-3" style="border-radius: 5px;">
                             <h1 class="text-center mb-3"><i class="fas fa-database"></i></h1>
                             <h4 class="text-center">Stock <br> <span class="text-urdu-kasheeda">اسٹاک</span></h4>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-3 p-3">
-                    <a href="" class="text-light">
-                        <div class="bg-success p-3" style="border-radius: 5px;">
-                            <h1 class="text-center mb-3"><i class="fas fa-chart-bar"></i></h1>
-                            <h4 class="text-center">Statistics <br> <span class="text-urdu-kasheeda">اعداد و شمار</span></h4>
                         </div>
                     </a>
                 </div>
@@ -63,7 +63,7 @@
                     </a>
                 </div>
                 <div class="col-md-3 p-3">
-                    <a href="" class="text-light">
+                    <a href="{{ route('medicineTraders.index') }}" class="text-light">
                         <div class="bg-success p-3" style="border-radius: 5px;">
                             <h1 class="text-center mb-3"><i class="fas fa-file-prescription"></i></h1>
                             <h4 class="text-center">Medicine Traders <br> <span class="text-urdu-kasheeda">ادویات کے تاجر</span></h4>
