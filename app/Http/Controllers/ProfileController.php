@@ -123,12 +123,14 @@ class ProfileController extends Controller
             $account_books = Auth::user()->accountBooks()->where('profile_id', $d_id)->latest()->get();
             $others = Auth::user()->others()->where('profile_id', $d_id)->latest()->get();
             $fertilizers = Auth::user()->fertilizerRecords()->where('profile_id', $d_id)->get();
+            $medicines = Auth::user()->medicineRecords()->where('profile_id', $d_id)->get();
 
             if ($profile) {
                 return view('dashboard.customers.show', [
                     'profile' => $profile, 'oil_records' => $oil_records, 'wheat_stocks' => $wheat_stocks,
                     'wheat_records' => $wheat_records, 'rice_stocks' => $rice_stocks, 'rice_records' => $rice_records,
-                    'account_books' => $account_books, 'others' => $others, 'fertilizers' => $fertilizers
+                    'account_books' => $account_books, 'others' => $others, 'fertilizers' => $fertilizers,
+                    'medicines' => $medicines
                     ]);
             } else {
                 return redirect()->route('profile.index');

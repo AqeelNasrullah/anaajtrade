@@ -35,7 +35,7 @@
                                 <a href="{{ route('accountBook.create', base64_encode(($profile->id * 123456789) / 12098)) }}" class="dropdown-item">Account Book / <span class="text-urdu-kasheeda">کھاتہ</span></a>
                                 <a href="{{ route('oilRecord.fillingStations', base64_encode(($profile->id * 123456789) / 12098)) }}" class="dropdown-item">Oil / <span class="text-urdu-kasheeda">تیل</span></a>
                                 <a href="{{ route('fertilizerRecord.create', base64_encode(($profile->id * 123456789) / 12098)) }}" class="dropdown-item">Fertilizer / <span class="text-urdu-kasheeda">کھاد</span></a>
-                                <a href="" class="dropdown-item">Agricultural Medicine / <span class="text-urdu-kasheeda">زرعی ادویات</span></a>
+                                <a href="{{ route('medicineRecord.create', base64_encode(($profile->id * 123456789) / 12098)) }}" class="dropdown-item">Agricultural Medicine / <span class="text-urdu-kasheeda">زرعی ادویات</span></a>
                                 <a href="{{ route('wheatRecord.create', base64_encode(($profile->id * 123456789) / 12098)) }}" class="dropdown-item">Wheat / <span class="text-urdu-kasheeda">گندم</span></a>
                                 <a href="{{ route('riceRecord.create', base64_encode(($profile->id * 123456789) / 12098)) }}" class="dropdown-item">Rice / <span class="text-urdu-kasheeda">چاول</span></a>
                                 <a href="{{ route('other.create', base64_encode(($profile->id * 123456789) / 12098)) }}" class="dropdown-item">Others / <span class="text-urdu-kasheeda">دیگر اشیاء</span></a>
@@ -114,42 +114,76 @@
                             </table>
                         </div>
                     </section>
-                    <section>
-                        <section id="fertilizer-records-section">
-                            <h3 class="text-success fw-700 mb-3">Fertilizer Records / <span class="text-urdu-kasheeda">کھاد کا ریکارڈ</span></h3>
-                            <div class="table-responsive">
-                                <table class="table table-striped" id="fertilizer-records-table">
-                                    <thead class="table-success">
-                                        <tr>
-                                            <th class="align-middle">Quantity / <span class="text-urdu-kasheeda">مقدار</span></th>
-                                            <th class="align-middle">Weight per sack / <span class="text-urdu-kasheeda">وزن فی بوری</span></th>
-                                            <th class="align-middle">Price / <span class="text-urdu-kasheeda">قیمت</span></th>
-                                            <th class="align-middle">Total Price / <span class="text-urdu-kasheeda">کل قیمت</span></th>
-                                            <th class="align-middle">ٖFertilizer Type / <span class="text-urdu-kasheeda">کھاد کی قسم</span></th>
-                                            <th class="align-middle">Date &amp; Time / <span class="text-urdu-kasheeda">تاریخ اور وقت</span></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @if ($fertilizers->count() > 0)
-                                            @foreach ($fertilizers as $fertilizer)
-                                                <tr>
-                                                    <td class="align-middle">{{ $fertilizer->quantity }} Sacks</td>
-                                                    <td class="align-middle">{{ $fertilizer->weight }} Kgs</td>
-                                                    <td class="align-middle">Rs {{ $fertilizer->paid }} /-</td>
-                                                    <td class="align-middle">Rs {{ $fertilizer->quantity * $fertilizer->paid }} /-</td>
-                                                    <td class="align-middle">{{ $fertilizer->type }}</td>
-                                                    <td class="align-middle">{{ date('d-F-Y h:i A', strtotime($fertilizer->created_at)) }}</td>
-                                                </tr>
-                                            @endforeach
-                                        @else
+                    <section id="fertilizer-records-section">
+                        <h3 class="text-success fw-700 mb-3">Fertilizer Records / <span class="text-urdu-kasheeda">کھاد کا ریکارڈ</span></h3>
+                        <div class="table-responsive">
+                            <table class="table table-striped" id="fertilizer-records-table">
+                                <thead class="table-success">
+                                    <tr>
+                                        <th class="align-middle">Quantity / <span class="text-urdu-kasheeda">مقدار</span></th>
+                                        <th class="align-middle">Weight per sack / <span class="text-urdu-kasheeda">وزن فی بوری</span></th>
+                                        <th class="align-middle">Price / <span class="text-urdu-kasheeda">قیمت</span></th>
+                                        <th class="align-middle">Total Price / <span class="text-urdu-kasheeda">کل قیمت</span></th>
+                                        <th class="align-middle">ٖFertilizer Type / <span class="text-urdu-kasheeda">کھاد کی قسم</span></th>
+                                        <th class="align-middle">Date &amp; Time / <span class="text-urdu-kasheeda">تاریخ اور وقت</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if ($fertilizers->count() > 0)
+                                        @foreach ($fertilizers as $fertilizer)
                                             <tr>
-                                                <td colspan="5" class="text-center font-italic">No record to show.</td>
+                                                <td class="align-middle">{{ $fertilizer->quantity }} Sacks</td>
+                                                <td class="align-middle">{{ $fertilizer->weight }} Kgs</td>
+                                                <td class="align-middle">Rs {{ $fertilizer->paid }} /-</td>
+                                                <td class="align-middle">Rs {{ $fertilizer->quantity * $fertilizer->paid }} /-</td>
+                                                <td class="align-middle">{{ $fertilizer->type }}</td>
+                                                <td class="align-middle">{{ date('d-F-Y h:i A', strtotime($fertilizer->created_at)) }}</td>
                                             </tr>
-                                        @endif
-                                    </tbody>
-                                </table>
-                            </div>
-                        </section>
+                                        @endforeach
+                                    @else
+                                        <tr>
+                                            <td colspan="5" class="text-center font-italic">No record to show.</td>
+                                        </tr>
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                    <section id="fertilizer-records-section">
+                        <h3 class="text-success fw-700 mb-3">Medicine Records / <span class="text-urdu-kasheeda">ادویات کا ریکارڈ</span></h3>
+                        <div class="table-responsive">
+                            <table class="table table-striped" id="medicine-records-table">
+                                <thead class="table-success">
+                                    <tr>
+                                        <th class="align-middle">Medicine / <span class="text-urdu-kasheeda">دوائی</span></th>
+                                        <th class="align-middle">Quantity / <span class="text-urdu-kasheeda">مقدار</span></th>
+                                        <th class="align-middle">Price / <span class="text-urdu-kasheeda">قیمت</span></th>
+                                        <th class="align-middle">Total Price / <span class="text-urdu-kasheeda">کل قیمت</span></th>
+                                        <th class="align-middle">ٖMedicine Type / <span class="text-urdu-kasheeda">دوائی کی قسم</span></th>
+                                        <th class="align-middle">Date &amp; Time / <span class="text-urdu-kasheeda">تاریخ اور وقت</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if ($medicines->count() > 0)
+                                        @foreach ($medicines as $medicine)
+                                            <tr>
+                                                <td class="align-middle">{{ $medicine->medicineType->name }}</td>
+                                                <td class="align-middle">{{ $medicine->quantity }}</td>
+                                                <td class="align-middle">Rs {{ $medicine->paid }} /-</td>
+                                                <td class="align-middle">Rs {{ $medicine->quantity * $medicine->paid }} /-</td>
+                                                <td class="align-middle">{{ $medicine->medicineType->type }}</td>
+                                                <td class="align-middle">{{ date('d-F-Y h:i A', strtotime($medicine->created_at)) }}</td>
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        <tr>
+                                            <td colspan="5" class="text-center font-italic">No record to show.</td>
+                                        </tr>
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
                     <section id="wheat-stock-section">
                         <h3 class="text-success fw-700 mb-3">Wheat Stocks / <span class="text-urdu-kasheeda">گندم کا اسٹاک</span></h3>
                         <div class="table-responsive">

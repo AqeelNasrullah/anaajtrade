@@ -82,4 +82,10 @@ class Profile extends Model
     {
         return $this->hasMany(FertilizerRecord::class);
     }
+
+    // Profile has many medicine records
+    public function medicineRecords()
+    {
+        return $this->hasMany(MedicineRecord::class);
+    }
 }

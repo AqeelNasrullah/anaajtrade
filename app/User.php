@@ -112,6 +112,12 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(MedicineStock::class);
     }
 
+    // User has many medicine record
+    public function medicineRecords()
+    {
+        return $this->hasMany(MedicineRecord::class);
+    }
+
     /*---------------------------------------------------------------------------------------*/
 
     /**

@@ -5,6 +5,7 @@ use App\FertilizerRecord;
 use App\FertilizerStock;
 use App\FertilizerTrader;
 use App\FillingStation;
+use App\MedicineRecord;
 use App\MedicineStock;
 use App\MedicineTrader;
 use App\OilCompany;
@@ -64,6 +65,7 @@ class DatabaseSeeder extends Seeder
         //         $users->random(rand(1, $users->count()))->pluck('id')->toArray()
         //     );
         // });
-        factory(MedicineStock::class, 1500)->create();
+        // factory(MedicineStock::class, 1500)->create();
+        factory(MedicineRecord::class, 3500)->create();
     }
 }

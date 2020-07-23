@@ -59,7 +59,7 @@
         </div>
 
         <div class="stock-content">
-            <h1 class="text-center fw-900 mb-3 text-success">Medicine Stock / <span class="text-urdu-kasheeda">کھاد کا اسٹاک</span></h1>
+            <h1 class="text-center fw-900 mb-3 text-success">Medicine Stock / <span class="text-urdu-kasheeda">ادویات کا اسٹاک</span></h1>
 
             @include('components.success')
 
@@ -143,7 +143,7 @@
                 if(inte == 0) {
                     window.location.href = "{{ route('medicineStock.index') }}";
                 } else if (inte == 1) {
-                    window.location.href = "{{ route('fertilizerRecord.index') }}";
+                    window.location.href = "{{ route('medicineRecord.index') }}";
                 }
             });
         });

@@ -6,6 +6,9 @@ input, button, .btn, select, textarea, select {box-shadow:0px 0px !important;out
 .bg-green-light {background-color:rgba(50,100,50,1.00);} .close {box-shadow:0px 0px !important;border:0px !important;outline: none;}
 .fw-900 {font-weight:900;} .fw-700 {font-weight:700;} .fw-400 {font-weight:400;} .fw-300 {font-weight:300;} .close {outline:0 !important;}
 
+.alert-success {border-left: 5px solid green !important;}
+.alert-danger {border-left: 5px solid red !important;}
+
 .modal {background-color:rgba(0,0,0,0.75);padding-top:50px;}
 .modal-content {max-height:420px;overflow:auto;}
 .modal-content::-webkit-scrollbar { width: 5px; }

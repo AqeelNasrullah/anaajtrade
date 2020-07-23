@@ -20,4 +20,10 @@ class MedicineType extends Model
     {
         return $this->hasMany(MedicineStock::class);
     }
+
+    // Medicine type has many many medicine records
+    public function medicineRecords()
+    {
+        return $this->hasMany(MedicineRecord::class);
+    }
 }

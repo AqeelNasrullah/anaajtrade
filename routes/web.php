@@ -134,6 +134,15 @@ Route::delete('dashboard/stock/medicine/{id}', 'MedicineStockController@destroy'
 Route::post('dashboard/stock/medicine/search-trader', 'MedicineStockSearchController@searchMedicineTrader')->name('medicineStockSearch.searchMedicineTrader');
 Route::get('dashboard/medicine-traders/list', 'MedicineStockSearchController@tradersList')->name('medicineStockSearch.tradersList');
 
+// Fertilizer Record Routes
+Route::get('dashboard/roznamcha/medicine', 'MedicineRecordController@index')->name('medicineRecord.index');
+Route::get('dashboard/customer/{id}/roznamcha/medicine/create', 'MedicineRecordController@create')->name('medicineRecord.create');
+Route::post('dashboard/customer/{id}/roznamcha/medicine/create', 'MedicineRecordController@store')->name('medicineRecord.store');
+Route::get('dashboard/roznamcha/medicine/{id}', 'MedicineRecordController@show')->name('medicineRecord.show');
+Route::get('dashboard/roznamcha/medicine/{id}/edit', 'MedicineRecordController@edit')->name('medicineRecord.edit');
+Route::put('dashboard/roznamcha/medicine/{id}/edit', 'MedicineRecordController@update')->name('medicineRecord.update');
+Route::delete('dashboard/roznamcha/medicine/{id}', 'MedicineRecordController@destroy')->name('medicineRecord.destroy');
+
 // Wheat Stock Routes
 Route::get('dashboard/stock/wheat', 'WheatStockController@index')->name('wheatStock.index');
 Route::get('dashboard/customer/{id}/stock/wheat/create', 'WheatStockController@create')->name('wheatStock.create');

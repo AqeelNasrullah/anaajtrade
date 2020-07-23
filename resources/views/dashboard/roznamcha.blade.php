@@ -41,7 +41,7 @@
                     </a>
                 </div>
                 <div class="col-md-4 px-3 mb-3">
-                    <a href="" class="text-light">
+                    <a href="{{ route('medicineRecord.index') }}" class="text-light">
                         <div class="bg-success px-2 py-4" style="border-radius: 5px;">
                             <h4 class="text-center fw-700">Agricultural Medicine<br><span class="text-urdu-kasheeda">زرعی ادویات</span></h4>
                         </div>

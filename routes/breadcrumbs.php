@@ -188,6 +188,30 @@ Breadcrumbs::for('edit_fertilizer_records', function($trail, $record) {
     $trail->push('Edit Fertilizer Record', route('fertilizerRecord.show', base64_encode(($record->id * 123456789) / 12098)));
 });
 
+// Home >> Roznamcha >> Fertilizer Record
+Breadcrumbs::for('medicine_records', function($trail) {
+    $trail->parent('roznamcha');
+    $trail->push('Medicine Records', route('medicineRecord.index'));
+});
+
+// Home >> Customer >> {User} >> Add Fertilizer Record
+Breadcrumbs::for('add_medicine_records', function($trail, $profile) {
+    $trail->parent('view_customers', $profile);
+    $trail->push('Add Medicine Record', route('medicineRecord.create', base64_encode(($profile->id * 123456789) / 12098)));
+});
+
+// Home >> Roznamcha >> Fertilizer Record >> View Fertilizer Record
+Breadcrumbs::for('view_medicine_records', function($trail, $record) {
+    $trail->parent('medicine_records', $record);
+    $trail->push('View Medicine Record', route('medicineRecord.show', base64_encode(($record->id * 123456789) / 12098)));
+});
+
+// Home >> Roznamcha >> Fertilizer Record >> Edit Fertilizer Record
+Breadcrumbs::for('edit_medicine_records', function($trail, $record) {
+    $trail->parent('medicine_records', $record);
+    $trail->push('Edit Medicine Record', route('medicineRecord.show', base64_encode(($record->id * 123456789) / 12098)));
+});
+
 // Home >> Roznamcha >> Wheat Records
 Breadcrumbs::for('wheat_records', function($trail) {
     $trail->parent('roznamcha');
