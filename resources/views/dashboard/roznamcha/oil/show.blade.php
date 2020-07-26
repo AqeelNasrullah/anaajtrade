@@ -72,8 +72,8 @@
                 <hr>
                 <div class="row">
                     <p class="mb-1 col-md-6"><strong>Quantity:</strong> {{ $record->quantity }} Litres</p>
-                    <p class="mb-1 col-md-6"><strong>Price per Litre:</strong> {{ $record->price_per_litre != 0 ? 'Rs ' . $record->price_per_litre . '/-': '________________________'}}</p>
-                    <p class="mb-1 col-md-6"><strong>Total Price:</strong> {{ $record->price_per_litre != 0 ? 'Rs ' . ($record->price_per_litre * $record->quantity) . '/-': '________________________'}}</p>
+                    <p class="mb-1 col-md-6"><strong>Price per Litre:</strong> {{ $record->paid_per_litre != 0 ? 'Rs ' . $record->paid_per_litre . '/-': '________________________'}}</p>
+                    <p class="mb-1 col-md-6"><strong>Total Price:</strong> {{ $record->paid_per_litre != 0 ? 'Rs ' . ($record->paid_per_litre * $record->quantity) . '/-': '________________________'}}</p>
                     <p class="mb-1 col-md-6"><strong>Date &amp; Time:</strong> {{ date('d-F-Y h:i A', strtotime($record->created_at)) }}</p>
                     <p class="col-md-12"><strong>Signature:</strong></p>
                 </div>
@@ -112,8 +112,8 @@
                 <hr>
                 <div class="row">
                     <p class="mb-1 col-md-6"><strong>Quantity:</strong> {{ $record->quantity }} Litres</p>
-                    <p class="mb-1 col-md-6"><strong>Price per Litre:</strong> {{ $record->price_per_litre != 0 ? 'Rs ' . $record->price_per_litre . '/-': '________________________'}}</p>
-                    <p class="mb-1 col-md-6"><strong>Total Price:</strong> {{ $record->price_per_litre != 0 ? 'Rs ' . ($record->price_per_litre * $record->quantity) . '/-': '________________________'}}</p>
+                    <p class="mb-1 col-md-6"><strong>Price per Litre:</strong> {{ $record->paid_per_litre != 0 ? 'Rs ' . $record->paid_per_litre . '/-': '________________________'}}</p>
+                    <p class="mb-1 col-md-6"><strong>Total Price:</strong> {{ $record->paid_per_litre != 0 ? 'Rs ' . ($record->paid_per_litre * $record->quantity) . '/-': '________________________'}}</p>
                     <p class="mb-1 col-md-6"><strong>Date &amp; Time:</strong> {{ date('d-F-Y h:i A', strtotime($record->created_at)) }}</p>
                     <p class="col-md-12"><strong>Signature:</strong></p>
                 </div>
@@ -152,8 +152,8 @@
                 <hr>
                 <div class="row">
                     <p class="mb-1 col-md-6"><strong>Quantity:</strong> {{ $record->quantity }} Litres</p>
-                    <p class="mb-1 col-md-6"><strong>Price per Litre:</strong> {{ $record->price_per_litre != 0 ? 'Rs ' . $record->price_per_litre . '/-': '________________________'}}</p>
-                    <p class="mb-1 col-md-6"><strong>Total Price:</strong> {{ $record->price_per_litre != 0 ? 'Rs ' . ($record->price_per_litre * $record->quantity) . '/-': '________________________'}}</p>
+                    <p class="mb-1 col-md-6"><strong>Price per Litre:</strong> {{ $record->paid_per_litre != 0 ? 'Rs ' . $record->paid_per_litre . '/-': '________________________'}}</p>
+                    <p class="mb-1 col-md-6"><strong>Total Price:</strong> {{ $record->paid_per_litre != 0 ? 'Rs ' . ($record->paid_per_litre * $record->quantity) . '/-': '________________________'}}</p>
                     <p class="mb-1 col-md-6"><strong>Date &amp; Time:</strong> {{ date('d-F-Y h:i A', strtotime($record->created_at)) }}</p>
                     <p class="col-md-12"><strong>Signature:</strong></p>
                 </div>

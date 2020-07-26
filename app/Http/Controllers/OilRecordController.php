@@ -23,9 +23,20 @@ class OilRecordController extends Controller
      */
     public function index()
     {
+        $date = date('Y-m-d', time());
+
+        $oil = Auth::user()->oilRecords()->selectRaw('sum(quantity) as quantity')->where('created_at', '>', $date)->first();
+        $oil_litre = Auth::user()->oilRecords()->select('paid_per_litre as paid')->where('created_at', '>', $date)->latest()->first();
+        $oil_price = Auth::user()->oilRecords()->selectRaw('sum(quantity * price_per_litre) as amount')->where('created_at', '>', $date)->first();
+        $oil_paid = Auth::user()->oilRecords()->selectRaw('sum(quantity * paid_per_litre) as amount')->where('created_at', '>', $date)->first();
+        $oil_profit = $oil_paid->amount - $oil_price->amount;
+
+
         $oil_dates = Auth::user()->oilRecords()->selectRaw('date(created_at) as date')->distinct()->latest()->simplePaginate(7);
         $oil_records = Auth::user()->oilRecords()->latest()->get();
-        return view('dashboard.roznamcha.oil.index', ['dates' => $oil_dates,'oils' => $oil_records]);
+        return view('dashboard.roznamcha.oil.index', [
+            'dates' => $oil_dates,'oils' => $oil_records, 'oil' => $oil, 'oil_litre' => $oil_litre, 'oil_paid' => $oil_paid, 'oil_profit' => $oil_profit
+        ]);
     }
 
     public function fillingStations($id)

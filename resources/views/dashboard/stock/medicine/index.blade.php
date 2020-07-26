@@ -58,6 +58,14 @@
             @endif
         </div>
 
+        <div class="row">
+            @foreach ($stock_dets as $k => $v)
+                <div class="col-md-3">
+                    <h5 class="alert alert-success mb-3 text-center"><strong>{{ $k }} Stock:</strong> {{ $v }} Packs</h5>
+                </div>
+            @endforeach
+        </div>
+
         <div class="stock-content">
             <h1 class="text-center fw-900 mb-3 text-success">Medicine Stock / <span class="text-urdu-kasheeda">ادویات کا اسٹاک</span></h1>
 

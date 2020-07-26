@@ -103,7 +103,9 @@ class FertilizerTraderController extends Controller
             $s_id = (base64_decode($id) * 12098) / 123456789;
             $trader = FertilizerTrader::find($s_id);
             $stocks = Auth::user()->fertilizerStocks()->where('fertilizer_trader_id', $s_id)->latest()->get();
-            return view('dashboard.fertilizer-traders.show', ['trader' => $trader, 'stocks' => $stocks]);
+            return view('dashboard.fertilizer-traders.show', [
+                'trader' => $trader, 'stocks' => $stocks
+            ]);
         }
     }
 

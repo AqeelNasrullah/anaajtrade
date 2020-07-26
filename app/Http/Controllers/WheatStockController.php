@@ -22,9 +22,12 @@ class WheatStockController extends Controller
      */
     public function index()
     {
+        $price = $this->getPriceInfo();
         $dates = Auth::user()->wheatStocks()->selectRaw('date(created_at) as date')->distinct()->latest()->simplePaginate(7);
         $records = Auth::user()->wheatStocks()->latest()->get();
-        return view('dashboard.stock.wheat.index', ['dates' => $dates, 'records' => $records]);
+        return view('dashboard.stock.wheat.index', [
+            'dates' => $dates, 'records' => $records, 'price' => $price
+        ]);
     }
 
     /**
@@ -165,5 +168,18 @@ class WheatStockController extends Controller
                 return redirect()->route('wheatStock.index')->with('error', 'An error occured while deleting wheat stock.');
             }
         }
+    }
+
+    // Get Prices Info
+    public function getPriceInfo()
+    {
+        $price = [];
+        $date = date('Y-m-d', time());
+        $wheat_mann = Auth::user()->wheatStocks()->select('price')->latest()->first();
+        $wheat_price = Auth::user()->wheatStocks()->selectRaw('sum(((num_of_sack * weight_per_sack) / 40) * price) as amount')->where('created_at', '>', $date)->first();
+        $wheat_com = Auth::user()->wheatStocks()->selectRaw('sum((commission / 100) * (((num_of_sack * weight_per_sack) / 40) * price)) as amount')->where('created_at', '>', $date)->first();
+        $wheat_paid = $wheat_price->amount - $wheat_com->amount;
+        $price['mann'] = $wheat_mann->price; $price['paid'] = $wheat_paid; $price['com'] = $wheat_com->amount;
+        return $price;
     }
 }

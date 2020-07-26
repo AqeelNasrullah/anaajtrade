@@ -13,11 +13,16 @@
         <div class="row">
             <aside class="col-md-3">
                 @include('components.sidebar-profile')
+
+                <div class="mb-3">
+                @foreach ($stock_det as $k => $v)
+                    <h5 class="alert alert-success mt-3 {{ $v <= 0 ? 'd-none' : '' }}"><strong>{{ $k }} Stock:</strong> {{ $v }} Packs</h5>
+                @endforeach
+                </div>
             </aside>
             <main class="col-md-9">
-                <div style="max-width: 700px;margin: 0px auto;">
+                <div style="max-width: 700px;margin: 0px auto;position: sticky;top: 15px;">
                     <h1 class="text-center text-success fw-900 mb-3">Add Medicine Record / <span class="text-urdu-kasheeda">دوائی کا ریکارڈ شامل کریں</span></h1>
-                    @if ($remain > 0)
 
                     @include('components.error')
 
@@ -31,7 +36,7 @@
                                         <option value="">-- Select --</option>
                                         @if ($types->count() > 0)
                                             @foreach ($types as $type)
-                                                <option value="{{ $type->id . ' ' . $type->type }}" {{ old('medicine') == $type->id . ' ' . $type->type ? 'selected' : '' }}>{{ $type->name . ' (' . $type->type . ')' }}</option>
+                                                <option value="{{ $type->id . ' ' . $type->type }}" class="{{ $stock_det[$type->name] <= 0 ? 'd-none' : ''  }}" {{ old('medicine') == $type->id . ' ' . $type->type ? 'selected' : '' }}>{{ $type->name . ' (' . $type->type . ')' }}</option>
                                             @endforeach
                                         @endif
                                     </select>
@@ -62,9 +67,6 @@
                             <br class="clear">
                         </div>
                     </form>
-                    @else
-                    <p class="mb-0 alert alert-danger w-50 mx-auto text-center font-italic">Stock is empty.</p>
-                    @endif
                 </div>
             </main>
         </div>

@@ -22,9 +22,15 @@ class AccountBookController extends Controller
      */
     public function index()
     {
+        $date = date('Y-m-d', time());
+        $loan = Auth::user()->accountBooks()->selectRaw('sum(amount) as amount')->where('type', 'Loan')->where('created_at', '>', $date)->first();
+        $returned = Auth::user()->accountBooks()->selectRaw('sum(amount) as amount')->where('type', 'Returned')->where('created_at', '>', $date)->first();
+
         $dates = Auth::user()->accountBooks()->selectRaw('date(created_at) as date')->distinct()->latest()->simplePaginate(7);
         $account_books = Auth::user()->accountBooks()->latest()->get();
-        return view('dashboard.roznamcha.account-book.index', ['dates' => $dates ,'account_books' => $account_books]);
+        return view('dashboard.roznamcha.account-book.index', [
+            'dates' => $dates ,'account_books' => $account_books, 'loan' => $loan, 'returned' => $returned
+        ]);
     }
 
     /**

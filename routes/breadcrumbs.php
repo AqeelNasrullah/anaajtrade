@@ -8,6 +8,12 @@ Breadcrumbs::for('home', function($trail) {
     $trail->push('Home', route('dashboard.index'));
 });
 
+// Home >> Statistics
+Breadcrumbs::for('statistics', function($trail) {
+    $trail->parent('home');
+    $trail->push('Statistics', route('statistics.index'));
+});
+
 // Home >> Roznamcha
 Breadcrumbs::for('roznamcha', function($trail) {
     $trail->parent('home');

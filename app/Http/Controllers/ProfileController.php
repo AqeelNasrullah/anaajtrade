@@ -125,12 +125,26 @@ class ProfileController extends Controller
             $fertilizers = Auth::user()->fertilizerRecords()->where('profile_id', $d_id)->get();
             $medicines = Auth::user()->medicineRecords()->where('profile_id', $d_id)->get();
 
+            // Calculate Balance
+            $wheat_stock_price = Auth::user()->wheatStocks()->selectRaw('sum((((num_of_sack * weight_per_sack) / 40) * price) - (((commission / 100) * ((num_of_sack * weight_per_sack) / 40) * price))) as total')->where('profile_id', $d_id)->latest()->first();
+            $rice_stock_price = Auth::user()->riceStocks()->selectRaw('sum((((num_of_sack * weight_per_sack) / 40) * price) - (((commission / 100) * ((num_of_sack * weight_per_sack) / 40) * price))) as total')->where('profile_id', $d_id)->latest()->first();
+            $wheat_price = Auth::user()->wheatRecords()->selectRaw('sum((quantity / 40) * paid_per_mann) as total')->where('profile_id', $d_id)->latest()->first();
+            $rice_price = Auth::user()->riceRecords()->selectRaw('sum((quantity / 40) * paid_per_mann) as total')->where('profile_id', $d_id)->latest()->first();
+            $oil_price = Auth::user()->oilRecords()->selectRaw('sum(quantity * paid_per_litre) as total')->where('profile_id', $d_id)->latest()->first();
+            $loan_price = Auth::user()->accountBooks()->selectRaw('sum(amount) as total')->where('profile_id', $d_id)->where('type', 'Loan')->latest()->first();
+            $returned_price = Auth::user()->accountBooks()->selectRaw('sum(amount) as total')->where('profile_id', $d_id)->where('type', 'Returned')->latest()->first();
+            $other_price = Auth::user()->others()->selectRaw('sum(amount) as total')->where('profile_id', $d_id)->latest()->first();
+            $fertilizer_price = Auth::user()->fertilizerRecords()->selectRaw('sum(quantity * paid) as total')->where('profile_id', $d_id)->first();
+            $medicine_price = Auth::user()->medicineRecords()->selectRaw('sum(quantity * paid) as total')->where('profile_id', $d_id)->first();
+
+            $balance = ($wheat_price->total + $rice_price->total + $oil_price->total + $loan_price->total + $other_price->total + $fertilizer_price->total + $medicine_price->total) - ($rice_stock_price->total + $wheat_stock_price->total + $returned_price->total);
+            // $balance = $medicine_price->total;
             if ($profile) {
                 return view('dashboard.customers.show', [
                     'profile' => $profile, 'oil_records' => $oil_records, 'wheat_stocks' => $wheat_stocks,
                     'wheat_records' => $wheat_records, 'rice_stocks' => $rice_stocks, 'rice_records' => $rice_records,
                     'account_books' => $account_books, 'others' => $others, 'fertilizers' => $fertilizers,
-                    'medicines' => $medicines
+                    'medicines' => $medicines, 'balance' => $balance
                     ]);
             } else {
                 return redirect()->route('profile.index');

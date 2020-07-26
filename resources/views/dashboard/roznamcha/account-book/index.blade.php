@@ -12,6 +12,15 @@
     <section class="container-fluid py-3">
         @include('components.customer-search')
 
+        <div class="row">
+            <div class="col-md-3 offset-md-3 mb-3">
+                <h4 class="alert alert-success text-center"><strong>Loan:</strong> Rs {{ $loan->amount ?? 0 }} /-</h4>
+            </div>
+            <div class="col-md-3 mb-3">
+                <h4 class="alert alert-success text-center"><strong>Returned:</strong> Rs {{ $returned->amount ?? 0 }} /-</h4>
+            </div>
+        </div>
+
         <div class="pt-3">
             <h1 class="text-center fw-900 text-success mb-3">Account Book / <span class="text-urdu-kasheeda">کھاتہ</span></h1>
             @include('components.success')

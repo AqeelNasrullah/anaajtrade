@@ -12,6 +12,21 @@
     <section class="container-fluid py-3">
         @include('components.customer-search')
 
+        <div class="row">
+            <div class="col-md-3">
+                <h5 class="alert alert-success text-center mb-3"><strong>Sale:</strong> {{ $urea->quantity ?? 0 }} Sacks</h5>
+            </div>
+            <div class="col-md-3">
+                <h5 class="alert alert-success text-center mb-3"><strong>Price per sack:</strong> Rs {{ $urea_sack->paid ?? 0 }} /-</h5>
+            </div>
+            <div class="col-md-3">
+                <h5 class="alert alert-success text-center mb-3"><strong>Total Price:</strong> Rs {{ $urea_paid->amount ?? 0 }} /-</h5>
+            </div>
+            <div class="col-md-3">
+                <h5 class="alert alert-success text-center mb-3"><strong>Profit:</strong> Rs {{ $urea_profit ?? 0 }} /-</h5>
+            </div>
+        </div>
+
         <h1 class="text-center text-success fw-900 mb-3">Fertilizer Record / <span class="text-urdu-kasheeda">کھاد کا ریکارڈ</span></h1>
 
         @include('components.success')

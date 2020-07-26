@@ -17,9 +17,14 @@ class OtherController extends Controller
      */
     public function index()
     {
+        $date = date('Y-m-d', time());
+        $oth = Auth::user()->others()->selectRaw('sum(amount) as amount')->where('created_at', '>', $date)->first();
+
         $dates = Auth::user()->others()->selectRaw('date(created_at) as date')->distinct()->latest()->simplePaginate(7);
         $others = Auth::user()->others()->latest()->get();
-        return view('dashboard.roznamcha.others.index', ['dates' => $dates, 'others' => $others]);
+        return view('dashboard.roznamcha.others.index', [
+            'dates' => $dates, 'others' => $others, 'oth' => $oth
+        ]);
     }
 
     /**

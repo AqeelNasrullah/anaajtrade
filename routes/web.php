@@ -31,6 +31,9 @@ Route::get('dashboard', 'DashboardController@index')->name('dashboard.index');
 Route::get('dashboard/roznamcha', 'DashboardController@roznamcha')->name('dashboard.roznamcha');
 Route::get('dashboard/stock', 'DashboardController@stock')->name('dashboard.stock');
 
+// Statistics Routes
+Route::get('dashboard/statistics', 'StatisticsController@index')->name('statistics.index');
+
 // Customers Routes
 Route::get('dashboard/customers', 'ProfileController@index')->name('profile.index');
 Route::get('dashboard/customer/create', 'ProfileController@create')->name('profile.create');

@@ -22,9 +22,12 @@ class MedicineStockController extends Controller
      */
     public function index()
     {
+        $stock_dets = $this->getStockInfo();
         $dates = Auth::user()->medicineStocks()->selectRaw('date(created_at) as date')->distinct()->latest()->simplePaginate(7);
         $stocks = Auth::user()->medicineStocks()->latest()->get();
-        return view('dashboard.stock.medicine.index', ['dates' => $dates, 'stocks' => $stocks]);
+        return view('dashboard.stock.medicine.index', [
+            'dates' => $dates, 'stocks' => $stocks, 'stock_dets' => $stock_dets
+        ]);
     }
 
     /**
@@ -163,5 +166,18 @@ class MedicineStockController extends Controller
                 return back()->with('error', 'An error occured while deleting medicine stock.');
             }
         }
+    }
+
+    // Get Stock Info
+    public function getStockInfo()
+    {
+        $stock = [];
+        $types = MedicineType::all();
+        foreach ($types as $type) {
+            $med_stock[$type->name] = Auth::user()->medicineStocks()->selectRaw('sum(quantity) as quantity')->where('medicine_type_id', $type->id)->first();
+            $med_record[$type->name] = Auth::user()->medicineRecords()->selectRaw('sum(quantity) as quantity')->where('medicine_type_id', $type->id)->first();
+            $stock[$type->name] = $med_stock[$type->name]->quantity - $med_record[$type->name]->quantity;
+        }
+        return $stock;
     }
 }

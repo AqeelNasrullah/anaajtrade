@@ -13,11 +13,18 @@
         <div class="row">
             <aside class="col-md-3">
                 @include('components.sidebar-profile')
+                <div class="mb-3">
+                    @foreach ($stock as $k => $v)
+                        @foreach ($v as $l => $m)
+                            <h5 class="alert alert-success mt-3"><strong>{{ $k . ' (' .$l. ')' }}: </strong> {{ $m }} Kgs</h5>
+                        @endforeach
+                    @endforeach
+                </div>
             </aside>
             <main class="col-md-9">
                 <h1 class="text-center mb-3 text-success fw-900">Add Rice Record / <span class="text-urdu-kasheeda">چاول کا ریکارڈ شامل کریں</span></h1>
-                @if ($rem_stock > 0)
-                    <div style="max-width:700px;margin:0px auto;">
+
+                    <div style="max-width:700px;margin:0px auto;position: sticky; top: 15px;">
                         @include('components.error')
                         <form action="{{ route('riceRecord.store', base64_encode(($profile->id * 123456789) / 12098)) }}" method="post">
                             @csrf
@@ -73,11 +80,6 @@
                             </div>
                         </form>
                     </div>
-                @else
-                    <div class="alert alert-danger w-50 mx-auto">
-                        <h3 class="text-center font-italic">Stock is Empty.</h3>
-                    </div>
-                @endif
             </main>
         </div>
     </section>

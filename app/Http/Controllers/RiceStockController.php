@@ -22,9 +22,10 @@ class RiceStockController extends Controller
      */
     public function index()
     {
+        $stock = $this->getPriceInfo();
         $dates = Auth::user()->riceStocks()->selectRaw('date(created_at) as date')->distinct()->latest()->simplePaginate(7);
         $records = Auth::user()->riceStocks()->latest()->get();
-        return view('dashboard.stock.rice.index', ['dates' => $dates, 'records' => $records]);
+        return view('dashboard.stock.rice.index', ['dates' => $dates, 'records' => $records, 'stock' => $stock]);
     }
 
     /**
@@ -172,5 +173,18 @@ class RiceStockController extends Controller
                 return redirect()->route('riceStock.index')->with('error', 'An error occured while deleting rice stock.');
             }
         }
+    }
+
+    // Get Prices Info
+    public function getPriceInfo()
+    {
+        $price = [];
+        $date = date('Y-m-d', time());
+        $rice_mann = Auth::user()->riceStocks()->select('price')->latest()->first();
+        $rice_price = Auth::user()->riceStocks()->selectRaw('sum(((num_of_sack * weight_per_sack) / 40) * price) as amount')->where('created_at', '>', $date)->first();
+        $rice_com = Auth::user()->riceStocks()->selectRaw('sum((commission / 100) * (((num_of_sack * weight_per_sack) / 40) * price)) as amount')->where('created_at', '>', $date)->first();
+        $rice_paid = $rice_price->amount - $rice_com->amount;
+        $price['mann'] = $rice_mann->price; $price['paid'] = $rice_paid; $price['com'] = $rice_com->amount;
+        return $price;
     }
 }

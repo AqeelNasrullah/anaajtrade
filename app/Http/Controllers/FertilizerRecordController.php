@@ -20,9 +20,19 @@ class FertilizerRecordController extends Controller
      */
     public function index()
     {
+        $date = date('Y-m-d', time());
+        $urea = Auth::user()->fertilizerRecords()->selectRaw('sum(quantity) as quantity')->where('created_at', '>', $date)->first();
+        $urea_sack = Auth::user()->fertilizerRecords()->select('paid')->where('created_at', '>', $date)->latest()->first();
+        $urea_price = Auth::user()->fertilizerRecords()->selectRaw('sum(quantity * price) as amount')->where('created_at', '>', $date)->first();
+        $urea_paid = Auth::user()->fertilizerRecords()->selectRaw('sum(quantity * paid) as amount')->where('created_at', '>', $date)->first();
+        $urea_profit = $urea_paid->amount - $urea_price->amount;
+
         $dates = Auth::user()->fertilizerRecords()->selectRaw('date(created_at) as date')->distinct()->latest()->simplePaginate(7);
         $records = Auth::user()->fertilizerRecords()->latest()->get();
-        return view('dashboard.roznamcha.fertilizer.index', ['dates' => $dates, 'records' => $records]);
+        return view('dashboard.roznamcha.fertilizer.index', [
+            'dates' => $dates, 'records' => $records, 'urea' => $urea, 'urea_sack' => $urea_sack, 'urea_price' => $urea_price, 'urea_paid' => $urea_paid,
+            'urea_profit' => $urea_profit
+        ]);
     }
 
     /**
@@ -33,12 +43,13 @@ class FertilizerRecordController extends Controller
     public function create($id)
     {
         if ($id) {
+            $stock = $this->getStockInfo();
             $s_id = (base64_decode($id) * 12098) / 123456789;
             $profile = Profile::find($s_id);
             $stock_intake = Auth::user()->fertilizerStocks()->sum('quantity');
             $sale = Auth::user()->fertilizerRecords()->sum('quantity');
             $remain = $stock_intake - $sale;
-            return view('dashboard.roznamcha.fertilizer.create', ['profile' => $profile, 'remain' => $remain]);
+            return view('dashboard.roznamcha.fertilizer.create', ['profile' => $profile, 'stock' => $stock]);
         }
     }
 
@@ -165,5 +176,19 @@ class FertilizerRecordController extends Controller
                 return back()->with('error', 'An error occured while deleting fertilizer record.');
             }
         }
+    }
+
+    // Get Stock Info
+    public function getStockInfo()
+    {
+        $stock = [];
+        $urea_stock = Auth::user()->fertilizerStocks()->selectRaw('sum(quantity) as quantity')->where('type', 'Urea')->first();
+        $urea_record = Auth::user()->fertilizerRecords()->selectRaw('sum(quantity) as quantity')->where('type', 'Urea')->first();
+        $stock['urea'] = $urea_stock->quantity - $urea_record->quantity;
+
+        $dap_stock = Auth::user()->fertilizerStocks()->selectRaw('sum(quantity) as quantity')->where('type', 'DAP')->first();
+        $dap_record = Auth::user()->fertilizerRecords()->selectRaw('sum(quantity) as quantity')->where('type', 'DAP')->first();
+        $stock['dap'] = $dap_stock->quantity - $dap_record->quantity;
+        return $stock;
     }
 }

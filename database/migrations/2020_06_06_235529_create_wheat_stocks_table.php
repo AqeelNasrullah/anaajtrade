@@ -24,7 +24,7 @@ class CreateWheatStocksTable extends Migration
             $table->integer('num_of_sack')->unsigned();
             $table->integer('weight_per_sack')->unsigned();
             $table->integer('price')->unsigned();
-            $table->integer('commission')->unsigned();
+            $table->float('commission')->unsigned();
             $table->string('category');
             $table->string('status')->nullable()->default('unpaid');
 

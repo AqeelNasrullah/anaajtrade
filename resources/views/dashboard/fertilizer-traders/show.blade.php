@@ -31,9 +31,9 @@
                 </div>
             </aside>
             <main class="col-md-9">
-                <div class="d-flex mb-3" style="justify-content: space-between;">
-                    <h4><strong>Stock: 3000 Sacks</strong></h4>
-                    <a href="{{ route('fertilizerStock.create', base64_encode(($trader->id * 123456789) / 12098)) }}" class="btn btn-success"><i class="fas fa-plus"></i> Add Fertilizer Stock</a>
+                <div class="mb-3">
+                    <a href="{{ route('fertilizerStock.create', base64_encode(($trader->id * 123456789) / 12098)) }}" class="float-right btn btn-success"><i class="fas fa-plus"></i> Add Fertilizer Stock</a>
+                    <br class="clear">
                 </div>
                 <h1 class="text-center text-success fw-900 mb-3">Fertilizer Stocks / <span class="text-urdu-kasheeda">کھاد کا اسٹاک</span></h1>
                 <div class="table-responsive">

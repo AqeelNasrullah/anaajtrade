@@ -57,7 +57,7 @@
 
                                     <ul class="dropdown-menu">
                                         <li><a href="{{ route('dashboard.index') }}" class="dropdown-item"><i class="fas fa-home"></i> Dashboard Home</a></li>
-                                        <li><a href="" class="dropdown-item"><i class="fas fa-chart-bar"></i> Statistics / <span class="text-urdu-kasheeda">اعداد و شمار</span></a></li>
+                                        <li><a href="{{ route('statistics.index') }}" class="dropdown-item"><i class="fas fa-chart-bar"></i> Statistics / <span class="text-urdu-kasheeda">اعداد و شمار</span></a></li>
                                         <li class="dropdown">
                                             <a href="{{ route('dashboard.roznamcha') }}" class="dropdown-item dropdown-toggle" data-toggle="dropdown"><i class="fas fa-address-book"></i> Roznamcha / <span class="text-urdu-kasheeda">روزنامچہ</span> &nbsp; <i class="fas fa-angle-right"></i></a>
                                             <ul class="dropdown-menu">

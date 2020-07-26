@@ -13,11 +13,17 @@
         <div class="row">
             <aside class="col-md-3">
                 @include('components.sidebar-profile')
+                <div class="mb-3">
+                    <h5 class="alert alert-success mt-3"><strong>Quality A:</strong> {{ $stock['A'] }} Kgs</h5>
+                    <h5 class="alert alert-success mt-3"><strong>Quality B:</strong> {{ $stock['B'] }} Kgs</h5>
+                    <h5 class="alert alert-success mt-3"><strong>Quality C:</strong> {{ $stock['C'] }} Kgs</h5>
+                    <h5 class="alert alert-success mt-3"><strong>Quality D:</strong> {{ $stock['D'] }} Kgs</h5>
+                </div>
             </aside>
             <main class="col-md-9">
                 <h1 class="text-center mb-3 text-success fw-900">Add Wheat Record / <span class="text-urdu-kasheeda">گندم کا ریکارڈ شامل کریں</span></h1>
-                @if ($rem_stock > 0)
-                    <div style="max-width:700px;margin:0px auto;">
+
+                    <div style="max-width:700px;margin:0px auto;position: sticky;top: 15px;">
                         @include('components.error')
                         <form action="{{ route('wheatRecord.store', base64_encode(($profile->id * 123456789) / 12098)) }}" method="post">
                             @csrf
@@ -45,10 +51,10 @@
                                         <label for="category">Category / <span class="text-urdu-kasheeda">گندم کی قسم</span> <span class="required">*</span></label>
                                         <select name="category" id="category" class="form-control">
                                             <option value="">-- Select --</option>
-                                            <option value="A" {{ old('category') == 'A' ? 'selected' : '' }}>A</option>
-                                            <option value="B" {{ old('category') == 'B' ? 'selected' : '' }}>B</option>
-                                            <option value="C" {{ old('category') == 'C' ? 'selected' : '' }}>C</option>
-                                            <option value="D" {{ old('category') == 'D' ? 'selected' : '' }}>D</option>
+                                            <option value="A" class="{{ $stock['A'] <= 0 ? 'd-none' : '' }}" {{ old('category') == 'A' ? 'selected' : '' }}>A</option>
+                                            <option value="B" class="{{ $stock['B'] <= 0 ? 'd-none' : '' }}" {{ old('category') == 'B' ? 'selected' : '' }}>B</option>
+                                            <option value="C" class="{{ $stock['C'] <= 0 ? 'd-none' : '' }}" {{ old('category') == 'C' ? 'selected' : '' }}>C</option>
+                                            <option value="D" class="{{ $stock['D'] <= 0 ? 'd-none' : '' }}" {{ old('category') == 'D' ? 'selected' : '' }}>D</option>
                                         </select>
                                     </div>
                                 </div>
@@ -60,11 +66,6 @@
                             </div>
                         </form>
                     </div>
-                @else
-                    <div class="alert alert-danger w-50 mx-auto">
-                        <h3 class="text-center font-italic">Stock is Empty.</h3>
-                    </div>
-                @endif
             </main>
         </div>
     </section>

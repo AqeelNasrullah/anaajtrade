@@ -22,9 +22,19 @@ class RiceRecordController extends Controller
      */
     public function index()
     {
+        $date = date('Y-m-d', time());
+        $rice = Auth::user()->riceRecords()->selectRaw('sum(quantity) as quantity')->where('created_at', '>', $date)->first();
+        $rice_mann = Auth::user()->riceRecords()->select('paid_per_mann as paid')->where('created_at', '>', $date)->latest()->first();
+        $rice_price = Auth::user()->riceRecords()->selectRaw('sum((quantity / 40) * price_per_mann) as amount')->where('created_at', '>', $date)->first();
+        $rice_paid = Auth::user()->riceRecords()->selectRaw('sum((quantity / 40) * paid_per_mann) as amount')->where('created_at', '>', $date)->first();
+        $rice_profit = $rice_paid->amount - $rice_price->amount;
+
         $dates = Auth::user()->riceRecords()->selectRaw('date(created_at) as date')->distinct()->latest()->simplePaginate(7);
         $records = Auth::user()->riceRecords()->latest()->get();
-        return view('dashboard.roznamcha.rice.index', ['dates' => $dates, 'records' => $records]);
+        return view('dashboard.roznamcha.rice.index', [
+            'dates' => $dates, 'records' => $records, 'rice' => $rice, 'rice_mann' => $rice_mann,
+            'rice_paid' => $rice_paid, 'rice_profit' => $rice_profit
+        ]);
     }
 
     /**
@@ -38,10 +48,8 @@ class RiceRecordController extends Controller
             $s_id = (base64_decode($id) * 12098) / 123456789;
             $profile = Profile::find($s_id);
             $types = RiceType::all();
-            $total_stock = Auth::user()->riceStocks()->selectRaw('sum(num_of_sack * weight_per_sack) as sum')->first();
-            $total_sale = Auth::user()->riceRecords()->sum('quantity');
-            $remaining_stock = $total_stock->sum - $total_sale;
-            return view('dashboard.roznamcha.rice.create', ['profile' => $profile, 'types' => $types, 'rem_stock' => $remaining_stock]);
+            $stock = $this->getStockInfo();
+            return view('dashboard.roznamcha.rice.create', ['profile' => $profile, 'types' => $types, 'stock' => $stock]);
         }
     }
 
@@ -171,5 +179,26 @@ class RiceRecordController extends Controller
                 return redirect()->route('riceRecord.index')->with('error', 'An error occur while deleting rice record.');
             }
         }
+    }
+
+    // Get Stock info
+    public function getStockInfo()
+    {
+        $rice = []; $qual = [];
+        $types = RiceType::all();
+        foreach ($types as $type) {
+            $stock_a = Auth::user()->riceStocks()->selectRaw('sum(num_of_sack * weight_per_sack) as quantity')->where('rice_type_id', $type->id)->where('category', 'A')->first();
+            $record_a = Auth::user()->riceRecords()->selectRaw('sum(quantity) as quantity')->where('rice_type_id', $type->id)->where('category', 'A')->first();
+            $stock_b = Auth::user()->riceStocks()->selectRaw('sum(num_of_sack * weight_per_sack) as quantity')->where('rice_type_id', $type->id)->where('category', 'B')->first();
+            $record_b = Auth::user()->riceRecords()->selectRaw('sum(quantity) as quantity')->where('rice_type_id', $type->id)->where('category', 'B')->first();
+            $stock_c = Auth::user()->riceStocks()->selectRaw('sum(num_of_sack * weight_per_sack) as quantity')->where('rice_type_id', $type->id)->where('category', 'C')->first();
+            $record_c = Auth::user()->riceRecords()->selectRaw('sum(quantity) as quantity')->where('rice_type_id', $type->id)->where('category', 'C')->first();
+            $stock_d = Auth::user()->riceStocks()->selectRaw('sum(num_of_sack * weight_per_sack) as quantity')->where('rice_type_id', $type->id)->where('category', 'D')->first();
+            $record_d = Auth::user()->riceRecords()->selectRaw('sum(quantity) as quantity')->where('rice_type_id', $type->id)->where('category', 'D')->first();
+            $qual['A'] = $stock_a->quantity - $record_a->quantity; $qual['B'] = $stock_b->quantity - $record_b->quantity;
+            $qual['C'] = $stock_c->quantity - $record_c->quantity; $qual['D'] = $stock_d->quantity - $record_d->quantity;
+            $rice[$type->name] = $qual;
+        }
+        return $rice;
     }
 }

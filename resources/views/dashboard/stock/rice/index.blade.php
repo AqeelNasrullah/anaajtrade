@@ -12,6 +12,18 @@
     <section class="container-fluid py-3">
         @include('components.customer-search')
 
+        <div class="row">
+            <div class="col-md-4">
+                <h5 class="alert alert-success mb-3 text-center"><strong>Price per 40Kg:</strong> Rs {{ $stock['mann'] }} /-</h5>
+            </div>
+            <div class="col-md-4">
+                <h5 class="alert alert-success mb-3 text-center"><strong>Total Price:</strong> Rs {{ (integer)$stock['paid'] }} /-</h5>
+            </div>
+            <div class="col-md-4">
+                <h5 class="alert alert-success mb-3 text-center"><strong>Profit:</strong> Rs {{ (integer)$stock['com'] }} /-</h5>
+            </div>
+        </div>
+
         <section>
             <h1 class="text-success text-center fw-900 mb-3">Rice Stock / <span class="text-urdu-kasheeda">چاول کا اسٹاک</span></h1>
 
@@ -58,7 +70,7 @@
                                                 <td class="align-middle">Rs {{ $record->price }} /-</td>
                                                 <td class="align-middle">Rs {{ (($record->num_of_sack * $record->weight_per_sack) / 40) * $record->price }} /-</td>
                                                 <td class="align-middle">{{ $record->commission }} %</td>
-                                                <td class="align-middle">Rs {{ ((($record->num_of_sack * $record->weight_per_sack) / 40) * $record->price) - ((2/100) * ((($record->num_of_sack * $record->weight_per_sack) / 40) * $record->price)) }} /-</td>
+                                                <td class="align-middle">Rs {{ ((($record->num_of_sack * $record->weight_per_sack) / 40) * $record->price) - (($record->commission/100) * ((($record->num_of_sack * $record->weight_per_sack) / 40) * $record->price)) }} /-</td>
                                                 <td class="align-middle">{{ $record->riceType->name }}</td>
                                                 <td class="align-middle">{{ $record->category }}</td>
                                                 <td class="align-middle">{{ date('h:i A', strtotime($record->created_at)) }}</td>

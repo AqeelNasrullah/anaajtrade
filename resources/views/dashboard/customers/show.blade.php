@@ -20,7 +20,7 @@
                     <div class="float-left">
                         <div class="card" style="width: 250px;">
                             <div class="card-header">
-                                <h3 class="text-center">Rs 2000 /-</h3>
+                                <h3 class="text-center">Rs {{ (integer)$balance ?? 0 }} /-</h3>
                             </div>
                             <div class="card-body p-2">
                                 <p class="text-center fw-700 mb-0">Balance</p>
@@ -28,7 +28,6 @@
                         </div>
                     </div>
                     <div class="float-right">
-                        <a href="{{ route('profile.index') }}" class="btn btn-outline-danger mr-2"><i class="fas fa-times"></i> Close</a>
                         <div class="dropdown float-right">
                             <a href="" class="btn btn-success dropdown-toggle" data-toggle="dropdown">Go for Transaction <i class="fas fa-angle-down"></i></a>
                             <ul class="dropdown-menu dropdown-menu-right">
@@ -48,6 +47,8 @@
                                 <a href="{{ route('riceStock.create', base64_encode(($profile->id * 123456789) / 12098)) }}" class="dropdown-item">Rice / <span class="text-urdu-kasheeda">چاول</span></a>
                             </ul>
                         </div>
+                        <a href="{{ route('profile.index') }}" class="btn btn-outline-danger float-right mr-2"><i class="fas fa-times"></i> Close</a><br>
+                        <h3 class="float-right mt-3 text-right text-urdu-kasheeda">اگر بیلنس کے ساتھ (-) ھوا تو کمیشن ایجنٹ (دوکاندار) خریدار کو رقم ادا کرنے کا پابند ہو گا۔</h3>
                     </div>
                     <br class="clear">
                 </section>
@@ -205,7 +206,7 @@
                                                 <td class="align-middle">{{ $stock->num_of_sack }}</td>
                                                 <td class="align-middle">{{ $stock->weight_per_sack }} Kgs</td>
                                                 <td class="align-middle">Rs {{ $stock->price }} /-</td>
-                                                <td class="align-middle">Rs {{ ((($stock->num_of_sack * $stock->weight_per_sack) / 40) * $stock->price) - ((2/100) * ((($stock->num_of_sack * $stock->weight_per_sack) / 40) * $stock->price)) }} /-</td>
+                                                <td class="align-middle">Rs {{ ((($stock->num_of_sack * $stock->weight_per_sack) / 40) * $stock->price) - (($stock->commission/100) * ((($stock->num_of_sack * $stock->weight_per_sack) / 40) * $stock->price)) }} /-</td>
                                                 <td class="align-middle">{{ $stock->category }}</td>
                                                 <td class="align-middle">{{ date('d-F-Y h:i A', strtotime($stock->created_at)) }}</td>
                                             </tr>
@@ -274,7 +275,7 @@
                                                 <td class="align-middle">{{ $stock->num_of_sack }}</td>
                                                 <td class="align-middle">{{ $stock->weight_per_sack }} Kgs</td>
                                                 <td class="align-middle">Rs {{ $stock->price }} /-</td>
-                                                <td class="align-middle">Rs {{ ((($stock->num_of_sack * $stock->weight_per_sack) / 40) * $stock->price) - ((2/100) * ((($stock->num_of_sack * $stock->weight_per_sack) / 40) * $stock->price)) }} /-</td>
+                                                <td class="align-middle">Rs {{ ((($stock->num_of_sack * $stock->weight_per_sack) / 40) * $stock->price) - (($stock->commission/100) * ((($stock->num_of_sack * $stock->weight_per_sack) / 40) * $stock->price)) }} /-</td>
                                                 <td class="align-middle">{{ $stock->riceType->name }}</td>
                                                 <td class="align-middle">{{ $stock->category }}</td>
                                                 <td class="align-middle">{{ date('d-F-Y h:i A', strtotime($stock->created_at)) }}</td>

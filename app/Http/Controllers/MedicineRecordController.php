@@ -18,9 +18,19 @@ class MedicineRecordController extends Controller
      */
     public function index()
     {
+        $date = date('Y-m-d', time());
+        $med = Auth::user()->medicineRecords()->selectRaw('sum(quantity) as quantity')->where('created_at', '>', $date)->first();
+        $med_pack = Auth::user()->medicineRecords()->select('paid')->where('created_at', '>', $date)->latest()->first();
+        $med_price = Auth::user()->medicineRecords()->selectRaw('sum(quantity * price) as amount')->where('created_at', '>', $date)->first();
+        $med_paid = Auth::user()->medicineRecords()->selectRaw('sum(quantity * paid) as amount')->where('created_at', '>', $date)->first();
+        $med_profit = $med_paid->amount - $med_price->amount;
+
         $dates = Auth::user()->medicineRecords()->selectRaw('date(created_at) as date')->distinct()->latest()->simplePaginate(7);
         $records = Auth::user()->medicineRecords()->latest()->get();
-        return view('dashboard.roznamcha.medicine.index', ['dates' => $dates, 'records' => $records]);
+        return view('dashboard.roznamcha.medicine.index', [
+            'dates' => $dates, 'records' => $records, 'med' => $med, 'med_pack' => $med_pack, 'med_paid' => $med_paid,
+            'med_profit' => $med_profit
+        ]);
     }
 
     /**
@@ -31,13 +41,13 @@ class MedicineRecordController extends Controller
     public function create($id)
     {
         if ($id) {
+            $stock_det = $this->getStockInfo();
             $s_id = (base64_decode($id) * 12098) / 123456789;
             $profile = Profile::find($s_id);
-            $stock_intake = Auth::user()->medicineStocks()->sum('quantity');
-            $sale = Auth::user()->medicineRecords()->sum('quantity');
-            $remain = $stock_intake - $sale;
             $types = MedicineType::all();
-            return view('dashboard.roznamcha.medicine.create', ['profile' => $profile, 'remain' => $remain, 'types' => $types]);
+            return view('dashboard.roznamcha.medicine.create', [
+                'profile' => $profile, 'stock_det' => $stock_det, 'types' => $types
+                ]);
         }
     }
 
@@ -165,5 +175,18 @@ class MedicineRecordController extends Controller
                 return back()->with('error', 'An error occured while deleting medicine record.');
             }
         }
+    }
+
+    // Get Stock Info
+    public function getStockInfo()
+    {
+        $stock = [];
+        $types = MedicineType::all();
+        foreach ($types as $type) {
+            $med_stock[$type->name] = Auth::user()->medicineStocks()->selectRaw('sum(quantity) as quantity')->where('medicine_type_id', $type->id)->first();
+            $med_record[$type->name] = Auth::user()->medicineRecords()->selectRaw('sum(quantity) as quantity')->where('medicine_type_id', $type->id)->first();
+            $stock[$type->name] = $med_stock[$type->name]->quantity - $med_record[$type->name]->quantity;
+        }
+        return $stock;
     }
 }

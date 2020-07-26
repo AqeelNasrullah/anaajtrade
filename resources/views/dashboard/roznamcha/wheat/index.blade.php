@@ -12,6 +12,21 @@
     <section class="container-fluid py-3">
         @include('components.customer-search')
 
+        <div class="row">
+            <div class="col-md-3">
+                <h4 class="alert alert-success mb-3 text-center"><strong>Sale:</strong> {{ $wheat->quantity ?? 0 }} Kgs</h4>
+            </div>
+            <div class="col-md-3">
+                <h4 class="alert alert-success mb-3 text-center"><strong>Price per 40Kg:</strong> Rs {{ $wheat_mann->paid ?? 0 }} /-</h4>
+            </div>
+            <div class="col-md-3">
+                <h4 class="alert alert-success mb-3 text-center"><strong>Total Price:</strong> Rs {{ (integer)$wheat_paid->amount ?? 0 }} /-</h4>
+            </div>
+            <div class="col-md-3">
+                <h4 class="alert alert-success mb-3 text-center"><strong>Profit:</strong> Rs {{ (integer)$wheat_profit ?? 0 }} /-</h4>
+            </div>
+        </div>
+
         <div>
             <h1 class="text-center text-success mb-3 fw-900">Wheat / <span class="text-urdu-kasheeda">گندم</span></h1>
             @include('components.error')

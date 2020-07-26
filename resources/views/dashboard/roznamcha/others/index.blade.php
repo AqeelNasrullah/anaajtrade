@@ -12,6 +12,12 @@
     <section class="container-fluid py-3">
         @include('components.customer-search')
 
+        <div class="row">
+            <div class="col-md-4 offset-md-4">
+                <h4 class="alert alert-success text-center mb-3"><strong>Total Amount:</strong> Rs {{ $oth->amount ?? 0 }} /-</h4>
+            </div>
+        </div>
+
         <div id="other-records">
             <h1 class="text-center text-success mb-3 fw-900">Others / <span class="text-urdu-kasheeda">دیگر اشیاء</span></h1>
             @include('components.success')

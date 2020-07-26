@@ -13,6 +13,21 @@
 
         @include('components.customer-search')
 
+        <div class="row">
+            <div class="col-md-3">
+                <h4 class="alert alert-success text-center mb-3"><strong>Total Sale:</strong> {{ $oil->quantity ?? 0 }} Litres</h4>
+            </div>
+            <div class="col-md-3">
+                <h4 class="alert alert-success text-center mb-3"><strong>ُPrice per litre:</strong> Rs {{ $oil_litre->paid ?? 0 }} /-</h4>
+            </div>
+            <div class="col-md-3">
+                <h4 class="alert alert-success text-center mb-3"><strong>Total Price:</strong> Rs {{ $oil_paid->amount ?? 0 }} /-</h4>
+            </div>
+            <div class="col-md-3">
+                <h4 class="alert alert-success text-center mb-3"><strong>Total Profit:</strong> Rs {{ $oil_profit ?? 0 }} /-</h4>
+            </div>
+        </div>
+
         <div class="oil-record">
             <h1 class="text-center text-success fw-900 mb-3">Oil Records / <span class="text-urdu-kasheeda">تیل کے ریکارڈ</span></h1>
 

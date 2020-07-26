@@ -13,11 +13,13 @@
         <div class="row">
             <aside class="col-md-3">
                 @include('components.sidebar-profile')
+                <h4 class="alert alert-success mt-3"><strong>Urea Stock:</strong> {{ $stock['urea'] ?? 0 }} Sacks</h4>
+                <h4 class="alert alert-success mt-3"><strong>DAP Stock:</strong> {{ $stock['dap'] ?? 0 }} Sacks</h4>
             </aside>
             <main class="col-md-9">
                 <div style="max-width: 700px;margin: 0px auto;">
                     <h1 class="text-center text-success fw-900 mb-3">Add Fertilizer Record / <span class="text-urdu-kasheeda">کھاد کا ریکارڈ شامل کریں</span></h1>
-                    @if ($remain > 0)
+                    @if ($stock['urea'] > 0 || $stock['dap'] > 0)
 
                     @include('components.error')
 
@@ -53,8 +55,8 @@
                                     <label for="type">Fertilizer Type / <span class="text-urdu-kasheeda">کھاد کی قسم</span> <span class="required">*</span>:</label>
                                     <select name="type" id="type" class="form-control">
                                         <option value="">-- Select --</option>
-                                        <option value="Urea" {{ old('type') == 'Urea' ? 'selected' : '' }}>Urea</option>
-                                        <option value="DAP" {{ old('type') == 'DAP' ? 'selected' : '' }}>DAP</option>
+                                        <option value="Urea" class="{{ $stock['urea'] <= 0 ? 'd-none' : '' }}" {{ old('type') == 'Urea' ? 'selected' : '' }}>Urea</option>
+                                        <option value="DAP" class="{{ $stock['dap'] <= 0 ? 'd-none' : '' }}" {{ old('type') == 'DAP' ? 'selected' : '' }}>DAP</option>
                                     </select>
                                 </div>
                             </div>

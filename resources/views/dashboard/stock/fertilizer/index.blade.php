@@ -58,6 +58,15 @@
             @endif
         </div>
 
+        <div class="row">
+            <div class="offset-md-2 col-md-4">
+                <h4 class="alert alert-success mb-3 text-center"><strong>Urea Stock: </strong>{{ $urea ?? 0 }} Sacks</h4>
+            </div>
+            <div class="col-md-4">
+                <h4 class="alert alert-success mb-3 text-center"><strong>DAP Stock: </strong>{{ $dap ?? 0 }} Sacks</h4>
+            </div>
+        </div>
+
         <div class="stock-content">
             <h1 class="text-center fw-900 mb-3 text-success">Fertilizer Stock / <span class="text-urdu-kasheeda">کھاد کا اسٹاک</span></h1>
 
