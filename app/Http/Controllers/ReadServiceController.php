@@ -24,20 +24,10 @@ class ReadServiceController extends Controller
         return ProfileResource::collection(auth()->guard('api')->user()->manyProfiles()->latest()->get());
     }
 
-    public function customer($id)
-    {
-        return new ProfileResource(Profile::find($id));
-    }
-
     // Oil Companies Read Services
     public function getOilCompanies()
     {
         return OilCompanyResource::collection(OilCompany::all());
-    }
-
-    public function oilCompany($id)
-    {
-        return new OilCompanyResource(OilCompany::find($id));
     }
 
     // Filling Station Read Services
@@ -46,19 +36,9 @@ class ReadServiceController extends Controller
         return FillingStationResource::collection(auth()->guard('api')->user()->manyFillingStations()->latest()->get());
     }
 
-    public function fillingStation($id)
-    {
-        return new FillingStationResource(FillingStation::find($id));
-    }
-
     // Oil Records Read Services
     public function getOilRecords()
     {
         return OilRecordResource::collection(auth()->guard('api')->user()->oilRecords()->latest()->get());
-    }
-
-    public function oilRecord($id)
-    {
-        return new OilRecordResource(OilRecord::find($id));
     }
 }

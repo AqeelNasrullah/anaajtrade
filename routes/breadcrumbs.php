@@ -8,6 +8,18 @@ Breadcrumbs::for('home', function($trail) {
     $trail->push('Home', route('dashboard.index'));
 });
 
+// Home >> Profile
+Breadcrumbs::for('profile', function($trail, $profile) {
+    $trail->parent('home');
+    $trail->push($profile->name, route('profile.userProfile', $profile->cnic));
+});
+
+// Home >> {Profile} >> Edit Profile
+Breadcrumbs::for('edit_profile', function($trail, $profile) {
+    $trail->parent('profile', $profile);
+    $trail->push('Edit Profile', route('profile.editProfile', $profile->cnic));
+});
+
 // Home >> Statistics
 Breadcrumbs::for('statistics', function($trail) {
     $trail->parent('home');

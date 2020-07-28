@@ -42,16 +42,12 @@ Route::post('customer/create', 'CreateServiceController@customer');
 
 // Customers API Routes
 Route::post('customers', 'ReadServiceController@getCustomers');
-Route::post('customer/{id}', 'ReadServiceController@customer');
 // Oil Companies API Routes
 Route::post('oil-companies', 'ReadServiceController@getOilCompanies');
-Route::post('oil-company/{id}', 'ReadServiceController@oilCompany');
 // Filling Stations API Routes
 Route::post('filling-stations', 'ReadServiceController@getFillingStations');
-Route::post('filling-station/{id}', 'ReadServiceController@fillingStation');
 // Oil Records API Routes
 Route::post('oil-records', 'ReadServiceController@getOilRecords');
-Route::post('oil-record/{id}', 'ReadServiceController@oilRecord');
 
 /**
  * Update Service Routes

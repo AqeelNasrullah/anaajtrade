@@ -163,7 +163,7 @@ class ProfileController extends Controller
         if($id) {
             $d_id = (base64_decode($id) * 12098) / 123456789;
             $profile = Profile::where('id', $d_id)->first();
-            $roles = Role::all();
+            $roles = Role::all()->take(4);
             return view('dashboard.customers.edit', ['profile'=>$profile, 'roles'=>$roles]);
         } else {
             return redirect()->route('profile.index');
@@ -296,6 +296,76 @@ class ProfileController extends Controller
                 'flag'                  =>  $flag
             ];
             return json_encode($data);
+        }
+    }
+
+    public function userProfile($cnic)
+    {
+        if ($cnic) {
+            $profile = Profile::where('cnic', $cnic)->first();
+            if ($profile) {
+                return view('profile', ['profile' => $profile]);
+            } else {
+                echo 'Error 404';
+            }
+        }
+    }
+
+    public function editProfile($cnic)
+    {
+        if ($cnic) {
+            $profile = Profile::where('cnic', $cnic)->first();
+            $roles = Role::all()->take(4);
+            if ($profile) {
+                return view('edit-profile', ['profile' => $profile, 'roles' => $roles]);
+            } else {
+                echo 'Error 404';
+            }
+        }
+    }
+
+    public function updateProfile(Request $request, $cnic)
+    {
+        $rules = [
+            'name'                  =>      'required|min:3',
+            'address'               =>      'required',
+            'role'                  =>      'required|numeric'
+        ];
+        if($request->hasFile('image')) {
+            $rules['image'] = 'mimes:jpg,png,gif,jpeg|max:2048';
+        }
+        if($request->get('father_name') !== null) {
+            $rules['father_name'] = 'min:3';
+        }
+        if($request->get('property') !== null) {
+            $rules['property'] = 'numeric|min:0';
+        }
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        } else {
+            $profile = Profile::where('cnic', $cnic)->first();
+            $filename = $profile->avatar;
+            if ($request->hasFile('image')) {
+                $avatar = $request->file('image');
+                $filename = time() . '.' . $avatar->getClientOriginalExtension();
+                $avatar->move(public_path('/images/dps/'), $filename);
+            }
+            $updateCustomer = $profile->update([
+                'avatar'                =>      $filename,
+                'name'                  =>      addslashes(htmlentities(trim($request->get('name')))),
+                'father_name'           =>      addslashes(htmlentities(trim($request->get('father_name')))),
+                'property'              =>      $request->get('property'),
+                'address'               =>      addslashes(htmlentities(trim($request->get('address')))),
+                'role_id'               =>      $request->get('role')
+            ]);
+            if ($updateCustomer) {
+                return redirect()->route('profile.userProfile', $profile->cnic)->with('success', 'Customer updated successfully.');
+            } else {
+                return back()->with('error', 'An error occured while updating customer.')->withInput();
+            }
         }
     }
 }

@@ -2,8 +2,8 @@
 .logo {max-width: 275px;float: left;}
 .logo-txt {float: right;}
 .navbar {background-color: rgba(100,190,90,1.00) !important;}
-.nav-link {color: white !important;transition: color .5s; font-size: medium;}
-.nav-link:hover {color: lightgray !important;}
+.navbar .nav-link {color: white !important;transition: color .5s; font-size: medium;}
+.navbar .nav-link:hover {color: lightgray !important;}
 .dropdown-menu {border-top: 2px solid goldenrod !important;}
 .dropdown-toggle::after {content: none !important;}
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3d083582f78ac76174f5bddafcb564da",
+    "content-hash": "7d97569be03ca2ab639ff2b73cc082a1",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1468,6 +1468,47 @@
                 }
             ],
             "time": "2020-05-18T15:13:39+00:00"
+        },
+        {
+            "name": "lifetimesms/gateway",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lifetimesms/gateway.git",
+                "reference": "9a23e8d22886fcba231d64118f9a5d2574578a62"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lifetimesms/gateway/zipball/9a23e8d22886fcba231d64118f9a5d2574578a62",
+                "reference": "9a23e8d22886fcba231d64118f9a5d2574578a62",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.3",
+                "php": "^7.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Lifetimesms": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "lifetimesms",
+                    "email": "info@lifetimesms.com"
+                }
+            ],
+            "description": "Lifetimesms sms sending module to send business SMS",
+            "homepage": "https://github.com/lifetimesms/gateway",
+            "keywords": [
+                "Lifetimesms"
+            ],
+            "time": "2019-11-28T07:14:49+00:00"
         },
         {
             "name": "monolog/monolog",

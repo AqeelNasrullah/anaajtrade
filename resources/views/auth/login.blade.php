@@ -37,7 +37,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-7 pt-2"><a href="" class="text-success">Forgot Password?</a></div>
+                        <div class="col-7 pt-2"><a href="{{ route('resetpassword.index') }}" class="text-success">Forgot Password?</a></div>
                         <div class="col-5">
                             <button type="submit" class="btn btn-success float-right"><i class="fas fa-sign-in-alt"></i> Login</button>
                             <br class="clear">

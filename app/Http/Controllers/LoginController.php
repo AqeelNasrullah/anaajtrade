@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Profile;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Lifetimesms;
 
 class LoginController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth', ['only' => ['changePassword', 'updatePassword']]);
+    }
+
     public function index()
     {
         if (Auth::check())
@@ -38,9 +46,9 @@ class LoginController extends Controller
             ];
 
             if (Auth::attempt($data)) {
-                    return redirect()->route('dashboard.index');
+                return redirect()->route('dashboard.index');
             } else {
-                return redirect()->back()->with('error', 'Phone number or password is incorrect.')->withInput();
+                return back()->with('error', 'Phone number or password is incorrect.')->withInput();
             }
         }
     }
@@ -49,5 +57,51 @@ class LoginController extends Controller
     {
         Auth::logout();
         return redirect()->route('login.index');
+    }
+
+    public function changePassword($cnic)
+    {
+        if ($cnic) {
+            $profile = Profile::where('cnic', $cnic)->first();
+            return view('auth.change-password', ['profile' => $profile]);
+        } else {
+            echo 'Error 404';
+        }
+    }
+
+    public function updatePassword(Request $request, $cnic)
+    {
+        if ($cnic) {
+            $profile = Profile::where('cnic', $cnic)->first();
+            $validator = Validator::make($request->all(), [
+                'old_password'              =>      'required|min:8|max:16',
+                'new_password'              =>      'required|min:8|max:16',
+                'retype_new_password'       =>      'required|min:8|max:16'
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->route('login.changePassword', $profile->cnic)->withErrors($validator);
+            } else {
+                if($request->get('new_password') !== $request->get('retype_new_password')) {
+                    return redirect()->route('login.changePassword', $profile->cnic)->with('error', "New password and retype password doesn't match.");
+                } else {
+                    $hashPass = User::where('id', Auth::user()->id)->first();
+                    $checked = Hash::check($request->get('old_password'), $hashPass->password);
+                    if ($checked) {
+                        $updated = Auth::user()->update([
+                            'password'          =>  Hash::make($request->get('new_password'))
+                        ]);
+                        if ($updated) {
+                            Auth::logout();
+                            return redirect()->route('login.index')->with('error', 'Your password has been changed. You need to login again.');
+                        } else {
+                            return redirect()->route('login.changePassword', $profile->cnic)->with('error', "An error occured while changing your password.");
+                        }
+                    } else {
+                        return redirect()->route('login.changePassword', $profile->cnic)->with('error', "Your old password is not correct.");
+                    }
+                }
+            }
+        }
     }
 }

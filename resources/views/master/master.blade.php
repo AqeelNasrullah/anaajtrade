@@ -55,8 +55,8 @@
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right">
                                         <a class="dropdown-item" href="{{ route('dashboard.index') }}"><i class="fas fa-home"></i> Dashboard</a>
-                                        <a class="dropdown-item" href="#"><i class="fas fa-user-tie"></i> Profile</a>
-                                        <a class="dropdown-item" href="#"><i class="fas fa-unlock"></i> Change Password</a>
+                                        <a class="dropdown-item" href="{{ route('profile.userProfile', auth()->user()->profile->cnic) }}"><i class="fas fa-user-tie"></i> My Profile</a>
+                                        <a class="dropdown-item" href="{{ route('login.changePassword', auth()->user()->profile->cnic) }}"><i class="fas fa-unlock"></i> Change Password</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="{{ route('login.logout') }}"><i class="fas fa-power-off"></i> Logout</a>
                                     </div>

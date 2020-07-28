@@ -22,6 +22,13 @@ Route::get('login', 'LoginController@index')->name('login.index');
 Route::post('login', 'LoginController@loginAttempt')->name('login.loginAttempt');
 Route::get('logout', 'LoginController@logout')->name('login.logout');
 
+Route::get('forgot-password', 'ResetPasswordController@index')->name('resetpassword.index');
+Route::post('forgot-password', 'ResetPasswordController@sendCode')->name('resetpassword.sendCode');
+Route::get('forgot-password/{cnic}', 'ResetPasswordController@verifyCode')->name('resetpassword.verifyCode');
+Route::post('forgot-password/{cnic}', 'ResetPasswordController@validateCode')->name('resetpassword.validateCode');
+Route::get('reset-password/{id}/{key}', 'ResetPasswordController@resetPassword')->name('resetpassword.resetPassword');
+Route::put('reset-password/{id}/{key}', 'ResetPasswordController@updatePassword')->name('resetpassword.updatePassword');
+
 // Registration Routes
 Route::get('register/profile', 'RegisterController@addProfile')->name('register.addProfile');
 Route::get('register/user', 'RegisterController@addUser')->name('register.addUser');
@@ -30,6 +37,13 @@ Route::get('register/user', 'RegisterController@addUser')->name('register.addUse
 Route::get('dashboard', 'DashboardController@index')->name('dashboard.index');
 Route::get('dashboard/roznamcha', 'DashboardController@roznamcha')->name('dashboard.roznamcha');
 Route::get('dashboard/stock', 'DashboardController@stock')->name('dashboard.stock');
+
+// My Profile Route
+Route::get('profile/{id}', 'ProfileController@userProfile')->name('profile.userProfile');
+Route::get('profile/{id}/edit', 'ProfileController@editProfile')->name('profile.editProfile');
+Route::put('profile/{id}/edit', 'ProfileController@updateProfile')->name('profile.updateProfile');
+Route::get('profile/{id}/change-password', 'LoginController@changePassword')->name('login.changePassword');
+Route::put('profile/{id}/change-password', 'LoginController@updatePassword')->name('login.updatePassword');
 
 // Statistics Routes
 Route::get('dashboard/statistics', 'StatisticsController@index')->name('statistics.index');
