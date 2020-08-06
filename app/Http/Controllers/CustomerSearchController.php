@@ -66,7 +66,7 @@ class CustomerSearchController extends Controller
                 return back()->withErrors($validator)->withInput();
             } else {
                 $name = addslashes(htmlentities(trim($request->get('name'))));
-                $profiles = Auth::user()->manyProfiles()->where('name', 'like', '%' . $name . '%')->get();
+                $profiles = Auth::user()->manyProfiles()->where('name', 'like', $name . '%')->get();
                 if ($profiles->count() > 0) {
                     return back()->with('profiles', $profiles);
                 } else {
@@ -114,7 +114,7 @@ class CustomerSearchController extends Controller
             $output = '';
 
             if ($name) {
-                $profiles = Auth::user()->manyProfiles()->where('name', 'like', '%' . $name . '%')->get();
+                $profiles = Auth::user()->manyProfiles()->where('name', 'like', $name . '%')->get();
                 if ($profiles->count() > 0) {
                     foreach ($profiles as $profile) {
                         $output .= '<a href="' . route('profile.show', base64_encode(($profile->id * 123456789) / 12098)) . '" class="dropdown-item px-2">

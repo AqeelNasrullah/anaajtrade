@@ -60,4 +60,57 @@ class CreateServiceController extends Controller
             }
         }
     }
+
+    public function accountBook(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'profile_id'            =>      'required|min:1|numeric',
+            'amount'                =>      'required|min:0|numeric',
+            'type'                  =>      'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response($validator->errors(), Response::HTTP_UNPROCESSABLE_ENTITY);
+        } else {
+            $created = auth()->guard('api')->user()->accountBooks()->create([
+                'profile_id'        =>      $request->get('profile_id'),
+                'amount'            =>      $request->get('amount'),
+                'type'              =>      $request->get('type')
+            ]);
+            if ($created) {
+                return response(['success' => 'Account book added successfully.'], Response::HTTP_CREATED);
+            } else {
+                return response(['error' => 'An error occured while adding account book.'], Response::HTTP_UNPROCESSABLE_ENTITY);
+            }
+        }
+
+    }
+
+    public function fertilizerStock(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'quantity'                  =>      'required|min:0|numeric',
+            'price'                     =>      'required|min:0|numeric',
+            'type'                      =>      'required',
+            'weight'                    =>      'required|min:0|numeric',
+            'fertilizer_trader_id'      =>      'required|min:1|numeric'
+        ]);
+
+        if ($validator->fails()) {
+            return response($validator->errors(), Response::HTTP_UNPROCESSABLE_ENTITY);
+        } else {
+            $created = auth()->guard('api')->user()->fertilizerStocks()->create([
+                'quantity'                      =>      $request->get('quantity'),
+                'price'                         =>      $request->get('price'),
+                'type'                          =>      $request->get('type'),
+                'weight'                        =>      $request->get('weight'),
+                'fertilizer_trader_id'          =>      $request->get('fertilizer_trader_id')
+            ]);
+            if ($created) {
+                return response(['success' => 'Fertilizer stock added successfully.'], Response::HTTP_CREATED);
+            } else {
+                return response(['error' => 'An error occured while adding fertilizer stock.'], Response::HTTP_UNPROCESSABLE_ENTITY);
+            }
+        }
+    }
 }

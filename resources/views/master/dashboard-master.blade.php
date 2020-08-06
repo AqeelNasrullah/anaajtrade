@@ -57,6 +57,12 @@
 
                                     <ul class="dropdown-menu">
                                         <li><a href="{{ route('dashboard.index') }}" class="dropdown-item"><i class="fas fa-home"></i> Dashboard Home</a></li>
+
+                                        @if (auth()->user()->profile->role_id == 1 || auth()->user()->profile->role_id == 2)
+                                        <li><a href="{{ route('privileges.index') }}" class="dropdown-item"><i class="fas fa-users"></i> Users / <span class="text-urdu-kasheeda">صارفین</span></a></li>
+                                        <li><a href="{{ route('request.index') }}" class="dropdown-item"><i class="fas fa-book-open"></i> Requests / <span class="text-urdu-kasheeda">درخواستیں</span></a></li>
+                                        @endif
+
                                         <li><a href="{{ route('statistics.index') }}" class="dropdown-item"><i class="fas fa-chart-bar"></i> Statistics / <span class="text-urdu-kasheeda">اعداد و شمار</span></a></li>
                                         <li class="dropdown">
                                             <a href="{{ route('dashboard.roznamcha') }}" class="dropdown-item dropdown-toggle" data-toggle="dropdown"><i class="fas fa-address-book"></i> Roznamcha / <span class="text-urdu-kasheeda">روزنامچہ</span> &nbsp; <i class="fas fa-angle-right"></i></a>

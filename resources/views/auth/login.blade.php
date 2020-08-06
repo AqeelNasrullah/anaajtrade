@@ -45,6 +45,9 @@
                     </div>
                 </form>
             </div>
+            <div class="card-footer bg-success">
+                <p class="mb-0 text-center"><a class="text-light" href="{{ route('register.index') }}">Register Here</a></p>
+            </div>
         </div>
     </section>
 @endsection

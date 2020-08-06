@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+Route::get('help', function () {
+    return view('contact');
+})->name('help');
+
 // Auth Routes
 Route::get('login', 'LoginController@index')->name('login.index');
 Route::post('login', 'LoginController@loginAttempt')->name('login.loginAttempt');
@@ -30,8 +34,18 @@ Route::get('reset-password/{id}/{key}', 'ResetPasswordController@resetPassword')
 Route::put('reset-password/{id}/{key}', 'ResetPasswordController@updatePassword')->name('resetpassword.updatePassword');
 
 // Registration Routes
-Route::get('register/profile', 'RegisterController@addProfile')->name('register.addProfile');
-Route::get('register/user', 'RegisterController@addUser')->name('register.addUser');
+Route::get('register', 'RegisterController@index')->name('register.index');
+Route::post('register', 'RegisterController@registration')->name('register.registration');
+Route::get('mark', 'RegisterController@mark')->name('register.mark');
+
+// Admin Routes
+Route::get('requests', 'RequestController@index')->name('request.index');
+Route::get('requests/confirm/{id}', 'RequestController@confirm')->name('request.confirm');
+Route::get('requests/remove/{id}', 'RequestController@remove')->name('request.remove');
+
+Route::get('users', 'PrivilegesController@index')->name('privileges.index');
+Route::get('users/add-moderator/{id}', 'PrivilegesController@addMod')->name('privileges.addMod');
+Route::get('users/remove-moderator/{id}', 'PrivilegesController@removeMod')->name('privileges.removeMod');
 
 // Dashboard Routes
 Route::get('dashboard', 'DashboardController@index')->name('dashboard.index');

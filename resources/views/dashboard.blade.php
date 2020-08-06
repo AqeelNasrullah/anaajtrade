@@ -12,7 +12,33 @@
 
 @section('content')
     <section>
-        <div class="container">
+        <div class="container py-3">
+
+            @if (auth()->user()->profile->role_id == 1 || auth()->user()->profile->role_id == 2)
+            <section>
+                <h3 class="text-success">{{ auth()->user()->profile->role->name }} Privileges</h3>
+                <div class="row">
+                    <div class="col-md-3 p-3">
+                        <a href="{{ route('privileges.index') }}" class="text-light">
+                            <div class="bg-success p-3" style="border-radius: 5px;">
+                                <h1 class="text-center mb-3"><i class="fas fa-users"></i></h1>
+                                <h4 class="text-center">Users <br> <span class="text-urdu-kasheeda">صارفین</span></h4>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3 p-3">
+                        <a href="{{ route('request.index') }}" class="text-light">
+                            <div class="bg-success p-3" style="border-radius: 5px;">
+                                <h1 class="text-center mb-3"><i class="fas fa-book-open"></i></h1>
+                                <h4 class="text-center">Requests <br> <span class="text-urdu-kasheeda">درخواستیں</span></h4>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+            <hr>
+            @endif
+
             <div class="row">
                 <div class="col-md-3 p-3">
                     <a href="{{ route('statistics.index') }}" class="text-light">

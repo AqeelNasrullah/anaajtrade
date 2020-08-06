@@ -8,7 +8,7 @@ class Profile extends Model
 {
     // Fillable Properties
     protected $fillable = [
-        'avatar', 'name', 'father_name', 'phone_number', 'cnic', 'address', 'property', 'role_id'
+        'avatar', 'name', 'father_name', 'phone_number', 'cnic', 'address', 'property', 'role_id', 'status'
     ];
 
     /**
